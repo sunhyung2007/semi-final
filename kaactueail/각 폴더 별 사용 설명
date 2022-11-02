@@ -1,0 +1,4 @@
+// com.kaactueail.controller -> ...DAO를 제외한 기능 구현
+// com.kaactueail.dao -> ...DAO 로 SQL구문 기능 구현
+// com.kaactueail.model -> ... DTO 등 모델 구현
+// src/main/webapp/WEB-INF/views -> ...jsp로 뷰 구현
