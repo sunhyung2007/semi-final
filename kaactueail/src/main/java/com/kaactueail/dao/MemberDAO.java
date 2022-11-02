@@ -16,6 +16,7 @@ public class MemberDAO {
 		sqlSessionFactory = SqlSessionFactoryService.getSqlSessionFactory();
 	}
 	
+	//회원가입
 	public int insertmember(MemberDTO dto) {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
@@ -23,12 +24,15 @@ public class MemberDAO {
 			sqlSession.commit();
 			return result;	
 		} catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		} finally {
 			if(sqlSession != null) sqlSession.close();
 		}
+		
 	}
 	
+	//회원번호 중복체크
 	public int selectmNum(int m_num) {
 		try {
 		sqlSession = sqlSessionFactory.openSession();
@@ -42,13 +46,12 @@ public class MemberDAO {
 		}
 	}
 	
+	//로그인
 	public boolean checkMember(MemberDTO dto) {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			System.out.println("MemberDTO getM_id = " + dto.getM_id());
-			System.out.println("MemberDTO getM_pwd" + dto.getM_pwd());
+			
 			boolean result = sqlSession.selectOne("memberdao.checkmember", dto);
-			System.out.println(result);
 			if(result == true)  return true;
 			else return false;
 		} catch (Exception e) {
@@ -56,6 +59,31 @@ public class MemberDAO {
 		}finally {
 			if(sqlSession != null) sqlSession.close();
 		}
-		
+	}
+	
+	//로그인한 사용자 권한 얻어오기
+	public String memberRole(String m_id) {
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			String result = sqlSession.selectOne("memberdao.memberrole", m_id);
+			return result;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			if(sqlSession != null) sqlSession.close();
+		}
+	}
+	
+	//로그인한 사용자 번호 얻어오기
+	public int memberNum(String m_id) {
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			int  result = sqlSession.selectOne("memberdao.membernum", m_id);
+			return result;
+		} catch (Exception e) {
+			return 0;
+		} finally {
+			if(sqlSession != null) sqlSession.close();
+		}
 	}
 }

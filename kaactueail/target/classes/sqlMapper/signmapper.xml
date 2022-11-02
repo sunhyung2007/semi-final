@@ -11,18 +11,28 @@
  	 
  	 <!-- 회원가입 -->
  	 <insert id="insertmember"   parameterType="memberdto">
- 	 	insert into Member value(M_num, M_id, M_pwd, M_name, M_tel,M_birth, M_ROLE)
- 	 	values(#{m_num}, #{m_id},#{m_pwd},#{m_name},#{m_tel} ,#{m_birth}, 'ROLE_USER')
+ 	 	INSERT INTO MEMBER VALUE(M_NUM, M_ID, M_PWD, M_NAME, M_TEL,M_BIRTH, M_ROLE)
+ 	 	VALUES(#{m_num}, #{m_id},#{m_pwd},#{m_name},#{m_tel} ,#{m_birth}, 'ROLE_USER')
  	 </insert>
- 	 
+ 	                                               
  	 <!-- 회원번호 중복체크 -->
  	 <select id = "selectmnum" parameterType="int" resultType="int">
- 	 	select count(*) from member where m_num = #{m_num}
+ 	 	SELECT COUNT(*) FROM MEMBER WHERE M_NUM = #{m_num}
  	 </select>
  	 
- 	 <!-- 아이디 비밀번호 체크(로그인) -->
+ 	 <!-- 아이디 비밀번호 체크(로그인)  -->
  	 <select id = "checkmember" parameterType="memberdto" resultType="boolean">
- 	 	select count(*) from member where m_id = #{m_id} and m_pwd=#{m_pwd}
+ 	 	SELECT COUNT(*) FROM MEMBER WHERE M_ID = #{m_id} AND M_PWD=#{m_pwd}
+ 	 </select>
+ 	 
+ 	 <!-- 로그인한 사용자 권한 가져오기 -->
+ 	 <select id="memberrole" parameterType = "String" resultType = "String">
+ 	 	SELECT M_ROLE FROM MEMBER WHERE M_ID = #{m_id}
+ 	 </select>
+ 	 
+ 	 <!-- 로그인한 사용자 회원번호 가져오기 -->
+ 	 <select id="membernum" parameterType = "String" resultType = "int">
+ 	 	SELECT M_NUM FROM MEMBER WHERE M_ID = #{m_id}
  	 </select>
  	 
  	 <!-- <delete id="delete" parameterType="int">

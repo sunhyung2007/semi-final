@@ -6,8 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-//import com.kaactueail.controller.ShaEncoder;
 import com.kaactueail.controller.signupcheckController;
 import com.kaactueail.dao.MemberDAO;
 import com.kaactueail.model.MemberDTO;
@@ -16,12 +16,14 @@ import com.kaactueail.model.MemberDTO;
 @WebServlet("/member")
 public class SignUpController extends HttpServlet{
 	
+
+	
 	public void service(HttpServletRequest request, 
 												HttpServletResponse response)
 														throws IOException {
 		
-		request.setCharacterEncoding("UTF-8");
 		
+		request.setCharacterEncoding("UTF-8");
 		String cmd = request.getParameter("cmd");
 		System.out.println(cmd);
 		if(cmd.equals("signup")) insertMember(request,response);
@@ -35,15 +37,12 @@ public class SignUpController extends HttpServlet{
 	//회원가입
 	public void insertMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		System.out.println("여기는 왔따.");
 		signupcheckController check = new signupcheckController(); // 회원번호 중복확인 후 중복되지 않을 때까지 값을 얻어 값 가져오기
 		
-//		ShaEncoder encoder = new ShaEncoder();
 		
 		int m_num = check.duplicateCheckMNum();
-		
 		String m_id = request.getParameter("m_id");
-//		String m_pwdpara = request.getParameter("m_pwd");
-//		String m_pwd = encoder.saltEncoding(m_pwdpara);
 		String m_pwd = request.getParameter("m_pwd");
 		System.out.println(m_pwd);
 		String m_name = request.getParameter("m_name");
@@ -67,24 +66,47 @@ public class SignUpController extends HttpServlet{
 		}
 	}
 	
+	//로그인
 	public void authenticationMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String m_id = request.getParameter("m_id");
 		String m_pwd = request.getParameter("m_pwd");
 		
-		System.out.println("login m_id 확인: " + m_id);
-		System.out.println("login m_pwd 확인: " + m_pwd);
+		
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = new MemberDTO(m_id, m_pwd);  //회원 id와 pwd를 세팅
 		
 		boolean check = dao.checkMember(dto);
 		
-		//고쳐야함
+		//로그인이 되면
 		if(check == true) {
-			System.out.println("로그인 제대로 됨");
-			response.sendRedirect("/web/loginSuccess"); // 테스트용
+			HttpSession session;
+			String m_role = dao.memberRole(m_id);
+			int m_num = dao.memberNum(m_id); 
+			session = request.getSession();
+			
+			//로그인 세션값 설정
+			session.setAttribute("m_id", m_id);
+			session.setAttribute("m_role", m_role);
+			session.setAttribute("m_num", m_num);
+			System.out.println("login m_id 확인: " + session.getAttribute("m_id"));
+			System.out.println("login m_pwd 확인: " +  session.getAttribute("m_role"));
+			System.out.println("login m_num 확인: " +  session.getAttribute("m_num"));
+			//세션 유지시간 설정(초단위) 20분
+			session.setMaxInactiveInterval(20*60);
+			
+			redirectMember(session,response);
 		} else {
-			System.out.println("로그인 실패");
-			response.sendRedirect("/from");  
+			response.sendRedirect("/web/member?cmd=login");
+		}
+	}
+	
+	//권한에 따라 main 페이지가 다름 (admin -> /admin/main)
+	public void redirectMember(HttpSession session, HttpServletResponse response) throws IOException {
+		if(session.getAttribute("m_role").equals("ROLE_USER")) {
+			response.sendRedirect("/web/main");
+		}
+		else if(session.getAttribute("m_role").equals("ROLE_ADMIN")) {
+			response.sendRedirect("/web/main");
 		}
 	}
 	

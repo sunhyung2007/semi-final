@@ -15,7 +15,7 @@
 <body>
     <div id = "MemberJoin_Box">
         <h2>회원가입</h2>
-            <form  action = "member?cmd=signup" method = "post">
+            <form  action = "member?cmd=signup"method = "post">
                 <ul id = "inpo_input">
                     <li>이름 입력</li>
                         <span class = "input_Box">

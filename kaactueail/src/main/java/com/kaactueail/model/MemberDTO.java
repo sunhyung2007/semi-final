@@ -15,6 +15,8 @@ public class MemberDTO {
 	private int m_num;
 	private String m_id, m_pwd, m_name, m_birth, m_tel, m_role;
 	
+//	private String m_enabled;
+	
 	@Autowired
 	public MemberDTO(String m_id, String m_pwd) {
 		this.m_id = m_id;
