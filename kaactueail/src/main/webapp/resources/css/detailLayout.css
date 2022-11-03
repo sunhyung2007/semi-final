@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+
+.layout_all{
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.layout_all input {
+	background-color:transparent;
+	border:0 solid black;
+}
+
+.layout_title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.layout_middle {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn_wrap {
+	padding-bottom: 5%;
+}
+
+
+input:focus {
+	outline:none;
+}

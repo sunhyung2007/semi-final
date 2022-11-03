@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DML 명령 처리-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- Mapper 인터페이스와 동일한 이름 주어야 하므로 패키지명+mapper이름으로 작명 --> 
+ <!-- 쿼리문 id는 인터페이스 메소드와 동일하게 설정 --> 
+ <mapper namespace="com.kaactueail.mappers.FreeBoardMapper">
+ 
+ 	<select id="getAllList" resultType="com.kaactueail.dto.FreeBoardDTO">
+ 		select*from FreeBoard order by FB_num desc
+ 	</select>
+ 	
+ 	<select id="getByFB_num" resultType="com.kaactueail.dto.FreeBoardDTO">
+ 		select*from FreeBoard where FB_num = #{FB_num}
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 		insert into freeboard values(FB_num.nextval, #{FB_title}, #{FB_content}, sysdate, #{FB_writer}, #{FB_readcount} , #{m_num})
+ 	</insert>
+ 	
+ 	<delete id="deleteByFBnum" parameterType="com.kaactueail.dto.FreeBoardDTO">
+ 		delete from freeboard where FB_num= #{FB_num}
+ 	</delete>
+ 	
+ 	<update id="updateByFBnum" parameterType="com.kaactueail.dto.FreeBoardDTO">
+		update freeboard set FB_title = #{FB_title}, FB_content = #{FB_content} where FB_num = #{FB_num}
+ 	</update>
+ 
+ 
+ </mapper>
