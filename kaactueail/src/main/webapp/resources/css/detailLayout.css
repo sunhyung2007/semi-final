@@ -1,9 +1,16 @@
 @charset "UTF-8";
 
+.btn_wrap button{
+	float:right;
+}
 
 .layout_all{
 	display: inline-flex;
 	flex-direction: column;
+	width: 100%;
+	text-align:center;
+	justify-content: space-between;
+	
 }
 
 .layout_all input {
@@ -13,7 +20,6 @@
 
 .layout_title {
 	display: flex;
-	justify-content: space-between;
 }
 
 .layout_middle {
@@ -22,10 +28,28 @@
 }
 
 .btn_wrap {
-	padding-bottom: 5%;
+	padding : 3% 0 3% 0;
 }
 
 
 input:focus {
 	outline:none;
+}
+
+.title {
+	padding-left: 10%;
+}
+
+#writer{
+	padding-right: 10%;
+}
+
+#writedate{
+	padding-right: 10%;
+}
+
+hr {
+	margin-top: 0;
+	color : #575151;
+	border-top: 2px solid;
 }

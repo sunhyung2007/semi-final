@@ -12,7 +12,6 @@
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<
 </head>
 <body>
 	<!-- header삽입 -->
@@ -53,30 +52,32 @@
 					$(".move").on("click",function(e) {
 							e.preventDefault();
 							moveForm.append("<intput type='hidden' name='FB_num' value=''"+ $(this).attr("href")+ "'>'");
-										moveForm.submit();
+							moveForm.submit();
 									});
 				</script>
-
+		<div class="btns_wrap">
+			<div class="btn_wrap" style="float:right;">
 				<button type="button" class="btn btn-dark" id="write_btn">글쓰기</button>
 				<button type="button" class="btn btn-dark" id="modifty_btn">수정</button>
 				<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
+			</div>
 				<div class="btn-toolbar" role="toolbar"
-					aria-label="Toolbar with button groups">
+					aria-label="Toolbar with button groups" style="padding-left:48%;">
 					<div class="btn-group me-2" role="group" aria-label="First group">
 						<button type="button" class="btn btn-secondary">1</button>
 						<button type="button" class="btn btn-secondary">2</button>
 						<button type="button" class="btn btn-secondary">3</button>
 						<button type="button" class="btn btn-secondary">4</button>
 					</div>
-					<div class="btn-group me-2" role="group" aria-label="Second group">
+<!-- 					<div class="btn-group me-2" role="group" aria-label="Second group">
 						<button type="button" class="btn btn-secondary">5</button>
 						<button type="button" class="btn btn-secondary">6</button>
 						<button type="button" class="btn btn-secondary">7</button>
 					</div>
 					<div class="btn-group" role="group" aria-label="Third group">
-						<button type="button" class="btn btn-secondary">8</button>
+						<button type="button" class="btn btn-secondary">8</button> -->
 					</div>
-				</div>
+			</div>
 
 			</div>
 		</div>
