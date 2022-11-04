@@ -8,23 +8,23 @@
  <mapper namespace="com.kaactueail.mappers.FreeBoardMapper">
  
  	<select id="getAllList" resultType="com.kaactueail.dto.FreeBoardDTO">
- 		select*from FreeBoard order by FB_num desc
+ 		select*from freeBoard order by freeBoardNum desc
  	</select>
  	
- 	<select id="getByFB_num" resultType="com.kaactueail.dto.FreeBoardDTO">
- 		select*from FreeBoard where FB_num = #{FB_num}
+ 	<select id="getByfreeBoardNum" resultType="com.kaactueail.dto.FreeBoardDTO">
+ 		select*from FreeBoard where freeBoardNum = #{freeBoardNum}
  	</select>
  	
- 	<insert id="insert">
- 		insert into freeboard values(FB_num.nextval, #{FB_title}, #{FB_content}, sysdate, #{FB_writer}, #{FB_readcount} , #{m_num})
+ 	<insert id="freeBoardinsert">
+ 		insert into freeboard values(freeBoardNum.nextval, #{freeBoardTitle}, #{freeBoardContent}, sysdate, #{freeBoardWriter}, #{freeBoardReadcount} , #{freeBoardMnum})
  	</insert>
  	
- 	<delete id="deleteByFBnum" parameterType="com.kaactueail.dto.FreeBoardDTO">
- 		delete from freeboard where FB_num= #{FB_num}
+ 	<delete id="deleteByfreeBoardNum" parameterType="com.kaactueail.dto.FreeBoardDTO">
+ 		delete from freeboard where FreeBoardnum= #{FreeBoardnum}
  	</delete>
  	
- 	<update id="updateByFBnum" parameterType="com.kaactueail.dto.FreeBoardDTO">
-		update freeboard set FB_title = #{FB_title}, FB_content = #{FB_content} where FB_num = #{FB_num}
+ 	<update id="updateByfreeBoardNum" parameterType="com.kaactueail.dto.FreeBoardDTO">
+		update freeboard set freeBoardTitle = #{freeBoardTitle}, freeBoardContent = #{freeBoardContent} where freeBoardNum = #{freeBoardNum}
  	</update>
  
  

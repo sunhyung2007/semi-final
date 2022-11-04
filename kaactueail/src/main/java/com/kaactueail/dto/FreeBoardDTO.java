@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class FreeBoardDTO {
 	//게시판 번호
-	private int FB_num;
+	private int freeBoardNum;
 	// 게시판 타이틀
-	private String FB_title, FB_content;
-	private Date FB_date;
-	private String FB_writer;
-	private int FB_readcount, m_num;
+	private String freeBoardTitle, freeBoardContent;
+	private Date freeBoardDate;
+	private String freeBoardWriter;
+	private int freeBoardReadcount, freeBoardMnum;
 	
 	
 }

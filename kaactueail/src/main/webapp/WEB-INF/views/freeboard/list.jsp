@@ -32,15 +32,15 @@
 
 					<c:forEach items="${ list }" var="list">
 						<tr>
-							<td scope="row"><c:out value="${list.FB_num}" /></td>
+							<td scope="row"><c:out value="${list.freeBoardNum}" /></td>
 							<td><a class="move_detail"
-								href='/freeboard/detail?FB_num=<c:out value="${list.FB_num}"/>'>
-									<c:out value="${list.FB_title}" />
+								href='/freeboard/detail?freeBoardNum=<c:out value="${list.freeBoardNum}"/>'>
+									<c:out value="${list.freeBoardTitle}" />
 							</a></td>
-							<td><c:out value="${list.FB_writer}" /></td>
-							<td><fmt:formatDate value="${list.FB_date}"
+							<td><c:out value="${list.freeBoardWriter}" /></td>
+							<td><fmt:formatDate value="${list.freeBoardDate}"
 									pattern="yyyy.MM.dd" /></td>
-							<td><c:out value="${list.FB_readcount}" /></td>
+							<td><c:out value="${list.freeBoardContent}" /></td>
 						</tr>
 					</c:forEach>
 				</table>

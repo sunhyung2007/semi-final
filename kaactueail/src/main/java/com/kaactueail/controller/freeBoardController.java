@@ -29,9 +29,9 @@ public class freeBoardController {
 	
 	// 게시판 클릭 시 해당 게시글 상세 페이지 출력
 	@GetMapping("detail")
-	public void Getdetail(int FB_num, Model model) {
+	public void Getdetail(int freeBoardNum, Model model) {
 		
-		model.addAttribute("pageDetail", dao.getByFB_num(FB_num));
+		model.addAttribute("pageDetail", dao.getByFB_num(freeBoardNum));
 	}
 	
 

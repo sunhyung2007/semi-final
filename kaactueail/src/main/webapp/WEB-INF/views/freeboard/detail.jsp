@@ -27,22 +27,22 @@
 				<div class="btn_wrap">
 					<button class="btn btn-dark" id="write_btn">글쓰기</button>
 					<button class="btn btn-dark" id="list_btn">목록</button>
-					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?FB_num=${FB_num}'">수정</button>
+					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeBoardNum=${freeBoardNum}'">수정</button>
 					<button class="btn btn-dark" id="delete_btn">삭제</button>
 				</div>
 				<form id="detailForm" action="/freeboard/modify" method="get">
-					<input type="hidden" id="FB_num" name="FB_num"
-						value="<c:out value= '${pageDetail.FB_num}'/>">
+					<input type="hidden" id="freeBoardNum" name="freeBoardNum"
+						value="<c:out value= '${pageDetail.freeBoardNum}'/>">
 				</form>
 				<div class="layout_all">
 					<div class="layout_title">
 						<div>
-							<p><c:out value="${pageDetail.FB_num}"/></p>
+							<p><c:out value="${pageDetail.freeBoardNum}"/></p>
 							<%-- <input name="FB_num" readonly value='<c:out value="${pageDetail.FB_num}"/>'> --%>
 						</div>
 						<div class="title">
 							<blockquote class="blockquote">
-    							<p class="mb-0"><c:out value="${pageDetail.FB_title}"/></p>
+    							<p class="mb-0"><c:out value="${pageDetail.freeBoardTitle}"/></p>
  							 </blockquote>
 							<%-- <input style="border: 0 solid balck;" name="FB_title" readonly	value='<c:out value="${pageDetail.FB_title}"/>'> --%>
 						</div>
@@ -51,21 +51,21 @@
 
 						<div class="layout_middle">
 							<div class="text-secondary" id="writer" >
-								<p><c:out value="${pageDetail.FB_writer}"/></p>
+								<p><c:out value="${pageDetail.freeBoardWriter}"/></p>
 								<%-- <input style="border: 0 solid balck;" name="FB_writer" readonly value='<c:out value="${pageDetail.FB_writer}"/>'> --%>
 							</div>
 							<div class="text-secondary" id="writedate">
-								<p><fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.FB_date}"/></p>
+								<p><fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.freeBoardDate}"/></p>
 								<%-- <input name="FB_date" value='<fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.FB_date}"/>'readonly> --%>
 							</div>
 							<div>
-								<p><c:out value="${pageDetail.FB_readcount}"/></p>
+								<p><c:out value="${pageDetail.freeBoardReadcount}"/></p>
 								<%-- <input name="FB_readcount" readonly value='<c:out value="${pageDetail.FB_readcount}"/>'> --%>
 							</div>
 						</div>
 						<div class="layout_content">
 							<div>
- 							 <p class="text-secondary"><c:out value="${pageDetail.FB_content}"/></p>
+ 							 <p class="text-secondary"><c:out value="${pageDetail.freeBoardContent}"/></p>
 								<%-- <input name="FB_content" readonly value='<c:out value="${pageDetail.FB_content}"/>'> --%>
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 	let form = ${"#detailForm"};
 	
 	$("#list_btn").on("click", function(e){
-		form.find("#FB_num").remove();
+		form.find("#freeBoardNum").remove();
 		form.attr("action", "/freeboard/list");
 	});
 	
