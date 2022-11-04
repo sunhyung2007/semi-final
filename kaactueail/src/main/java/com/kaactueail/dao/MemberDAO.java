@@ -86,4 +86,18 @@ public class MemberDAO {
 			if(sqlSession != null) sqlSession.close();
 		}
 	}
+	
+	//로그인 중복처리
+	public int membercheck(String m_id) {
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			int result = sqlSession.selectOne("memberdao.checkid", m_id);
+			return result;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			if(sqlSession != null) sqlSession.close();
+		}
+	}
 }

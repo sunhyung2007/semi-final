@@ -13,23 +13,7 @@ body {
   padding: 0;
 }
 
-#Logo a{
-  text-decoration: none;
-}
-#Logo {
-  display: flex;
-  padding: 8px 12px;
-  align-items: center;
-}
-#Logo h1 {
-  font-size: 24px;
-  margin-left: 8px;
-  font-family: "Roboto Condensed", sans-serif;
-  color: var(--text-color);
-}
-#Logo i {
-  color: var(--logo-color);
-}
+
 #MemberJoin_Box {
   display: flex;
   justify-content: center;
@@ -80,7 +64,11 @@ body {
   font-size: 20px;
 }
 
-#Joinbtn {
+#nEmo {
+	font-size: 20px;
+}
+
+.signupbtn {
   width: 464px;
   height: 63px;
   font-size: 25px;
@@ -88,7 +76,7 @@ body {
   background-color: var(--text-color);
   color: var(--btn-color);
 }
-#Joinbtn:hover {
+.signupbtn:hover {
   background-color: var(--hoverbtn-color);
   color: var(--hovertext-color);
   transition: all ease 2s 0s;

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kaactueail.dao.MemberDAO;
 
@@ -16,12 +18,19 @@ public class formController {
 	@Inject
 	MemberDAO Dao;
 	
-	//관리자 영역 페이지 (테스트용)
+	@RequestMapping(value = "/checkid", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody int idCheck(String m_id) {
+		if(m_id == null || m_id == "")
+			return -1;
+		else
+		return Dao.membercheck(m_id);
+		
+	}
 	@RequestMapping("/main")
-	public String admin(HttpSession session) {
+	public String mainPage(HttpSession session) {
 		if(session.getAttribute("m_role").equals("ROLE_ADMIN")) return "admin/main";
 		else if(session.getAttribute("m_role").equals("ROLE_USER")) return "main";
-		else return "main";
+		else return "loginform";
 	}
 	
 	
@@ -38,7 +47,7 @@ public class formController {
 	}
 	
 	@RequestMapping("/loginform")
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
 		return "loginform";
 	}
 }

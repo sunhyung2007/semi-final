@@ -28,6 +28,7 @@ public class SignUpController extends HttpServlet{
 		System.out.println(cmd);
 		if(cmd.equals("signup")) insertMember(request,response);
 		else if(cmd.equals("login")) authenticationMember(request,response);
+		else if(cmd.equals("logout")) sessionOut(request, response);
 	}
 	
 
@@ -94,20 +95,17 @@ public class SignUpController extends HttpServlet{
 			//세션 유지시간 설정(초단위) 20분
 			session.setMaxInactiveInterval(20*60);
 			
-			redirectMember(session,response);
+			response.sendRedirect("/web/main");
 		} else {
 			response.sendRedirect("/web/member?cmd=login");
 		}
 	}
 	
-	//권한에 따라 main 페이지가 다름 (admin -> /admin/main)
-	public void redirectMember(HttpSession session, HttpServletResponse response) throws IOException {
-		if(session.getAttribute("m_role").equals("ROLE_USER")) {
-			response.sendRedirect("/web/main");
-		}
-		else if(session.getAttribute("m_role").equals("ROLE_ADMIN")) {
-			response.sendRedirect("/web/main");
-		}
+	//로그아웃
+	public void sessionOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session;
+		session = request.getSession();
+		session.invalidate();
+		response.sendRedirect("/web/loginform");
 	}
-	
 }
