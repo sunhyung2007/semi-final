@@ -10,7 +10,8 @@ public interface FreeBoardMapper {
 	
 	public FreeBoardDTO getByfreeBoardNum(int num);
 	
-	public void freeBoardinsert(FreeBoardDTO FBoard);
+	// 게시물 등록
+	public void insertfreeBoard(FreeBoardDTO FBoard);
 	
 	public int deleteByfreeBoardNum(int freeBoardNum);
 	

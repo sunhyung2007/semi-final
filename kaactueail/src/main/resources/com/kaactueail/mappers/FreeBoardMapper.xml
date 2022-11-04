@@ -15,8 +15,8 @@
  		select*from FreeBoard where freeBoardNum = #{freeBoardNum}
  	</select>
  	
- 	<insert id="freeBoardinsert">
- 		insert into freeboard values(freeBoardNum.nextval, #{freeBoardTitle}, #{freeBoardContent}, sysdate, #{freeBoardWriter}, #{freeBoardReadcount} , #{freeBoardMnum})
+ 	<insert id="insertfreeBoard">
+ 		insert into freeboard values(freeBoardNum.nextval, #{freeBoardTitle}, #{freeBoardContent}, sysdate, #{freeBoardWriter}, #{freeBoardReadcount} , 1)
  	</insert>
  	
  	<delete id="deleteByfreeBoardNum" parameterType="com.kaactueail.dto.FreeBoardDTO">

@@ -41,9 +41,16 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	}
 
 	@Override
-	public FreeBoardDTO getByFB_num(int freeBoardNum) {
+	public FreeBoardDTO getByfreeBoardNum(int freeBoardNum) {
 		
 		return mapper.getByfreeBoardNum(freeBoardNum);
+	}
+
+	@Override
+	public void write(FreeBoardDTO FBboard) {
+		
+		mapper.insertfreeBoard(FBboard);
+		
 	}
 
 }

@@ -34,13 +34,12 @@
 						<tr>
 							<td scope="row"><c:out value="${list.freeBoardNum}" /></td>
 							<td><a class="move_detail"
-								href='/freeboard/detail?freeBoardNum=<c:out value="${list.freeBoardNum}"/>'>
-									<c:out value="${list.freeBoardTitle}" />
+								href='/freeboard/detail?freeBoardNum=<c:out value="${list.freeBoardNum}"/>'><c:out value="${list.freeBoardTitle}" />
 							</a></td>
 							<td><c:out value="${list.freeBoardWriter}" /></td>
 							<td><fmt:formatDate value="${list.freeBoardDate}"
 									pattern="yyyy.MM.dd" /></td>
-							<td><c:out value="${list.freeBoardContent}" /></td>
+							<td><c:out value="${list.freeBoardReadcount}" /></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -51,16 +50,17 @@
 
 					$(".move").on("click",function(e) {
 							e.preventDefault();
-							moveForm.append("<intput type='hidden' name='FB_num' value=''"+ $(this).attr("href")+ "'>'");
+							moveForm.append("<intput type='hidden' name='freeBoardNum' value=''"+ $(this).attr("href")+ "'>'");
 							moveForm.submit();
 									});
 				</script>
 		<div class="btns_wrap">
 			<div class="btn_wrap" style="float:right;">
-				<button type="button" class="btn btn-dark" id="write_btn">글쓰기</button>
-				<button type="button" class="btn btn-dark" id="modifty_btn">수정</button>
+				<button type="button" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
 				<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
 			</div>
+			
+			
 				<div class="btn-toolbar" role="toolbar"
 					aria-label="Toolbar with button groups" style="padding-left:48%;">
 					<div class="btn-group me-2" role="group" aria-label="First group">
@@ -69,6 +69,7 @@
 						<button type="button" class="btn btn-secondary">3</button>
 						<button type="button" class="btn btn-secondary">4</button>
 					</div>
+					
 <!-- 					<div class="btn-group me-2" role="group" aria-label="Second group">
 						<button type="button" class="btn btn-secondary">5</button>
 						<button type="button" class="btn btn-secondary">6</button>
