@@ -33,11 +33,11 @@ public class MemberDAO {
 	}
 	
 	//회원번호 중복체크
-	public int selectmNum(int m_num) {
+	public int selectmNum(int mNum) {
 		try {
 		sqlSession = sqlSessionFactory.openSession();
-		int result = sqlSession.selectOne("memberdao.selectmnum", m_num); // 회원 번호가 중복됐는지 count로 처리
-		if(result == 0) return m_num;
+		int result = sqlSession.selectOne("memberdao.selectmnum", mNum); // 회원 번호가 중복됐는지 count로 처리
+		if(result == 0) return mNum;
 		else return 0;
 		}catch (Exception e) {
 			return 0;
@@ -62,10 +62,10 @@ public class MemberDAO {
 	}
 	
 	//로그인한 사용자 권한 얻어오기
-	public String memberRole(String m_id) {
+	public String memberRole(String mId) {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			String result = sqlSession.selectOne("memberdao.memberrole", m_id);
+			String result = sqlSession.selectOne("memberdao.memberrole", mId);
 			return result;
 		} catch (Exception e) {
 			return null;
@@ -75,10 +75,10 @@ public class MemberDAO {
 	}
 	
 	//로그인한 사용자 번호 얻어오기
-	public int memberNum(String m_id) {
+	public int memberNum(String mId) {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			int  result = sqlSession.selectOne("memberdao.membernum", m_id);
+			int  result = sqlSession.selectOne("memberdao.membernum", mId);
 			return result;
 		} catch (Exception e) {
 			return 0;
@@ -88,10 +88,10 @@ public class MemberDAO {
 	}
 	
 	//로그인 중복처리
-	public int membercheck(String m_id) {
+	public int membercheck(String mId) {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			int result = sqlSession.selectOne("memberdao.checkid", m_id);
+			int result = sqlSession.selectOne("memberdao.checkid", mId);
 			return result;
 		}catch (Exception e) {
 			e.printStackTrace();

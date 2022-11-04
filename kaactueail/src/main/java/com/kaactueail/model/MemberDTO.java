@@ -12,25 +12,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemberDTO {
-	private int m_num;
-	private String m_id, m_pwd, m_name, m_birth, m_tel, m_role;
+	private int mNum;
+	private String mId, mPwd, mName, mBirth, mTel, mRole;
 	
-//	private String m_enabled;
 	
 	@Autowired
-	public MemberDTO(String m_id, String m_pwd) {
-		this.m_id = m_id;
-		this.m_pwd = m_pwd;
+	public MemberDTO(String mId, String mPwd) {
+		this.mId = mId;
+		this.mPwd = mPwd;
 	}
 	
 	
 	@Autowired
-	public MemberDTO(int m_num, String m_id, String m_pwd, String m_name, String m_birth, String m_tel) {
-		this.m_num = m_num;
-		this.m_id = m_id;
-		this.m_pwd = m_pwd;
-		this.m_name = m_name;
-		this.m_birth = m_birth;
-		this.m_tel = m_tel;
+	public MemberDTO(int mNum, String mId, String mPwd, String mName, String mBirth, String mTel) {
+		this.mNum = mNum;
+		this.mId = mId;
+		this.mPwd = mPwd;
+		this.mName = mName;
+		this.mBirth = mBirth;
+		this.mTel = mTel;
 	}
 }

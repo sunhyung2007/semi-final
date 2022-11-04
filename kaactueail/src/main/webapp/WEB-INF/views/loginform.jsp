@@ -9,8 +9,8 @@
 <body>
 
 <form action="member?cmd=login" method = "post">
-<input type = "text" name = "m_id"> <br/>
-<input type = "password" name = "m_pwd"> <br/>
+<input type = "text" name = "mId"> <br/>
+<input type = "password" name = "mPwd"> <br/>
 <input type = "submit" value = "로그인"><br/>
 </form>
 

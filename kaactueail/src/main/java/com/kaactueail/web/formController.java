@@ -19,17 +19,17 @@ public class formController {
 	MemberDAO Dao;
 	
 	@RequestMapping(value = "/checkid", method = {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody int idCheck(String m_id) {
-		if(m_id == null || m_id == "")
+	public @ResponseBody int idCheck(String mId) {
+		if(mId == null || mId == "")
 			return -1;
 		else
-		return Dao.membercheck(m_id);
+		return Dao.membercheck(mId);
 		
 	}
 	@RequestMapping("/main")
 	public String mainPage(HttpSession session) {
-		if(session.getAttribute("m_role").equals("ROLE_ADMIN")) return "admin/main";
-		else if(session.getAttribute("m_role").equals("ROLE_USER")) return "main";
+		if(session.getAttribute("mRole").equals("ROLE_ADMIN")) return "admin/main";
+		else if(session.getAttribute("mRole").equals("ROLE_USER")) return "main";
 		else return "loginform";
 	}
 	

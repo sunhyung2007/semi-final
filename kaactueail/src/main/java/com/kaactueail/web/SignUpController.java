@@ -38,21 +38,21 @@ public class SignUpController extends HttpServlet{
 	//회원가입
 	public void insertMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		System.out.println("여기는 왔따.");
+		
 		signupcheckController check = new signupcheckController(); // 회원번호 중복확인 후 중복되지 않을 때까지 값을 얻어 값 가져오기
 		
 		
-		int m_num = check.duplicateCheckMNum();
-		String m_id = request.getParameter("m_id");
-		String m_pwd = request.getParameter("m_pwd");
-		System.out.println(m_pwd);
-		String m_name = request.getParameter("m_name");
-		String m_birth = request.getParameter("years")
+		int mNum = check.duplicateCheckMNum();
+		String mId = request.getParameter("mId");
+		String mPwd = request.getParameter("mPwd");
+		System.out.println(mPwd);
+		String mName = request.getParameter("mName");
+		String mBirth = request.getParameter("years")
 				+ request.getParameter("month")  + request.getParameter("day");
-		String m_tel = request.getParameter("m_tel");
+		String mTel = request.getParameter("mTel");
 		
 		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = new MemberDTO(m_num,m_id, m_pwd, m_name, m_birth, m_tel); // 회원 정보들 세팅
+		MemberDTO dto = new MemberDTO(mNum,mId, mPwd, mName, mBirth, mTel); // 회원 정보들 세팅
 		
 		int rowcount = dao.insertmember(dto);
 		
@@ -69,29 +69,29 @@ public class SignUpController extends HttpServlet{
 	
 	//로그인
 	public void authenticationMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String m_id = request.getParameter("m_id");
-		String m_pwd = request.getParameter("m_pwd");
+		String mId = request.getParameter("mId");
+		String mPwd = request.getParameter("mPwd");
 		
 		
 		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = new MemberDTO(m_id, m_pwd);  //회원 id와 pwd를 세팅
+		MemberDTO dto = new MemberDTO(mId, mPwd);  //회원 id와 pwd를 세팅
 		
 		boolean check = dao.checkMember(dto);
 		
 		//로그인이 되면
 		if(check == true) {
 			HttpSession session;
-			String m_role = dao.memberRole(m_id);
-			int m_num = dao.memberNum(m_id); 
+			String mRole = dao.memberRole(mId);
+			int mNum = dao.memberNum(mId); 
 			session = request.getSession();
 			
 			//로그인 세션값 설정
-			session.setAttribute("m_id", m_id);
-			session.setAttribute("m_role", m_role);
-			session.setAttribute("m_num", m_num);
-			System.out.println("login m_id 확인: " + session.getAttribute("m_id"));
-			System.out.println("login m_pwd 확인: " +  session.getAttribute("m_role"));
-			System.out.println("login m_num 확인: " +  session.getAttribute("m_num"));
+			session.setAttribute("mId", mId);
+			session.setAttribute("mRole", mRole);
+			session.setAttribute("mNum", mNum);
+			System.out.println("login mId 확인: " + session.getAttribute("mId"));
+			System.out.println("login mRole 확인: " +  session.getAttribute("mRole"));
+			System.out.println("login mNum 확인: " +  session.getAttribute("mNum"));
 			//세션 유지시간 설정(초단위) 20분
 			session.setMaxInactiveInterval(20*60);
 			
