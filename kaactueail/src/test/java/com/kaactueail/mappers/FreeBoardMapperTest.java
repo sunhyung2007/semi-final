@@ -18,17 +18,17 @@ public class FreeBoardMapperTest {
 	
 	@Setter(onMethod_ = { @Autowired })
 	private FreeBoardMapper mapper;
-	/*
+/*
 
 	@Test
 	public void testInsert() {
 		FreeBoardDTO FBoard = new FreeBoardDTO();
-		FBoard.setFreeBoardTitle("java title");
-		FBoard.setFreeBoardContent("java contents");
-		FBoard.setFreeBoardWriter("java writer");
-		FBoard.setFreeBoardMnum(1);
+		FBoard.setFreeboardTitle("java title");
+		FBoard.setFreeboardContent("java contents");
+		FBoard.setFreeboardWriter("java writer");
+		FBoard.setFreeboardMnum(1);
 		
-		mapper.freeBoardinsert(FBoard);
+		mapper.insertfreeBoard(FBoard);
 		
 		log.info(FBoard);
 	}
@@ -37,7 +37,7 @@ public class FreeBoardMapperTest {
 	@Test
 	public void testDelete() {
 		
-		log.info("Delete Count:"+mapper.deleteByfreeBoardNum(2));
+		log.info("Delete Count:"+mapper.deleteByfreeboardNum(2));
 	}
 
 */
@@ -45,15 +45,15 @@ public class FreeBoardMapperTest {
 	public void testUpdate() {
 		FreeBoardDTO FBoard = new FreeBoardDTO();
 		
-		FBoard.setFreeBoardNum(1);
-		FBoard.setFreeBoardTitle("업데이트 제목");
-		FBoard.setFreeBoardContent("업데이트 내용");
+		FBoard.setFreeboardNum(1);
+		FBoard.setFreeboardTitle("아아아아아아아아");
+		FBoard.setFreeboardContent("업데이트 내용");
 
-		int count = mapper.updateByfreeBoardNum(FBoard);
+		int count = mapper.updateByfreeboardNum(FBoard);
 		
 		log.info("Update count: "+count);
 	}
-	/*	
+	/*		
 		@Test
 	public void testGetList() {
 		mapper.getAllList().forEach(freeboard -> log.info(freeboard));
@@ -61,7 +61,7 @@ public class FreeBoardMapperTest {
 		
 	@Test
 	public void testGetFBnumList() {
-		FreeBoardDTO FBoard = mapper.getByfreeBoardNum(1);
+		FreeBoardDTO FBoard = mapper.getByfreeboardNum(1);
 		log.info(FBoard);
 		
 	}

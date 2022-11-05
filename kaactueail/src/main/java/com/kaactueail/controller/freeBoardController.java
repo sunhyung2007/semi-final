@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kaactueail.dao.FreeBoardDAO;
 import com.kaactueail.dto.FreeBoardDTO;
@@ -35,7 +36,7 @@ public class freeBoardController {
 		
 	}
 	
-	// 글쓰기 버튼 누르면 post 방식으로 데이터 숨겨서 리스트로 넘김
+	// post방식(글 작성 후 글쓰기 버튼 클릭)으로 오면 리스트로 리다이렉트
 	@PostMapping("write")
 	public String Postwrite(FreeBoardDTO dto) {
 		
@@ -46,16 +47,26 @@ public class freeBoardController {
 	
 	// 게시판 클릭 시 해당 게시글 상세 페이지 출력
 	@GetMapping("detail")
-	public void Getdetail(int freeBoardNum, Model model) {
+	public void Getdetail(int freeboardNum, Model model) {
 		
-		model.addAttribute("pageDetail", dao.getByfreeBoardNum(freeBoardNum));
+		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
 	}
 	
 	// 수정 페이지로 이동하며 상세 페이지처럼 데이터 가지고 옴
 	@GetMapping("modify")
-	public void Getmodify(int freeBoardNum, Model model) {
+	public void Getmodify(int freeboardNum, Model model) {
 		
-		model.addAttribute("pageDetail", dao.getByfreeBoardNum(freeBoardNum));
+		model.addAttribute("pagemodify", dao.getByfreeboardNum(freeboardNum));
+	}
+	
+	
+	// post방식(글 수정 후 수정버튼 클릭)으로 오면
+	@PostMapping("modify")
+	public String Postmodify(FreeBoardDTO dto) {
+		//dto.setFreeboardNum(1); // jsp에서 번호를 못 받아옴
+		dao.modify(dto);
+		System.out.println(dto);
+		return "redirect:/freeboard/list";
 	}
 
 

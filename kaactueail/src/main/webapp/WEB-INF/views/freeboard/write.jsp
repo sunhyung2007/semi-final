@@ -31,16 +31,16 @@
 					<div class="form-group">
 						<label class="col-form-label mt-4" for="inputDefault">제목</label>
 						<input type="text" class="form-control" placeholder="제목을 입력하세요"
-							id="inputDefault" name="freeBoardTitle" >
+							id="inputDefault" name="freeboardTitle" >
 					</div>
 					<div class="form-group">
 						<label class="col-form-label mt-4" for="inputDefault">작성자</label>
 						<input type="text" class="form-control" placeholder="작성자를 입력하세요"
-							id="inputDefault" name="freeBoardWriter">
+							id="inputDefault" name="freeboardWriter">
 					</div>
 					<div class="form-group">
 						<label for="exampleTextarea" class="form-label mt-4">내용</label>
-						<textarea name="freeBoardContent" class="form-control" id="exampleTextarea"
+						<textarea name="freeboardContent" class="form-control" id="exampleTextarea"
 							rows="15" placeholder="내용을 입력하세요"></textarea>
 					</div>
 					<div class="form-group">

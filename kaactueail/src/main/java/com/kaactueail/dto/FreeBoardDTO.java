@@ -10,13 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class FreeBoardDTO {
-	//게시판 번호
-	private int freeBoardNum;
-	// 게시판 타이틀
-	private String freeBoardTitle, freeBoardContent;
-	private Date freeBoardDate;
-	private String freeBoardWriter;
-	private int freeBoardReadcount, freeBoardMnum;
+	
+	private int freeboardNum;
+	private String freeboardTitle, freeboardContent;
+	private Date freeboardDate;
+	private String freeboardWriter;
+	private int freeboardReadcount, freeboardMnum;
 	
 	
 }

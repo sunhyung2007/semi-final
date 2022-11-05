@@ -24,14 +24,14 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	public boolean modify(FreeBoardDTO FBoard) {
 		
 		// 정상적으로 수행되면 1 값 반환되므로 엄격하게 처리하기 위해 == 1
-		return mapper.updateByfreeBoardNum(FBoard)==1;
+		return mapper.updateByfreeboardNum(FBoard)==1;
 	}
 
 	@Override
-	public boolean remove(int freeBoardNum) {
+	public boolean remove(int freeboardNum) {
 		
 		// 정상적으로 수행되면 1 값 반환되므로 엄격하게 처리하기 위해 == 1		
-		return mapper.deleteByfreeBoardNum(freeBoardNum)==1;
+		return mapper.deleteByfreeboardNum(freeboardNum)==1;
 	}
 
 	@Override
@@ -41,9 +41,9 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	}
 
 	@Override
-	public FreeBoardDTO getByfreeBoardNum(int freeBoardNum) {
+	public FreeBoardDTO getByfreeboardNum(int freeboardNum) {
 		
-		return mapper.getByfreeBoardNum(freeBoardNum);
+		return mapper.getByfreeboardNum(freeboardNum);
 	}
 
 	@Override

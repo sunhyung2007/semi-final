@@ -9,6 +9,8 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
 <title>자유게시판</title>
+<!-- jqeury cdn -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
@@ -32,14 +34,14 @@
 
 					<c:forEach items="${ list }" var="list">
 						<tr>
-							<td scope="row"><c:out value="${list.freeBoardNum}" /></td>
+							<td scope="row"><c:out value="${list.freeboardNum}" /></td>
 							<td><a class="move_detail"
-								href='/freeboard/detail?freeBoardNum=<c:out value="${list.freeBoardNum}"/>'><c:out value="${list.freeBoardTitle}" />
+								href='/freeboard/detail?freeboardNum=<c:out value="${list.freeboardNum}"/>'><c:out value="${list.freeboardTitle}" />
 							</a></td>
-							<td><c:out value="${list.freeBoardWriter}" /></td>
-							<td><fmt:formatDate value="${list.freeBoardDate}"
+							<td><c:out value="${list.freeboardWriter}" /></td>
+							<td><fmt:formatDate value="${list.freeboardDate}"
 									pattern="yyyy.MM.dd" /></td>
-							<td><c:out value="${list.freeBoardReadcount}" /></td>
+							<td><c:out value="${list.freeboardReadcount}" /></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -50,13 +52,13 @@
 
 					$(".move").on("click",function(e) {
 							e.preventDefault();
-							moveForm.append("<intput type='hidden' name='freeBoardNum' value=''"+ $(this).attr("href")+ "'>'");
+							moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
 							moveForm.submit();
 									});
 				</script>
 		<div class="btns_wrap">
 			<div class="btn_wrap" style="float:right;">
-				<button type="button" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
+				<button type="button" class="btn btn-dark" id="write_btn" onclick="location.href='write'" formmethod="get">글쓰기</button>
 				<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
 			</div>
 			
