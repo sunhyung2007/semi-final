@@ -79,7 +79,7 @@
 	<!-- wrapper end -->
 
 	<!-- 버튼 클릭 시 이동 로직 -->
-	<script>
+<script>
 	let form = ${"#detailForm"};
 	let mForm = $("#modifyForm");
 	

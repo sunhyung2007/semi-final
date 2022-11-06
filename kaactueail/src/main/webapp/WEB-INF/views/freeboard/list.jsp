@@ -36,8 +36,7 @@
 						<tr>
 							<td scope="row"><c:out value="${list.freeboardNum}" /></td>
 							<td><a class="move_detail"
-								href='/freeboard/detail?freeboardNum=<c:out value="${list.freeboardNum}"/>'><c:out value="${list.freeboardTitle}" />
-							</a></td>
+								href='/freeboard/detail?freeboardNum=<c:out value="${list.freeboardNum}"/>'><c:out value="${list.freeboardTitle}" /></a></td>
 							<td><c:out value="${list.freeboardWriter}" /></td>
 							<td><fmt:formatDate value="${list.freeboardDate}"
 									pattern="yyyy.MM.dd" /></td>
@@ -45,48 +44,64 @@
 						</tr>
 					</c:forEach>
 				</table>
+				
+				
+				<div class="btns_wrap">
+					<div class="btn_wrap" style="float: right;">
+						<button type="button" class="btn btn-dark" id="write_btn"
+							onclick="location.href='write'" formmethod="get">글쓰기</button>
+						<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
+					</div>
 
-				<form id="moveForm" method="get"></form>
-				<script>
+
+					<div>
+						<ul class="pagination">
+							 <c:if test="${ paging.prev }"> 
+						 		<li class="page-item"><a class="page-link" href="/freeboard/list?pageNum=${ paging.startPage-1 }&amount=${ paging.cri.amount}">&laquo;</a></li>
+						 	 </c:if> 
+							<c:forEach var="num" begin="${ paging.startPage }" end="${ paging.endPage }">
+								<li class="page-item ${ paging.cri.pageNum == num ? "active":"" }"><a class="page-link" href="/freeboard/list?pageNum=${ num }&amount=${ paging.cri.amount}">${ num }</a></li>
+							</c:forEach>
+						 	<c:if test="${ paging.next }">	 
+								<li class="page-item"><a class="page-link" href="/freeboard/list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">&raquo;</a></li>
+						 	</c:if>
+						</ul>
+					</div>
+					
+
+				</div>
+				
+				<form id="moveForm" method="get">
+					<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
+					<input type="hidden" name="amount" value="${ paging.cri.amount }">
+				</form>
+				 
+<script type="text/javascript">
 					let moveForm = $("#moveForm");
 
 					$(".move").on("click",function(e) {
 							e.preventDefault();
+							
 							moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
+							moveForm.attr("action", "freeboard/detail")
 							moveForm.submit();
 									});
-				</script>
-		<div class="btns_wrap">
-			<div class="btn_wrap" style="float:right;">
-				<button type="button" class="btn btn-dark" id="write_btn" onclick="location.href='write'" formmethod="get">글쓰기</button>
-				<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
-			</div>
-			
-			
-				<div class="btn-toolbar" role="toolbar"
-					aria-label="Toolbar with button groups" style="padding-left:48%;">
-					<div class="btn-group me-2" role="group" aria-label="First group">
-						<button type="button" class="btn btn-secondary">1</button>
-						<button type="button" class="btn btn-secondary">2</button>
-						<button type="button" class="btn btn-secondary">3</button>
-						<button type="button" class="btn btn-secondary">4</button>
-					</div>
 					
-<!-- 					<div class="btn-group me-2" role="group" aria-label="Second group">
-						<button type="button" class="btn btn-secondary">5</button>
-						<button type="button" class="btn btn-secondary">6</button>
-						<button type="button" class="btn btn-secondary">7</button>
-					</div>
-					<div class="btn-group" role="group" aria-label="Third group">
-						<button type="button" class="btn btn-secondary">8</button> -->
-					</div>
-			</div>
+					$(".pagination a").on("click", function(e)){
+						e.preventDefault();
+						moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+						moveForm.attr("action", "/freeboard/list");
+						moveForm.submit();
+					});
+					
+</script>
 
-			</div>
-		</div>
-	</div>
-
-	<!-- footer삽입 -->
+				
+				
+			</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->
+		<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kaactueail.dao.FreeBoardDAO;
+import com.kaactueail.dto.Criteria;
 import com.kaactueail.dto.FreeBoardDTO;
+import com.kaactueail.dto.PageDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -22,13 +24,28 @@ public class freeBoardController {
 	
 	@Autowired
 	private FreeBoardDAO dao;
-	
+/*	
 	// 자유게시판 접속 시 게시판 전체 리스트 출력
 	@GetMapping("list")
 	public void Getlist(Model model) {
 		
 		model.addAttribute("list", dao.getAllList());
 	}
+*/	
+	// 게시판 리스트 출력 - 페이징 처리
+	@GetMapping("list")
+	public void GetlistPaging(Model model, Criteria cri) {
+		
+		log.info("boardlistget");
+		model.addAttribute("list", dao.getListPaging(cri));
+		
+		int total = dao.getTotal();
+		PageDTO page = new PageDTO(cri, total);
+		
+		model.addAttribute("paging", page);
+		
+	}
+	
 	
 	// 글쓰기 진입 - get 방식으로 들어올시
 	@GetMapping("write")
@@ -48,9 +65,11 @@ public class freeBoardController {
 	
 	// 게시판 클릭 시 해당 게시글 상세 페이지 출력
 	@GetMapping("detail")
-	public void Getdetail(int freeboardNum, Model model) {
+	public void Getdetail(int freeboardNum, Model model, Criteria cri) {
 		
 		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
+		
+		model.addAttribute("cri", cri);
 	}
 	
 	// 수정 페이지로 이동하며 상세 페이지처럼 데이터 가지고 옴

@@ -1,12 +1,14 @@
 package com.kaactueail.mappers;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.kaactueail.dto.FreeBoardDTO;
+import com.kaactueail.dto.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -32,14 +34,14 @@ public class FreeBoardMapperTest {
 		
 		log.info(FBoard);
 	}
-*/	
+	
 
 	@Test
 	public void testDelete() {
 		
 		log.info("Delete Count:"+mapper.deleteByfreeboardNum(2));
 	}
-/*
+
 	@Test
 	public void testUpdate() {
 		FreeBoardDTO FBoard = new FreeBoardDTO();
@@ -65,4 +67,13 @@ public class FreeBoardMapperTest {
 		
 	}
 */
+	// 게시판 목록 페이징
+	@Test
+	public void testGetListPaging() {
+		
+		Criteria cri = new Criteria();
+		List list = mapper.getListPaing(cri);
+		
+		list.forEach(freeboard -> log.info(""+freeboard));
+	}
 }

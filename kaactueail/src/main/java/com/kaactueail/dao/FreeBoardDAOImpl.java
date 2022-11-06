@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kaactueail.dto.Criteria;
 import com.kaactueail.dto.FreeBoardDTO;
 import com.kaactueail.mappers.FreeBoardMapper;
 
@@ -51,6 +52,17 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 		
 		mapper.insertfreeBoard(FBboard);
 		
+	}
+
+	@Override
+	public List<FreeBoardDTO> getListPaging(Criteria cri) {
+		
+		return mapper.getListPaing(cri);
+	}
+
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
 	}
 
 }
