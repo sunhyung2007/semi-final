@@ -1,0 +1,18 @@
+1. root-context.xml에 mybatis 관련 자동 스캔 경로 매핑 해놓음
+(<mybatis-spring:scan base-package="com.kaactueail.mappers"/>
+
+
+2. 따라서 src/mian/java 내 com.kaactueail.mapper 패키지에 인터페이스 생성해서 sql 관련 메소드 생성
+
+
+3. 메소드 생성 후 src/mian/resources 내 com/kaactueail/mapper 폴더 안에
+	2번에서 생성한 인터페이스 이름과 같은 xml 파일 생성하여 그 안에 태그 이용해 sql 쿼리문 기재
+	
+*주의사항
+xml에 생성하는 쿼리문 id는 인터페이스에서 생성한 메소드와 같은 이름으로 해야함
+
+즉, 인터페이스 이름 = mapper.xml 이름  /  인터페이스에서 선언한 메소드 이름 = mapper.xml 쿼리문 id 이름
+이렇게 두 개가 같아야 함
+
+
+4. xml파일 쿼리문 작성시 변수 이름 대소문자 db, DTO와 같게 기재해야함(쿼리문 인식 될 때도 있으나, 인식 안 될 수도 있음)
