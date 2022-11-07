@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DML 명령 처리-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- Mapper 인터페이스와 동일한 이름 주어야 하므로 패키지명+mapper이름으로 작명 --> 
+ <!-- 쿼리문 id는 인터페이스 메소드와 동일하게 설정 --> 
+ <mapper namespace="com.kaactueail.mappers.MyCocktailBoardMapper">
+ 
+ 	<select id="getAllMycocktailboardList" resultType="com.kaactueail.dto.MyCocktailBoardDTO">
+ 		select*from mycocktailboard order by mycocktailNum desc
+ 	</select>
+ 	
+ 	<select id="getBymycocktailNum" resultType="com.kaactueail.dto.MyCocktailBoardDTO">
+ 		select*from mycocktailboard where mycocktailNum = #{mycocktailNum}
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 		insert into mycocktailboard values(mycocktailNum.nextval, #{mycocktailTitle}, #{mycocktailContent}, #{mycocktailRecipe},sysdate, #{mycocktailWriter}, #{mycocktailReadcount} , #{mycocktailImgName}, #{mycocktailMemberNum})
+ 	</insert>
+ 	
+ 	<delete id="deleteBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
+ 		delete from mycocktailboard where mycocktailNum= #{mycocktailNum}
+ 	</delete>
+ 	
+ 	<update id="updateBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
+		update mycocktailboard set mycocktailTitle = #{mycocktailTitle}, mycocktailContent = #{mycocktailContent} where mycocktailNum = #{mycocktailNum}
+ 	</update>
+ </mapper>
