@@ -28,6 +28,9 @@ public interface FreeBoardDAO {
 	// 게시판 총 개수 - 페이징처리
 	public int getTotal();
 	
+	// 게시글 조회수
+	public int updateReadcount(int freeboardNum);
+	
 
 
 }

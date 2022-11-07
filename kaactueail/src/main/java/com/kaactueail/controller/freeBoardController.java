@@ -67,7 +67,10 @@ public class freeBoardController {
 	@GetMapping("detail")
 	public void Getdetail(int freeboardNum, Model model, Criteria cri) {
 		
+		dao.updateReadcount(freeboardNum);
 		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
+		
+		System.out.println(dao);
 		
 		model.addAttribute("cri", cri);
 	}

@@ -39,23 +39,23 @@
 				<div class="layout_all">
 					<div class="layout_title">
 						<div>
-							<input type="text" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pagemodify.freeboardNum}'/>" readonly>
+							<input type="text" class="form-control" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pagemodify.freeboardNum}'/>" readonly style="border: none">
 						</div>
 						<div class="title">
-							<input type="text" id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pagemodify.freeboardTitle}'/>">
+							<input type="text" class="form-control" id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pagemodify.freeboardTitle}'/>">
 						</div>
 					</div>
 					<hr />
 
 					<div class="layout_middle">
 						<div class="text-secondary" id="writer">
-							<input type="text" id="freeboardWriter" name="freeboardWriter" value="<c:out value= '${pagemodify.freeboardWriter}'/>" readonly>
+							<input type="text" class="form-control" id="freeboardWriter" name="freeboardWriter" value="<c:out value= '${pagemodify.freeboardWriter}'/>" readonly style="border: none">
 						</div>
 						<div class="text-secondary" id="writedate">
 							<p><fmt:formatDate pattern="yyyy.MM.dd" value="${pagemodify.freeboardDate}" /></p>
 						</div>
 						<div>
-							<input type="text" id="freeboardReadcount" name="freeboardReadcount" value="<c:out value="${pagemodify.freeboardReadcount}" />" readonly>
+							<input type="text" class="form-control" id="freeboardReadcount" name="freeboardReadcount" value="<c:out value="${pagemodify.freeboardReadcount}" />" readonly style="border: none">
 
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 	</div>
 	<!-- wrapper end -->
 
-	<!-- 버튼 클릭 시 이동 로직 -->
+	<!-- 버튼 클릭 시 이동 로직 
 <script>
 	let form = ${"#detailForm"};
 	let mForm = $("#modifyForm");
@@ -90,7 +90,7 @@
 	});
  	
 
-</script>
+</script> -->
 
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

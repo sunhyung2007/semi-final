@@ -65,4 +65,9 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 		return mapper.getTotal();
 	}
 
+	@Override
+	public int updateReadcount(int freeboardNum) {
+		return mapper.updateReadcount(freeboardNum);
+	}
+
 }

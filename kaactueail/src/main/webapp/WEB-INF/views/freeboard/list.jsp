@@ -14,6 +14,8 @@
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<!-- header삽입 -->
@@ -22,7 +24,6 @@
 		<div class="contents">
 			<div class="main_contents">
 				<h3>자유게시판</h3>
-
 				<table class="table table-hover">
 					<tr class="table-dark">
 						<th scope="col">게시글번호</th>
@@ -44,60 +45,110 @@
 						</tr>
 					</c:forEach>
 				</table>
-				
-				
-				<div class="btns_wrap">
+
+
+				<div class="numbers_wrap" style="display:flex; justify-content: space-around;">
+					<div>
+						<ul class="pagination">
+							<c:if test="${ paging.prev }">
+								<li class="page-item"><a class="page-link"
+									href="/freeboard/list?pageNum=${ paging.startPage-1 }&amount=${ paging.cri.amount}">&laquo;</a></li>
+							</c:if>
+							<c:forEach var="num" begin="${ paging.startPage }"
+								end="${ paging.endPage }">
+								<li class="page-item ${ paging.cri.pageNum == num ? "active":"" }">
+									<a class="page-link"
+									href="/freeboard/list?pageNum=${ num }&amount=${ paging.cri.amount}">${ num }</a>
+								</li>
+							</c:forEach>
+							<c:if test="${ paging.next }">
+								<li class="page-item"><a class="page-link"
+									href="/freeboard/list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">&raquo;</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+				<div class="btns_wrap"
+					style="display: flex; justify-content: flex-end; align-items: center;">
+					<div class="dropbox"
+						style="display: flex; align-items: center; padding-right: 1%">
+							<form class="d-flex" action="list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">
+								<select name="type">
+									<option value="" <c:out value="${ paging.cri.type == null ? 'selected' : ''}"/> >선택</option>
+									<option value="T" <c:out value="${ paging.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
+									<option value="C" <c:out value="${ paging.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+									<option value="W" <c:out value="${ paging.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+									<option value="TC" <c:out value="${ paging.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
+									<option value="TW" <c:out value="${ paging.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
+									<option value="TCW" <c:out value="${ paging.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
+								</select>
+
+								<input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
+								<button id="search_btn" class="btn btn-secondary my-2 my-sm-0" type="submit" href="keyword=${ paging.cri.keyword }&type=${ paging.cri.type }">Search</button>
+							</form>
+
+					</div>
 					<div class="btn_wrap" style="float: right;">
 						<button type="button" class="btn btn-dark" id="write_btn"
 							onclick="location.href='write'" formmethod="get">글쓰기</button>
-						<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
+						<!-- <button type="button" class="btn btn-dark" id="delete_btn">삭제</button> -->
 					</div>
-
-
-					<div>
-						<ul class="pagination">
-							 <c:if test="${ paging.prev }"> 
-						 		<li class="page-item"><a class="page-link" href="/freeboard/list?pageNum=${ paging.startPage-1 }&amount=${ paging.cri.amount}">&laquo;</a></li>
-						 	 </c:if> 
-							<c:forEach var="num" begin="${ paging.startPage }" end="${ paging.endPage }">
-								<li class="page-item ${ paging.cri.pageNum == num ? "active":"" }"><a class="page-link" href="/freeboard/list?pageNum=${ num }&amount=${ paging.cri.amount}">${ num }</a></li>
-							</c:forEach>
-						 	<c:if test="${ paging.next }">	 
-								<li class="page-item"><a class="page-link" href="/freeboard/list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">&raquo;</a></li>
-						 	</c:if>
-						</ul>
-					</div>
-					
 
 				</div>
 				
+				
+<!--
 				<form id="moveForm" method="get">
 					<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
 					<input type="hidden" name="amount" value="${ paging.cri.amount }">
+					<input type="hidden" name="keyword" value="${ paging.cri.keyword }">
+					<input type="hidden" name="type" value="${ paging.cri.type }">
 				</form>
-				 
-<script type="text/javascript">
-					let moveForm = $("#moveForm");
 
-					$(".move").on("click",function(e) {
-							e.preventDefault();
+ <script type="text/javascript">
+	let moveForm = $("#moveForm");
+
+		$(".move").on("click",function(e) {
+			e.preventDefault();
 							
-							moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
-							moveForm.attr("action", "freeboard/detail")
-							moveForm.submit();
-									});
+			moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
+			moveForm.attr("action", "freeboard/detail")
+			moveForm.submit();
+		});
 					
-					$(".pagination a").on("click", function(e)){
-						e.preventDefault();
-						moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-						moveForm.attr("action", "/freeboard/list");
-						moveForm.submit();
-					});
+		$(".pagination a").on("click", function(e)){
+			e.preventDefault();
+			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+			moveForm.attr("action", "/freeboard/list");
+			moveForm.submit();
+		});
+		
+		$("#search_btn").on("click", function(e){
+			e.preventDefault();
+			
+			let type = $("#search_btn select").val();
+			let keyword = $("#search_btn input[name='keyword']").val();
+			
+			if(!type){
+				alert("검색 종류를 선택하세요.");
+				return false;
+			}
+			
+			if(!keyword){
+				alert("키워드를 입력하세요.");
+				return false;
+			}		
+			
+			moveForm.find("input[name='type']").val(type);
+			moveForm.find("input[name='keyword']").val(keyword);
+			moveForm.find("input[name='pageNum']").val(1);
+			moveForm.submit();
+		});
 					
-</script>
+</script> -->
 
-				
-				
+
+
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->

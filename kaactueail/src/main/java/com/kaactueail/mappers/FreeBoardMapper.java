@@ -27,4 +27,6 @@ public interface FreeBoardMapper {
 	// 게시판 총 개수 - 페이징처리
 	public int getTotal();
 	
+	// 게시판 조회 수
+	public int updateReadcount(int freeboardNum);
 }

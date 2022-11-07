@@ -6,25 +6,68 @@
  <!-- Mapper 인터페이스와 동일한 이름 주어야 하므로 패키지명+mapper이름으로 작명 --> 
  <!-- 쿼리문 id는 인터페이스 메소드와 동일하게 설정 --> 
  <mapper namespace="com.kaactueail.mappers.FreeBoardMapper">
+ 
 	<!-- 게시글 조회 --> 
  	<select id="getAllList" resultType="com.kaactueail.dto.FreeBoardDTO">
  		select*from freeBoard order by freeboardNum desc
  	</select>
+ 	
+ 	<!-- 게시물 키워드로 검색 -->
+ 	<sql id="criteria">
+ 		<trim prefix="AND" prefixOverrides="OR">
+ 			<foreach collection="typeArr" item="type">
+ 				<trim prefix="OR">
+ 					<choose>
+ 						<when test="type == 'T'.toString()">
+ 							freeboardTitle like '%'||#{keyword}||'%'
+ 						</when>
+ 						<when test="type == 'C'.toString()">
+ 							freeboardContent like '%'||#{keyword}||'%'
+ 						</when>
+ 						<when test="type == 'W'.toString()">
+ 							freeboardWriter like '%'||#{keyword}||'%'
+ 						</when>
+ 					</choose>
+ 				</trim>
+ 			</foreach>
+ 		</trim>
+ 	
+ 	</sql>
+ 	
+ 	
 	<!-- 게시글 조회 페이징처리 -->
 	<select id="getListPaing" resultType="com.kaactueail.dto.FreeBoardDTO">
  	<![CDATA[
- 		select rn, freeboardNum, freeboardTitle, freeboardwriter, freeboarddate, freeboardreadcount from(
-   	     	select rownum as rn, freeboardNum, freeboardTitle, freeboardwriter, freeboarddate, freeboardreadcount 
-        	from freeboard where rownum <= #{pageNum} * #{amount} order by freeboardNum desc) 
-		where rn > (#{pageNum}-1) * #{amount}
- 	]]>
+ 		select rn, freeboardNum, freeboardTitle, freeboardWriter, freeboardDate, freeboardReadcount from(
+   	     	select rownum as rn, freeboardNum, freeboardTitle, freeboardwriter, freeboardDate, freeboardReadcount 
+        	from freeboard where rownum <= #{pageNum} * #{amount}
+      	]]>   	
+        <if test="keyword != null">
+ 			<include refid="criteria"></include>
+ 		</if>
+
+  	<![CDATA[       	
+        	order by freeboardNum desc)
+ 			where rn > (#{pageNum}-1) * #{amount}
+ 	]]>		
 	</select>
+
+	
 	<!-- 게시물 총 개수 --> 	
  	<select id="getTotal" resultType="int">
  		select count(*) from freeboard
+ 		
+ 		<if test="keyword != null">
+ 			where freeboardNum > 0 <include refid="criteria"></include>
+ 		</if>
  	</select>
  	
+ 	<!-- 게시글 조회수 -->
+ 	<update id="updateReadcount">
+ 		update freeboard set freeboardReadcount = freeboardReadcount+1 where freeboardNum = #{ freeboardNum }
+ 	</update>
  	
+
  	<!-- 게시판 번호로 게시글 조회 -->
  	<select id="getByfreeboardNum" resultType="com.kaactueail.dto.FreeBoardDTO">
  		select*from FreeBoard where freeboardNum = #{freeboardNum}
@@ -34,10 +77,12 @@
  	<insert id="insertfreeBoard">
  		insert into freeboard values(freeboardNumSeq.nextval, #{freeboardTitle}, #{freeboardContent}, sysdate, #{freeboardWriter}, #{freeboardReadcount} , 1)
  	</insert>
+ 	
  	<!-- 게시글 삭제 -->
  	<delete id="deleteByfreeboardNum" parameterType="com.kaactueail.dto.FreeBoardDTO">
  		delete from freeboard where freeboardNum= #{freeboardNum}
  	</delete>
+ 	
  	<!-- 게시글 수정 -->
  	<update id="updateByfreeboardNum" parameterType="com.kaactueail.dto.FreeBoardDTO">
 		update freeboard set freeboardTitle = #{freeboardTitle}, freeboardContent = #{freeboardContent} where freeboardNum = #{freeboardNum}
