@@ -31,8 +31,8 @@
 				<ul class="right">
 					<li><a href="#">카트</a></li>
 					<li><a href="#">마이페이지</a></li>
-					<li><a href="/login/list">로그인</a></li>
-					<li><a href="/join/list">회원가입</a></li>
+					<li><a href="#">로그인</a></li>
+					<li><a href="#">회원가입</a></li>
 				</ul>
 			</div>
 		</div>

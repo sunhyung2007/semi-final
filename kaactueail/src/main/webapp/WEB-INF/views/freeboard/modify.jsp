@@ -16,7 +16,7 @@
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/modifyLayout.css" />
+<link rel="stylesheet" href="/resources/css/modifyLayout_freeb.css" />
 </head>
 <body>
 	<!-- header삽입 -->

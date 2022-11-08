@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DML 명령 처리-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.kaactueail.mappers.QuestionMapper">
+
+	<select id="getAllList" resultType="com.kaactueail.dto.QuestionDTO">
+		select*from Question order by questionNum desc
+	</select>
+	
+	 	<!-- 게시물 키워드로 검색 -->
+ 	<sql id="criteria">
+ 		<trim prefix="AND" prefixOverrides="OR">
+ 			<foreach collection="typeArr" item="type">
+ 				<trim prefix="OR">
+ 					<choose>
+ 						<when test="type == 'T'.toString()">
+ 							questionTitle like '%'||#{keyword}||'%'
+ 						</when>
+ 						<when test="type == 'C'.toString()">
+ 							questionContent like '%'||#{keyword}||'%'
+ 						</when>
+ 						<when test="type == 'W'.toString()">
+ 							questionWriter like '%'||#{keyword}||'%'
+ 						</when>
+ 					</choose>
+ 				</trim>
+ 			</foreach>
+ 		</trim>
+ 	
+ 	</sql>
+ 	
+ 	<!-- 게시글 조회 페이징처리 -->
+	<select id="getListPaging" resultType="com.kaactueail.dto.QuestionDTO">
+ 	<![CDATA[
+ 		select questionNum, questionTitle, questionWriter, questionDate, questionReadcount from(
+   	     	select rownum as rn, questionNum, questionTitle, questionWriter, questionDate, questionReadcount 
+        	from(select*from Question order by questionNum desc) where rownum <= #{pageNum} * #{amount}
+     ]]>   	
+        <if test="keyword != null">
+ 			<include refid="criteria"></include>
+ 		</if>
+  	<![CDATA[       	
+        	)
+ 			where rn > (#{pageNum}-1) * #{amount}
+ 	]]>		
+	</select>
+ 	
+ 		<!-- 게시물 총 개수 --> 	
+ 	<select id="getTotal" resultType="int">
+ 		select count(*) from question
+ 		
+ 		<if test="keyword != null">
+ 			where questionNum > 0 <include refid="criteria"></include>
+ 		</if>
+ 	</select>
+
+	
+	<select id="getByquestionNum" resultType="com.kaactueail.dto.QuestionDTO">
+		select*from Question where questionNum = #{ questionNum }
+	</select>
+
+	<insert id="insertquestion">
+		insert into Question values(questionNumSeq.nextval, #{questionTitle}, #{questionContent}, sysdate, #{questionWriter}, #{ questionReadcount }, 1)
+	</insert>
+
+</mapper>

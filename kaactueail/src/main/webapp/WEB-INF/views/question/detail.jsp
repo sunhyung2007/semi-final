@@ -23,44 +23,44 @@
 		<div class="contents">
 			<div class="main_contents">
 
-				<h3>자유게시판</h3>
+				<h3>고객센터</h3>
 				<div class="btn_wrap">
 					<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
 					<button type="submit" class="btn btn-dark" id="list_btn" onclick="location.href='list'">목록</button>
-					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button>
+					<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button> --%>
 					<!-- <button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'" formaction="/freeboard/delete" formmethod="post">삭제</button> -->
 				</div>
 				
-				<form id="detailForm" action="/freeboard/modify" method="get">
+				<%-- <form id="detailForm" action="/freeboard/modify" method="get">
 					<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
-				</form>
+				</form> --%>
 				
 				<div class="layout_all">
 					<div class="layout_title">
 						<div>
-							<input id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>" readonly>
+							<input id="questionNum" name="questionNum" value="<c:out value= '${pagedetail.questionNum}'/>" readonly>
 						</div>
 						<div class="title">
-							<input id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pageDetail.freeboardTitle}'/>" readonly>
+							<input id="questionTitle" name="questionTitle" value="<c:out value= '${pagedetail.questionTitle}'/>" readonly>
 						</div>
 					</div>
 					<hr />
 
 					<div class="layout_middle">
 						<div class="text-secondary" id="writer">
-							<input id="freeboardWriter" name="freeboardWriter" value="<c:out value= '${pageDetail.freeboardWriter}'/>" readonly>
+							<input id="questionWriter" name="questionWriter" value="<c:out value= '${pagedetail.questionWriter}'/>" readonly>
 						</div>
 						<div class="text-secondary" id="writedate">
-							<input id="freeboardDate" name="freeboardDate" value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.freeboardDate}" />" readonly>
+							<input id="questionDate" name="questionDate" value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pagedetail.questionDate}" />" readonly>
 						</div>
 						<div>
-							<input id="freeboardReadcount" name="freeboardReadcount" value="<c:out value="${pageDetail.freeboardReadcount}" />" readonly>
+							<input id="questionReadcount" name="questionReadcount" value="<c:out value="${pagedetail.questionReadcount}" />" readonly>
 
 						</div>
 					</div>
 					<div class="layout_content">
-						<textarea name="freeboardContent" class="form-control" id="exampleTextarea"
-							rows="15" readonly style="border: none; "><c:out value="${pageDetail.freeboardContent}" /></textarea>
+						<textarea name="questionContent" class="form-control" id="exampleTextarea"
+							rows="15" readonly style="border: none; "><c:out value="${pagedetail.questionContent}" /></textarea>
 					</div>
 				</div>
 

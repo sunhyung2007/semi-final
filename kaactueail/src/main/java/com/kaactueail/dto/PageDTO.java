@@ -20,13 +20,14 @@ public class PageDTO {
 	// 현재페이지, 페이지당 게시물 표시 정보
 	private Criteria cri;
 
+	
 	public PageDTO(Criteria cri, int total) {
-		
 		this.cri = cri;
 		this.total = total;
 		
 		// 마지막 페이지
 		this.endPage = (int)(Math.ceil(cri.getPageNum()/10.0))*10;
+		
 		// 시작 페이지
 		this.startPage = this.endPage - 9;
 		

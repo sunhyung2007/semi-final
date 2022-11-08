@@ -16,7 +16,7 @@
 				</ul>
 			</div>
 			<div class="foo_help">
-				<a href="#">고객센터</a>
+				<a href="/question/list">고객센터</a>
 			</div>
 
 		</div>

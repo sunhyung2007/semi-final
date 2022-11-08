@@ -38,7 +38,7 @@
 	<!-- 게시글 조회 페이징처리 -->
 	<select id="getListPaing" resultType="com.kaactueail.dto.FreeBoardDTO">
  	<![CDATA[
- 		select rn, freeboardNum, freeboardTitle, freeboardWriter, freeboardDate, freeboardReadcount from(
+ 		select freeboardNum, freeboardTitle, freeboardWriter, freeboardDate, freeboardReadcount from(
    	     	select rownum as rn, freeboardNum, freeboardTitle, freeboardwriter, freeboardDate, freeboardReadcount 
         	from freeboard where rownum <= #{pageNum} * #{amount}
       	]]>   	

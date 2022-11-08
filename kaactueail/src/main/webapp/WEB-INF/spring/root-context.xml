@@ -36,7 +36,6 @@
     <mybatis-spring:scan base-package="com.kaactueail.mappers"/> 
     
     <!-- 패키지 내 어노테이션 찾아 처리 -->
-    <context:component-scan base-package="com.kaactueail.model"/>
     <context:component-scan base-package="com.kaactueail.dao"/>
 
 </beans>

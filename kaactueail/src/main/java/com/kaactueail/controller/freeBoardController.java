@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kaactueail.dao.FreeBoardDAO;
 import com.kaactueail.dto.Criteria;
@@ -37,10 +36,13 @@ public class freeBoardController {
 	public void GetlistPaging(Model model, Criteria cri) {
 		
 		log.info("boardlistget");
-		model.addAttribute("list", dao.getListPaging(cri));
 		
+		model.addAttribute("list", dao.getListPaging(cri));
 		int total = dao.getTotal();
 		PageDTO page = new PageDTO(cri, total);
+		
+		System.out.println(cri);
+		System.out.println(total);
 		
 		model.addAttribute("paging", page);
 		
