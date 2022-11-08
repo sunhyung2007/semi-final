@@ -41,8 +41,8 @@ public class freeBoardController {
 		int total = dao.getTotal();
 		PageDTO page = new PageDTO(cri, total);
 		
-		System.out.println(cri);
-		System.out.println(total);
+//		System.out.println(cri);
+//		System.out.println(total);
 		
 		model.addAttribute("paging", page);
 		
@@ -60,7 +60,6 @@ public class freeBoardController {
 	public String Postwrite(FreeBoardDTO dto) {
 		
 		dao.write(dto);
-		System.out.println(dto);
 		return "redirect:/freeboard/list";
 	}
 	
@@ -70,11 +69,9 @@ public class freeBoardController {
 	public void Getdetail(int freeboardNum, Model model, Criteria cri) {
 		
 		dao.updateReadcount(freeboardNum);
-		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
-		
-		System.out.println(dao);
-		
 		model.addAttribute("cri", cri);
+		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
+		System.out.println(cri);
 	}
 	
 	// 수정 페이지로 이동하며 상세 페이지처럼 데이터 가지고 옴
@@ -98,6 +95,7 @@ public class freeBoardController {
 	@PostMapping("delete")
 	public String Postdelete(int freeboardNum) {
 		dao.remove(freeboardNum);
+		
 		System.out.println(freeboardNum);
 		return "redirect:/freeboard/list";
 	}

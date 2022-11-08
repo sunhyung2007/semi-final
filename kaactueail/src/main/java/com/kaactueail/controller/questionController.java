@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kaactueail.dao.AnswerDAO;
 import com.kaactueail.dao.QuestionDAO;
+import com.kaactueail.dto.AnswerDTO;
 import com.kaactueail.dto.Criteria;
 import com.kaactueail.dto.PageDTO;
 import com.kaactueail.dto.QuestionDTO;
@@ -24,12 +26,17 @@ public class questionController {
 	@Autowired
 	private QuestionDAO dao;
 	
+	@Autowired
+	private AnswerDAO answerdao;
+	
 	@GetMapping("list")
 	public void GetListPaging(Model model, Criteria cri) {
-	
+		model.addAttribute("answer", answerdao.getAnswer());
 		model.addAttribute("list", dao.getListPaging(cri));
+		
 		int total = dao.getTotal();
 		PageDTO page = new PageDTO(cri, total);
+		
 		
 		model.addAttribute("paging", page);
 	}
@@ -48,7 +55,18 @@ public class questionController {
 	@GetMapping("detail")
 	public void Getdetail(int questionNum, Model model, Criteria cri) {
 		model.addAttribute("pagedetail", dao.getByquestionNum(questionNum));
+		model.addAttribute("answer", answerdao.getByQuestionNum(questionNum));
 		model.addAttribute("cri", cri);
+		System.out.println(cri);
+	}
+	
+	@GetMapping("answer")
+	public String Getanswer(AnswerDTO answer) {
+		
+		System.out.println(answer);
+		answerdao.write(answer);
+		
+		return "redirect:/question/list";
 	}
 
 }

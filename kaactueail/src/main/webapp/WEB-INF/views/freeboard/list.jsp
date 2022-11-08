@@ -9,15 +9,58 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
 <title>자유게시판</title>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- jqeury cdn -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 </head>
 <body>
+<!-- 
+ <script type="text/javascript">
+	let moveForm = $("#moveForm");
+
+		$(".move").on("click",function(e) {
+			e.preventDefault();
+							
+			moveForm.append("<input type='hidden' name='freeboardNum' value='"+ $(this).attr("href")+ "'>'");
+			moveForm.attr("action", "freeboard/detail")
+			moveForm.submit();
+		});
+					
+		$(".pagination a").on("click", function(e)){
+			e.preventDefault();
+			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+			moveForm.attr("action", "/freeboard/list");
+			moveForm.submit();
+		});
+		
+		$("#search_btn").on("click", function(e){
+			e.preventDefault();
+			
+			let type = $("#search_btn select").val();
+			let keyword = $("#search_btn input[name='keyword']").val();
+			
+			if(!type){
+				alert("검색 종류를 선택하세요.");
+				return false;
+			}
+			
+			if(!keyword){
+				alert("키워드를 입력하세요.");
+				return false;
+			}		
+			
+			moveForm.find("input[name='type']").val(type);
+			moveForm.find("input[name='keyword']").val(keyword);
+			moveForm.find("input[name='pageNum']").val(1);
+			moveForm.submit();
+		});
+					
+</script>
+ -->
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
 	<div class="wrapper">
@@ -36,7 +79,7 @@
 					<c:forEach items="${ list }" var="list">
 						<tr>
 							<td scope="row"><c:out value="${list.freeboardNum}" /></td>
-							<td><a class="move_detail"
+ 							<td><a class="move_detail"
 								href='/freeboard/detail?freeboardNum=<c:out value="${list.freeboardNum}"/>'><c:out value="${list.freeboardTitle}" /></a></td>
 							<td><c:out value="${list.freeboardWriter}" /></td>
 							<td><fmt:formatDate value="${list.freeboardDate}"
@@ -96,8 +139,7 @@
 
 				</div>
 				
-				
-<!--
+
 				<form id="moveForm" method="get">
 					<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
 					<input type="hidden" name="amount" value="${ paging.cri.amount }">
@@ -105,54 +147,11 @@
 					<input type="hidden" name="type" value="${ paging.cri.type }">
 				</form>
 
- <script type="text/javascript">
-	let moveForm = $("#moveForm");
-
-		$(".move").on("click",function(e) {
-			e.preventDefault();
-							
-			moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
-			moveForm.attr("action", "freeboard/detail")
-			moveForm.submit();
-		});
-					
-		$(".pagination a").on("click", function(e)){
-			e.preventDefault();
-			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-			moveForm.attr("action", "/freeboard/list");
-			moveForm.submit();
-		});
-		
-		$("#search_btn").on("click", function(e){
-			e.preventDefault();
-			
-			let type = $("#search_btn select").val();
-			let keyword = $("#search_btn input[name='keyword']").val();
-			
-			if(!type){
-				alert("검색 종류를 선택하세요.");
-				return false;
-			}
-			
-			if(!keyword){
-				alert("키워드를 입력하세요.");
-				return false;
-			}		
-			
-			moveForm.find("input[name='type']").val(type);
-			moveForm.find("input[name='keyword']").val(keyword);
-			moveForm.find("input[name='pageNum']").val(1);
-			moveForm.submit();
-		});
-					
-</script> -->
-
-
 
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->
-		<!-- footer삽입 -->
+	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>

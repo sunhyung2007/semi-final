@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<title>자유게시판</title>
+<title>고객센터</title>
 <!-- jqeury cdn -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <!-- bootstrap -->
@@ -30,7 +30,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일자</th>
-						<th>조회수</th>
+						<th>답변여부</th>
 					</tr>
 
 					<c:forEach items="${ list }" var="list">
@@ -41,7 +41,23 @@
 							<td><c:out value="${list.questionWriter}" /></td>
 							<td><fmt:formatDate value="${list.questionDate}"
 									pattern="yyyy.MM.dd" /></td>
-							<td><c:out value="${list.questionReadcount}" /></td>
+							<td>
+							<c:set var="loop_flag" value="false"/>
+								<c:forEach items="${ answer }" var="answer" >
+									<c:if test="${not loop_flag }">
+										<c:choose>
+											<c:when test="${ list.questionNum eq answer.answerQuestionNum }">
+												<c:set var="result" value="답변완료"/>
+												<c:set var="loop_flag" value="true"/>
+											</c:when>
+											<c:otherwise>
+												<c:set var="result" value="대기"/>	
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:forEach>
+								${ result }
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -95,58 +111,6 @@
 					</div>
 
 				</div>
-				
-				
-<!--
-				<form id="moveForm" method="get">
-					<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
-					<input type="hidden" name="amount" value="${ paging.cri.amount }">
-					<input type="hidden" name="keyword" value="${ paging.cri.keyword }">
-					<input type="hidden" name="type" value="${ paging.cri.type }">
-				</form>
-
- <script type="text/javascript">
-	let moveForm = $("#moveForm");
-
-		$(".move").on("click",function(e) {
-			e.preventDefault();
-							
-			moveForm.append("<intput type='hidden' name='freeboardNum' value=''"+ $(this).attr("href")+ "'>'");
-			moveForm.attr("action", "freeboard/detail")
-			moveForm.submit();
-		});
-					
-		$(".pagination a").on("click", function(e)){
-			e.preventDefault();
-			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-			moveForm.attr("action", "/freeboard/list");
-			moveForm.submit();
-		});
-		
-		$("#search_btn").on("click", function(e){
-			e.preventDefault();
-			
-			let type = $("#search_btn select").val();
-			let keyword = $("#search_btn input[name='keyword']").val();
-			
-			if(!type){
-				alert("검색 종류를 선택하세요.");
-				return false;
-			}
-			
-			if(!keyword){
-				alert("키워드를 입력하세요.");
-				return false;
-			}		
-			
-			moveForm.find("input[name='type']").val(type);
-			moveForm.find("input[name='keyword']").val(keyword);
-			moveForm.find("input[name='pageNum']").val(1);
-			moveForm.submit();
-		});
-					
-</script> -->
-
 
 
 			</div> <!-- main_contents -->

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp" %>
-<title>자유게시판 글쓰기</title>
+<title>고객센터</title>
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 
