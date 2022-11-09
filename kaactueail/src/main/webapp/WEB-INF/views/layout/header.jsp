@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
-
 		<div class="header">
 			<div class="navbar_logo">
 				<a href="/main"><img class="logo" src="/resources/images/LOGO.png" /></a>
@@ -30,8 +31,8 @@
 			</div>
 			<div>
 				<ul class="right">
-					<li><a href="#">카트</a></li>
-					<li><a href="#">마이페이지</a></li>
+					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='#'">shopping_cart</span></li>
+					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='#'">person</span></li>
 				<!-- 로그인 안 했을 경우 -->
 				<c:if test="${ mId == null }">
 					<li><a href="/loginform">로그인</a></li>
