@@ -1,5 +1,7 @@
 package com.kaactueail.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,13 +49,18 @@ public class questionController {
 	}
 	
 	@PostMapping("write")
-	public String Postwrite(QuestionDTO dto) {
+	public String Postwrite(QuestionDTO dto, HttpSession session) {
+		String mId = (String)session.getAttribute("mId");
+		int mNum = (Integer)session.getAttribute("mNum");
+		dto.setQuestionMemberNum(mNum);
+		dto.setQuestionWriter(mId);
 		dao.write(dto);
 		return "redirect:/question/list";
 	}
 	
 	@GetMapping("detail")
-	public void Getdetail(int questionNum, Model model, Criteria cri) {
+	public void Getdetail(int questionNum, Model model, Criteria cri, HttpSession session) {
+		
 		model.addAttribute("pagedetail", dao.getByquestionNum(questionNum));
 		model.addAttribute("answer", answerdao.getByQuestionNum(questionNum));
 		model.addAttribute("cri", cri);
@@ -63,9 +70,9 @@ public class questionController {
 	@GetMapping("answer")
 	public String Getanswer(AnswerDTO answer) {
 		
-		System.out.println(answer);
-		answerdao.write(answer);
 		
+		
+		answerdao.write(answer);
 		return "redirect:/question/list";
 	}
 

@@ -35,9 +35,7 @@
 							id="inputDefault" name="freeboardTitle" required>
 					</div>
 					<div class="form-group">
-						<label class="col-form-label mt-4" for="inputDefault">작성자</label>
-						<input type="text" class="form-control" placeholder="작성자를 입력하세요"
-							id="inputDefault" name="freeboardWriter" required>
+						<input type="hidden" class="form-control" id="inputDefault" name="freeboardWriter">
 					</div>
 					<div class="form-group">
 						<label for="exampleTextarea" class="form-label mt-4">내용</label>

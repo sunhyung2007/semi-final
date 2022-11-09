@@ -60,12 +60,12 @@
 								value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pagedetail.questionDate}" />"
 								readonly>
 						</div>
-						<div>
+<%-- 						<div>
 							<input id="questionReadcount" name="questionReadcount"
 								value="<c:out value="${pagedetail.questionReadcount}" />"
 								readonly>
 
-						</div>
+						</div> --%>
 					</div>
 					<div class="layout_content">
 						<textarea name="questionContent" class="form-control"

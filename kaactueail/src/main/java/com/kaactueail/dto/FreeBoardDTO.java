@@ -15,7 +15,7 @@ public class FreeBoardDTO {
 	private String freeboardTitle, freeboardContent;
 	private Date freeboardDate;
 	private String freeboardWriter;
-	private int freeboardReadcount, freeboardMnum;
+	private int freeboardReadcount, freeboardMemberNum;
 	
 	
 }

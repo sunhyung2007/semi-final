@@ -26,7 +26,7 @@
 				<h3>자유게시판</h3>
 				<div class="btn_wrap">
 					<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
-					<button class="btn btn-dark" id="list_btn" onclick="location.href='list?pageNum=${ paging.cri.pageNum }&amount=${ cri.amount }'">목록</button>
+					<button class="btn btn-dark" id="list_btn" onclick="location.href='list<%-- ?pageNum=${ paging.cri.pageNum }&amount=${ cri.amount } --%>'">목록</button>
 					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button>
 					<!-- <button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'" formaction="/freeboard/delete" formmethod="post">삭제</button> -->
 				</div>

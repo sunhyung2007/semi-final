@@ -1,5 +1,7 @@
 package com.kaactueail.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +43,6 @@ public class freeBoardController {
 		int total = dao.getTotal();
 		PageDTO page = new PageDTO(cri, total);
 		
-//		System.out.println(cri);
-//		System.out.println(total);
 		
 		model.addAttribute("paging", page);
 		
@@ -57,8 +57,11 @@ public class freeBoardController {
 	
 	// post방식(글 작성 후 글쓰기 버튼 클릭)으로 오면 리스트로 리다이렉트
 	@PostMapping("write")
-	public String Postwrite(FreeBoardDTO dto) {
-		
+	public String Postwrite(FreeBoardDTO dto, HttpSession session) {
+		String mId = (String)session.getAttribute("mId");
+		int mNum = (Integer)session.getAttribute("mNum");
+		dto.setFreeboardMemberNum(mNum);
+		dto.setFreeboardWriter(mId);
 		dao.write(dto);
 		return "redirect:/freeboard/list";
 	}
@@ -66,12 +69,11 @@ public class freeBoardController {
 	
 	// 게시판 클릭 시 해당 게시글 상세 페이지 출력
 	@GetMapping("detail")
-	public void Getdetail(int freeboardNum, Model model, Criteria cri) {
+	public void Getdetail(int freeboardNum, Model model) {
+		
 		
 		dao.updateReadcount(freeboardNum);
-		model.addAttribute("cri", cri);
 		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));
-		System.out.println(cri);
 	}
 	
 	// 수정 페이지로 이동하며 상세 페이지처럼 데이터 가지고 옴

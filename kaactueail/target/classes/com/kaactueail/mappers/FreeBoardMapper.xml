@@ -75,7 +75,7 @@
  	
  	<!-- 게시글 쓰기 -->
  	<insert id="insertfreeBoard">
- 		insert into freeboard values(freeboardNumSeq.nextval, #{freeboardTitle}, #{freeboardContent}, sysdate, #{freeboardWriter}, #{freeboardReadcount} , 1)
+ 		insert into freeboard values(freeboardNumSeq.nextval, #{freeboardTitle}, #{freeboardContent}, sysdate, #{freeboardWriter}, #{freeboardReadcount} , #{freeboardMemberNum})
  	</insert>
  	
  	<!-- 게시글 삭제 -->

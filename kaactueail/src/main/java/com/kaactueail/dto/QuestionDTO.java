@@ -14,6 +14,6 @@ public class QuestionDTO {
 	private int questionNum;
 	private String questionTitle, questionContent, questionWriter;
 	private Date questionDate;
-	private int questionReadcount, questionMemberNum;
+	private int questionMemberNum;
 
 }
