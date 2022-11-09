@@ -21,13 +21,14 @@
 			<div class="main_contents">
 
 
-				<h3>아이디 비밀번호 찾기</h3>
+				<h3>ID/비밀번호 찾기</h3>
 
-
-				<a href="/findidform">아이디찾기</a>
+				<div class="btn_wrap" style="display: grid; margin: 12%">
+				<button type="submit" class="btn btn-secondary" onclick="location.href='/findidform'" formaction="/findidform" style="padding: 1.5% 0 1.5%;">ID 찾기</button><br>
+				<button type="submit" class="btn btn-secondary" onclick="location.href='/findpwdform'" formaction="/findpwdform" style="padding: 1.5% 0 1.5%;">비밀번호 찾기</button>
+<!-- 				<a href="/findidform">아이디찾기</a>
 				<a href="/findpwdform">비밀번호 찾기</a>
-
-
+ -->			</div>
 
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->

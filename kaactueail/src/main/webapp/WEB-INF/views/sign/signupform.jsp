@@ -52,8 +52,8 @@
 		$.ajax({
 			success: function() {
 				if(regMemberName(inputed) == false || inputed.length > 18) {
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#signupbtn").prop("disabled", true);
+					$("#signupbtn").css("background-color", "#aaaaaa");
 					$("#mName").css("background-color", "#FFCECE");
 					$("#nEmo").css("color", "#ff2020");
 					nameCheck = 0;
@@ -87,16 +87,16 @@
 				if(data == '1') {
 					$("#fail").css("display", "block");
 					$("#failid").css("display","none");
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#signupbtn").prop("disabled", true);
+					$("#signupbtn").css("background-color", "#aaaaaa");
 					$("#mId").css("background-color", "#FFCECE");
 					$("#idEmo").css("color", "#ff2020");
 					idCheck = 0;
 				} else if (regMemberid(inputed) == false || inputed.length > 14) {
 					$("#failid").css("display","block");
 					$("#fail").css("display","none");
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#signupbtn").prop("disabled", true);
+					$("#signupbtn").css("background-color", "#aaaaaa");
 					$("#mId").css("background-color", "#FFCECE");
 					$("#idEmo").css("color", "#ff2020");
 					idCheck = 0;
@@ -123,8 +123,8 @@
 		$.ajax({
 			success: function() {
 				if(regPassword(inputed) == false || inputed.length > 16) {
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#signupbtn").prop("disabled", true);
+					$("#signupbtn").css("background-color", "#aaaaaa");
 					$("#failpwd").css("display", "block");
 					$("#mPwd").css("background-color", "#FFCECE");
 					$("#pwEmo1").css("color", "#ff2020");
@@ -145,8 +145,8 @@
 		$.ajax({
 			success: function() {
 				if(inputed != inputed1) {
-					$(".signupbtn").prop("disabled", true);
-					$(".signupbtn").css("background-color", "#aaaaaa");
+					$("#signupbtn").prop("disabled", true);
+					$("#signupbtn").css("background-color", "#aaaaaa");
 					$("#pwCheck").css("background-color", "#FFCECE");
 					$("#pwEmo2").css("color", "#ff2020");
 					pwCheck = 0;
@@ -174,8 +174,8 @@
 					$("#mTel").css("background-color", "#B0F6AC");
 					$("#telEmo").css("color", "#1853ff");
 					phoneCheck = 1;
-					$(".signupbtn").prop("disabled", false);	
-					$(".signupbtn").css("background-color", "#B0F6AC");
+					$("#signupbtn").prop("disabled", false);	
+					$("#signupbtn").css("background-color", "#B0F6AC");
 				}
 			}
 		})
@@ -185,13 +185,13 @@
 	function activateSignupbtn() {
 		
 		if( idCheck == 1 && pwdCheck == 1  && nameCheck == 1  && pwCheck == 1) {
-			$(".signupbtn").prop("disabled", false);	
-			$(".signupbtn").css("background-color", "#B0F6AC");
+			$("#signupbtn").prop("disabled", false);	
+			$("#signupbtn").css("background-color", "#B0F6AC");
 		}
 		else  {
-			$(".signupbtn").prop("disabled", true);
-			$(".signupbtn").css("background-color", "#aaaaaa");
-			$(".signupbtn").prop("disabled", true);
+			$("#signupbtn").prop("disabled", true);
+			$("#signupbtn").css("background-color", "#aaaaaa");
+			$("#signupbtn").prop("disabled", true);
 		}
 	}
 	
@@ -203,11 +203,80 @@
 		<div class="contents">
 			<div class="main_contents">
 			
-			
-    <div id = "MemberJoin_Box">
         <h2>회원가입</h2>
-            <form  action = "signup"method = "post">
-                <ul id = "inpo_input">
+        
+
+            <form action = "signup" method = "post">
+
+				<div class="form-group" style="margin:3% 25%;">
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="mName" placeholder="이름" oninput="checkName(),activateSignupbtn()" name = "mName">
+						<label for="floatingInput">이름</label>
+						<i id = "nEmo" class="fa fa-id-card-o"></i>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="mId"	placeholder="ID" oninput="checkId(), activateSignupbtn()" name = "mId">
+						<label for="floatingInput">ID</label>
+						<i id="idEmo" class="fa-solid fa-id-card"></i>
+                        <font color = "red" id = "failid" style = "display:none">5~15자의 영문자와 숫자를 조합해서 입력해주세요.</font>
+                        <font color = "red" id = "fail" style = "display:none">이미 존재하는 ID입니다.</font>
+					</div>
+					<div class="form-floating">
+						<input type="password" class="form-control" id="mPwd" placeholder="Password" oninput ="checkPwd(), checkPwd2()" name = "mPwd">
+						<label for="floatingPassword">Password</label>
+						<i id= "pwEmo1"class="fa-solid fa-fingerprint"></i>
+						<font color = "red" id = "failpwd" style = "display:none">8~16자의 영문자와 숫자를 조합해서 입력해주세요.</font>
+					</div>
+					<div class="form-floating">
+						<input type="password" class="form-control" id="pwCheck" placeholder="Password 확인" oninput ="checkPwd2(), activateSignupbtn()" name = "pwcheck">
+						<label for="floatingPassword">Password 확인</label>
+						<i id = "pwEmo2" class="fa-solid fa-check-double"></i>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="mTel"	placeholder="전화번호" oninput="addhyphen(),checkTel(), activateSignupbtn()" name = "mTel">
+						<label for="floatingInput">전화번호</label>
+						<i id = "telEmo" class="fa-solid fa-phone"></i>
+					</div>
+					<div>
+						<p>생년월일</p>
+						 <select name="years" id = "years">
+                        <script>
+                            for(i=2022; i>1900; i--){
+                                document.write("<option>" + [i] + "</option>");
+                            }
+                        </script>
+                    </select>
+                    <select name="month" id = "month">
+                        <script>
+                            for(i=1; i<13; i++) {
+                                document.write("<option>" + [i] + "</option>");
+                            }
+                        </script>
+                    </select>
+                    <select name="day" id="day">
+                        <script>
+                       
+                                for(i=1; i<32; i++) {
+                                    document.write("<option>" + [i] + "</option>");
+                                }
+                        
+                        </script>
+                    </select>
+                    <i id = "birthdayEmo" class="fa-solid fa-calendar"></i>  
+					</div>
+					<div style="display: grid; padding-top: 5%;">
+					<button type="submit" class="btn btn-secondary" style="padding: 2% 0 2%;" id="signupbtn">회원가입</button>
+					</div>
+				</div>
+			</form>
+
+ 
+ 
+   <!--      <div id = "MemberJoin_Box"> 
+        <div class="join_wrap">
+            <form action = "signup" method = "post">
+
+				<ul id = "inpo_input">
                     <li>이름</li>
                         <span class = "input_Box">
                             <input type="text" name = "mName" id = "mName" oninput= "checkName(),activateSignupbtn()" >
@@ -266,11 +335,11 @@
                 </ul>
                 <input type = "submit" value = "회원가입" class = "signupbtn">
             </form>
-    </div>
+    </div> 
     
+    </div>  -->
     
-    
-    			</div> <!-- main_contents -->
+    		</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->
     	<!-- footer삽입 -->

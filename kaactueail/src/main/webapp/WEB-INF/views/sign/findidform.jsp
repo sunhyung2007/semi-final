@@ -55,18 +55,50 @@ function checkMessage() {
 		<div class="contents">
 			<div class="main_contents">
 				<h3>ID 찾기</h3>
+				
+				<div class="findpwd_wrap" style="margin: 12% 25%;">
+				
+				<form action="findid" method="POST">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="floatingInput" name="mName" placeholder="이름">
+							<label for="floatingInput">이름</label>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="전화번호" aria-label="전화번호"
+									aria-describedby="button-addon2" name="mTel" style="padding: 2%">
+								<button class="btn btn-primary" type="button" id="button-addon2" onclick="authnum()">인증번호받기</button>
+								<div style = "display:none;" class = "successMessage"><b >인증번호가 발송 되었습니다</b></div>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="인증번호" aria-label="인증번호"
+									aria-describedby="button-addon2" name="authNum" style="padding: 2%">
+								<button class="btn btn-primary" type="button" id="button-addon2" onclick = "checkMessage()">인증번호확인</button>
+								<div style = "display:none;" class = "authsuccessMessage"><b >인증 성공!</b></div>
+						</div>
+					</div>
+					<div style="display: grid">
+						<button type="submit" class="btn btn-secondary" style="padding: 1.5% 0 1.5%;">ID 찾기</button>
+					</div>
 
-	<form action="findid" method="POST">
-		이름: <input type="text" name="mName" id="mName"> <br /> 
+				</form>
+
+		</div>
+
+<!-- 		이름: <input type="text" name="mName" id="mName"> <br /> 
+
 		전화번호: <input type="text" name="mTel" id="mTel">
 		<input type = "button" onclick="authnum()" class = "authbtn" value = "인증번호받기">
 		<div style = "display:none;" class = "successMessage"><b >인증 번호가 발송 되었습니다 !</b></div>
-		<input type="text" name="authNum" id="authNum" > <input type = "button" onclick = "checkMessage()" value = "인증번호 확인">
+		
+		<input type="text" name="authNum" id="authNum" >
+		<input type = "button" onclick = "checkMessage()" value = "인증번호 확인">
+		
 		<div style = "display:none;" class = "authsuccessMessage"><b >인증 성공 !</b></div>
 		<input type = "submit" value = "아이디찾기" class = "successbtn" style = "display:none">
-	</form>
-
-
+-->
+			
+ 
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->

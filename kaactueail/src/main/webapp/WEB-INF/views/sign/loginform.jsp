@@ -19,18 +19,43 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
+			
 				<h2>로그인</h2>
+
+				<div class="login_wrap" style="margin: 8% 25%;">
 
 
 				<form action="login" method="post">
-					<input type="text" name="mId" style=${css }> <br />
-					${Message } <input type="password" name="mPwd"> <br /> <input
-						type="submit" value="로그인"><br />
-					<button>
-						<a href="/findform">아이디/비밀번호찾기</a>
-					</button>
+						<div class="form-group">
+							<label class="form-label mt-4"></label>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="floatingInput"	placeholder="ID" name="mId" style=${css }>
+								<label for="floatingInput">ID</label>
+							</div>
+							${ Message }
+							<div class="form-floating">
+								<input type="password" class="form-control"
+									id="floatingPassword" placeholder="Password" name="mPwd">
+								<label for="floatingPassword">Password</label>
+							</div>
+						</div>
+						<div class="btn_wrap" style="display: flex; flex-direction: column; padding-top: 5%;">
+						<button type="submit" class="btn btn-secondary" style="padding: 2% 0 2%;">로그인</button><br>
+						<button type="submit" class="btn btn-secondary" onclick="location.href='/findform'" formaction="/findform" style="padding: 2% 0 2%;">ID/비밀번호 찾기</button>
+						</div>
+						
+						
+<%-- 
+							<input type="text" name="mId" style=${css }> <br />
+							${Message } <input type="password" name="mPwd"> <br /> <input
+								type="submit" value="로그인"><br />
+							<button>
+								<a href="/findform">아이디/비밀번호찾기</a>
+							</button>
+ --%>
+						</form>
 
-				</form>
+					</div>
 
 
 
@@ -43,9 +68,7 @@
 
 
 
-
-
-			</div> <!-- main_contents -->
+			</div>	<!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->
 	<!-- footer삽입 -->
