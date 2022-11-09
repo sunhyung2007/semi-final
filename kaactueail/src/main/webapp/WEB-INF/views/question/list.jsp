@@ -36,8 +36,7 @@
 					<c:forEach items="${ list }" var="list">
 						<tr>
 							<td scope="row"><c:out value="${list.questionNum}" /></td>
-							<td><a class="move_detail"
-								href='/question/detail?questionNum=<c:out value="${list.questionNum}"/>'><c:out value="${list.questionTitle}" /></a></td>
+							<td><a class="move_detail"	href='/question/detail?questionNum=<c:out value="${list.questionNum}"/>'><c:out value="${list.questionTitle}" /></a></td>
 							<td><c:out value="${list.questionWriter}" /></td>
 							<td><fmt:formatDate value="${list.questionDate}"
 									pattern="yyyy.MM.dd" /></td>
@@ -104,12 +103,13 @@
 							</form>
 
 					</div>
+					<c:if test="${ mRole != null }">
 					<div class="btn_wrap" style="float: right;">
 						<button type="button" class="btn btn-dark" id="write_btn"
 							onclick="location.href='write'" formmethod="get">글쓰기</button>
 						<!-- <button type="button" class="btn btn-dark" id="delete_btn">삭제</button> -->
 					</div>
-
+					</c:if>
 				</div>
 
 

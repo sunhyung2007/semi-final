@@ -32,6 +32,7 @@ public class formController {
 	public int getAuthNumber() {
 		return authNumber;
 	}
+	
 //	@Autowired
 //	MemberDTO dto;
 	
@@ -134,6 +135,7 @@ public class formController {
 	public String find() {
 		return "sign/successfindid";
 	}
+	
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "user/mypage";

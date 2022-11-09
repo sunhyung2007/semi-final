@@ -78,19 +78,6 @@
 	</div>
 	<!-- wrapper end -->
 
-	<!-- 버튼 클릭 시 이동 로직 
-<script>
-	let form = ${"#detailForm"};
-	let mForm = $("#modifyForm");
-	
-	$("#list_btn").on("click", function(e){
-		form.find("#freeboardNum").remove();
-		form.attr("action", "/freeboard/list");
-		form.submit();
-	});
- 	
-
-</script> -->
 
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

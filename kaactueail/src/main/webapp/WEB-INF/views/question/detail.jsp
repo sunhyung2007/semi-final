@@ -29,6 +29,7 @@
 						onclick="location.href='write'">글쓰기</button>
 					<button type="submit" class="btn btn-dark" id="list_btn"
 						onclick="location.href='list'">목록</button>
+						
 					<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button> --%>
 					<!-- <button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'" formaction="/freeboard/delete" formmethod="post">삭제</button> -->
 				</div>
@@ -60,12 +61,6 @@
 								value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pagedetail.questionDate}" />"
 								readonly>
 						</div>
-<%-- 						<div>
-							<input id="questionReadcount" name="questionReadcount"
-								value="<c:out value="${pagedetail.questionReadcount}" />"
-								readonly>
-
-						</div> --%>
 					</div>
 					<div class="layout_content">
 						<textarea name="questionContent" class="form-control"
@@ -73,9 +68,10 @@
 								value="${pagedetail.questionContent}" /></textarea>
 					</div>
 				</div>
-
+				<h4>답변내용</h4>
 				<hr>
 				<!-- 댓글 -->
+				<c:forEach items="${ answer }" var="answer">
 				<div class="answer"
 					style="display: flex; justify-content: space-between;">
 					<div class="text-secondary" id="writedate">
@@ -89,10 +85,11 @@
 						</p>
 					</div>
 				</div>
+				</c:forEach>
 
 
-
-				<!-- 댓글작성 -->
+				<!-- Role이 관리자일 경우 댓글작성 가능 -->
+			<c:if test="${ mRole eq 'ROLE_ADMIN' }">
 				<form action="/question/answer" method="get">
 					<div class="answerinput">
 					<div>
@@ -107,7 +104,7 @@
 					</div>
 					</div>
 				</form>
-
+			</c:if>
 
 
 
@@ -118,27 +115,6 @@
 	</div>
 	<!-- wrapper end -->
 
-<!-- 	<!-- 목록/수정버튼 클릭 시 이동하는 로직 
-<script>
-	let form = ${"#detailForm"};
-	
-	$("#list_btn").on("click", function(e){
-		form.find("#freeboardNum").remove();
-		form.attr("action", "/freeboard/list");
-		form.submit();
-	});
-	
- 	$("#modify_btn").on("click", function(e){
-		form.attr("action", "/freeboard/modify");
-		form.submit();
-	});
- 	
- 	$("#delete_btn").on("click", function(e){
- 		form.attr("action", "freeboard/delete");
- 		form.attr("methode"m "post");
- 		form.submit();
- 	});
-</script> -->
 
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

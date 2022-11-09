@@ -31,7 +31,7 @@ public class AnswerDAOImpl implements AnswerDAO {
 	}
 
 	@Override
-	public AnswerDTO getByQuestionNum(int answerQuestionNum) {
+	public List<AnswerDTO> getByQuestionNum(int answerQuestionNum) {
 		
 		return mapper.getByQuestionNum(answerQuestionNum);
 	}

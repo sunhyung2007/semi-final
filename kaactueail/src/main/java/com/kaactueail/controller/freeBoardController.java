@@ -25,17 +25,12 @@ public class freeBoardController {
 	
 	@Autowired
 	private FreeBoardDAO dao;
-/*	
-	// 자유게시판 접속 시 게시판 전체 리스트 출력
-	@GetMapping("list")
-	public void Getlist(Model model) {
-		
-		model.addAttribute("list", dao.getAllList());
-	}
-*/	
+	
 	// 게시판 리스트 출력 - 페이징 처리
 	@GetMapping("list")
-	public void GetlistPaging(Model model, Criteria cri) {
+	public void GetlistPaging(Model model, Criteria cri, HttpSession session) {
+		
+		String mRole = (String)session.getAttribute("mRole");
 		
 		log.info("boardlistget");
 		
@@ -43,6 +38,7 @@ public class freeBoardController {
 		int total = dao.getTotal();
 		PageDTO page = new PageDTO(cri, total);
 		
+		System.out.println(cri);
 		
 		model.addAttribute("paging", page);
 		
@@ -62,6 +58,7 @@ public class freeBoardController {
 		int mNum = (Integer)session.getAttribute("mNum");
 		dto.setFreeboardMemberNum(mNum);
 		dto.setFreeboardWriter(mId);
+		
 		dao.write(dto);
 		return "redirect:/freeboard/list";
 	}
@@ -69,8 +66,10 @@ public class freeBoardController {
 	
 	// 게시판 클릭 시 해당 게시글 상세 페이지 출력
 	@GetMapping("detail")
-	public void Getdetail(int freeboardNum, Model model) {
-		
+	public void Getdetail(int freeboardNum, Model model, HttpSession session, Criteria cri) {
+		String mRole = (String)session.getAttribute("mRole");
+		String mId = (String)session.getAttribute("mId");
+		System.out.println(cri);
 		
 		dao.updateReadcount(freeboardNum);
 		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));

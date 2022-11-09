@@ -18,49 +18,7 @@
 
 </head>
 <body>
-<!-- 
- <script type="text/javascript">
-	let moveForm = $("#moveForm");
 
-		$(".move").on("click",function(e) {
-			e.preventDefault();
-							
-			moveForm.append("<input type='hidden' name='freeboardNum' value='"+ $(this).attr("href")+ "'>'");
-			moveForm.attr("action", "freeboard/detail")
-			moveForm.submit();
-		});
-					
-		$(".pagination a").on("click", function(e)){
-			e.preventDefault();
-			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-			moveForm.attr("action", "/freeboard/list");
-			moveForm.submit();
-		});
-		
-		$("#search_btn").on("click", function(e){
-			e.preventDefault();
-			
-			let type = $("#search_btn select").val();
-			let keyword = $("#search_btn input[name='keyword']").val();
-			
-			if(!type){
-				alert("검색 종류를 선택하세요.");
-				return false;
-			}
-			
-			if(!keyword){
-				alert("키워드를 입력하세요.");
-				return false;
-			}		
-			
-			moveForm.find("input[name='type']").val(type);
-			moveForm.find("input[name='keyword']").val(keyword);
-			moveForm.find("input[name='pageNum']").val(1);
-			moveForm.submit();
-		});
-					
-</script>
- -->
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
 	<div class="wrapper">
@@ -128,24 +86,24 @@
 
 								<input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
 								<button id="search_btn" class="btn btn-secondary my-2 my-sm-0" type="submit" href="keyword=${ paging.cri.keyword }&type=${ paging.cri.type }">Search</button>
+								
+								<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
+								<input type="hidden" name="amount" value="${ paging.cri.amount }">
+								<input type="hidden" name="keyword" value="${ paging.cri.keyword }">
+								<input type="hidden" name="type" value="${ paging.cri.type }">
 							</form>
 
 					</div>
+					
+					<!-- 회원가입 한 경우에만 글 작성 가능 -->
+					<c:if test="${ mRole != null }">
 					<div class="btn_wrap" style="float: right;">
 						<button type="button" class="btn btn-dark" id="write_btn"
 							onclick="location.href='write'" formmethod="get">글쓰기</button>
-						<!-- <button type="button" class="btn btn-dark" id="delete_btn">삭제</button> -->
 					</div>
-
+					</c:if>
 				</div>
 				
-
-				<form id="moveForm" method="get">
-					<input type="hidden" name="PageNum" value="${ paging.cri.pageNum }">
-					<input type="hidden" name="amount" value="${ paging.cri.amount }">
-					<input type="hidden" name="keyword" value="${ paging.cri.keyword }">
-					<input type="hidden" name="type" value="${ paging.cri.type }">
-				</form>
 
 
 			</div> <!-- main_contents -->

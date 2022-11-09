@@ -10,6 +10,6 @@ public interface AnswerDAO {
 	
 	public void write(AnswerDTO answer);
 	
-	public AnswerDTO getByQuestionNum(int answerQuestionNum);
+	public List<AnswerDTO> getByQuestionNum(int answerQuestionNum);
 
 }

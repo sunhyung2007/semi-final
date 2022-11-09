@@ -24,16 +24,32 @@
 			<div class="main_contents">
 
 				<h3>자유게시판</h3>
-				<div class="btn_wrap">
-					<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
-					<button class="btn btn-dark" id="list_btn" onclick="location.href='list<%-- ?pageNum=${ paging.cri.pageNum }&amount=${ cri.amount } --%>'">목록</button>
-					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button>
-					<!-- <button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'" formaction="/freeboard/delete" formmethod="post">삭제</button> -->
-				</div>
-				
-<%-- 				<form id="detailForm" action="/freeboard/modify" method="get">
-					<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
-				</form> --%>
+
+
+					<div class="btn_wrap">
+						<button class="btn btn-dark" id="list_btn" onclick="location.href='list<%--? pageNum=${ cri.pageNum }&amount=${ paging.cri.amount }--%>' ">목록</button>
+						<!-- 회원가입되어 있으면 -->
+						<c:if test="${ mRole != null }">
+						<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
+						<c:if test="${ mRole eq 'ROLE_ADMIN' }">
+							<form action="/freeboard/delete" method="post">
+								<button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'">삭제</button>
+								<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
+							</form>
+						</c:if>
+
+						<!-- 로그인한 세션 ID와 작성자 ID가 같거나 관리자 권한이면 수정 버튼 보임 -->
+						<c:if test="${ mId == pageDetail.freeboardWriter}">
+							<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button>
+							<form action="/freeboard/delete" method="post">
+								<button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'">삭제</button>
+								<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
+							</form>
+						</c:if>
+						</c:if>
+					</div>
+
+
 				<div class="layout_all">
 					<div class="layout_title">
 						<div>
@@ -71,27 +87,6 @@
 	</div>
 	<!-- wrapper end -->
 
-<!-- 	<!-- 목록/수정버튼 클릭 시 이동하는 로직 
-<script>
-	let form = ${"#detailForm"};
-	
-	$("#list_btn").on("click", function(e){
-		form.find("#freeboardNum").remove();
-		form.attr("action", "/freeboard/list");
-		form.submit();
-	});
-	
- 	$("#modify_btn").on("click", function(e){
-		form.attr("action", "/freeboard/modify");
-		form.submit();
-	});
- 	
- 	$("#delete_btn").on("click", function(e){
- 		form.attr("action", "freeboard/delete");
- 		form.attr("methode"m "post");
- 		form.submit();
- 	});
-</script> -->
 
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

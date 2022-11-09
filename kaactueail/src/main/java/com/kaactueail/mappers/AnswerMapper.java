@@ -10,7 +10,7 @@ public interface AnswerMapper {
 	public List<AnswerDTO> getAnswer();
 	
 	// 게시글 번호로 댓글 출력
-	public AnswerDTO getByQuestionNum(int answerQuestionNum);
+	public List<AnswerDTO> getByQuestionNum(int answerQuestionNum);
 	
 	// 댓글 등록
 	public void insertanswer(AnswerDTO answer);

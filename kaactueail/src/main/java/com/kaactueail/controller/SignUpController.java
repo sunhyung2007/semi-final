@@ -101,6 +101,7 @@ public class SignUpController extends HttpServlet{
 			String mRole = dao.memberRole(mId);
 			int mNum = dao.memberNum(mId); 
 			session = request.getSession();
+			System.out.println(dto);
 			
 			//로그인 세션값 설정
 			session.setAttribute("mId", mId);
@@ -125,7 +126,7 @@ public class SignUpController extends HttpServlet{
 		HttpSession session;
 		session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("/loginform");
+		response.sendRedirect("/main");
 	}
 	
 	

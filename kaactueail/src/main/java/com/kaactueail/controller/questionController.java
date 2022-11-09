@@ -60,6 +60,7 @@ public class questionController {
 	
 	@GetMapping("detail")
 	public void Getdetail(int questionNum, Model model, Criteria cri, HttpSession session) {
+		String mRole = (String)session.getAttribute("mRole");
 		
 		model.addAttribute("pagedetail", dao.getByquestionNum(questionNum));
 		model.addAttribute("answer", answerdao.getByQuestionNum(questionNum));
@@ -69,7 +70,6 @@ public class questionController {
 	
 	@GetMapping("answer")
 	public String Getanswer(AnswerDTO answer) {
-		
 		
 		
 		answerdao.write(answer);
