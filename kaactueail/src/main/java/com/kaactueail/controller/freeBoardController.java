@@ -29,10 +29,7 @@ public class freeBoardController {
 	// 게시판 리스트 출력 - 페이징 처리
 	@GetMapping("list")
 	public void GetlistPaging(Model model, Criteria cri, HttpSession session) {
-		
 		String mRole = (String)session.getAttribute("mRole");
-		
-		log.info("boardlistget");
 		
 		model.addAttribute("list", dao.getListPaging(cri));
 		int total = dao.getTotal();
@@ -69,7 +66,9 @@ public class freeBoardController {
 	public void Getdetail(int freeboardNum, Model model, HttpSession session, Criteria cri) {
 		String mRole = (String)session.getAttribute("mRole");
 		String mId = (String)session.getAttribute("mId");
+		
 		System.out.println(cri);
+		model.addAttribute("cri", cri);
 		
 		dao.updateReadcount(freeboardNum);
 		model.addAttribute("pageDetail", dao.getByfreeboardNum(freeboardNum));

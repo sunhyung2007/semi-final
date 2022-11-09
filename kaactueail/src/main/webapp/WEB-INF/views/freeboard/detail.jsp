@@ -27,7 +27,7 @@
 
 
 					<div class="btn_wrap">
-						<button class="btn btn-dark" id="list_btn" onclick="location.href='list<%--? pageNum=${ cri.pageNum }&amount=${ paging.cri.amount }--%>' ">목록</button>
+						<button class="btn btn-dark" id="list_btn" onclick="location.href='list?pageNum=${ cri.pageNum }&amount=${ cri.amount }' ">목록</button>
 						<!-- 회원가입되어 있으면 -->
 						<c:if test="${ mRole != null }">
 						<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
@@ -80,12 +80,10 @@
 				</div>
 
 
-			</div>
-			<!-- main contents end -->
-		</div>
-		<!-- contents end -->
-	</div>
-	<!-- wrapper end -->
+			</div> 	<!-- main contents end -->
+		</div> 	<!-- contents end -->
+	</div> 	<!-- wrapper end -->
+
 
 
 	<!-- footer삽입 -->
