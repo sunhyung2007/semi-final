@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kaactueail.dto.CockInfoBoardDTO;
+import com.kaactueail.dto.Criteria;
 import com.kaactueail.mappers.CockInfoBoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -25,10 +26,10 @@ public class CockInfoBoardDAOImpl implements CockInfoBoardDAO {
 	
 	//  select all 칵테일 이름&내용또는설명 전체 조회
 	@Override
-	public List<CockInfoBoardDTO> selectAll(){
+	public List<CockInfoBoardDTO> selectAll(Criteria cri){
 		log.info("getallList-----------");
 		
-		return mapper.selectAll();
+		return mapper.selectAll(cri);
 	}
 
 	@Override
@@ -37,9 +38,9 @@ public class CockInfoBoardDAOImpl implements CockInfoBoardDAO {
 	}
 
 	@Override
-	public CockInfoBoardDTO getDetail(int infoBoardNum) throws Exception {
-		log.info("cockInfoGetDetail....." + infoBoardNum);
-		return mapper.getDetail(infoBoardNum);
+	public CockInfoBoardDTO getDetail(int infoboardNum) throws Exception {
+		log.info("cockInfoGetDetail....." + infoboardNum);
+		return mapper.getDetail(infoboardNum);
 	}
 
 	// 칵테일 정보 등록
@@ -48,6 +49,23 @@ public class CockInfoBoardDAOImpl implements CockInfoBoardDAO {
 		mapper.write(board);
 		
 	}
+
+	@Override
+	public CockInfoBoardDTO getByinfoboardNum(int infoboardNum) {
+		return mapper.getByinfoboardNum(infoboardNum);
+	}
+
+	@Override
+	public boolean modify(CockInfoBoardDTO dto) {		
+		return mapper.updateByinfoboardNum(dto)==1;
+	}
+
+	@Override
+	public int updateReadcount(int infoboardNum) {		
+		return mapper.updateReadcount(infoboardNum);
+	}
+	
+	
 	
 	
 	

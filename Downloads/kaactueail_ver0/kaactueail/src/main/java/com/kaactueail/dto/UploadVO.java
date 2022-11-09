@@ -8,5 +8,4 @@ import lombok.Data;
 public class UploadVO {
 	private String name;
 	private MultipartFile file;
-
 }

@@ -8,31 +8,79 @@
   	
  <mapper namespace="com.kaactueail.mappers.CockInfoBoardMapper">
  	
- 	<select id="selectAll"  resultType="com.kaactueail.dto.CockInfoBoardDTO">
- 		select * from InfoBoard where infoBoardTitle 
- 		in (select cImgName from Cockit)
- 	</select>
+ 		<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%' 
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	
+	</sql>
+
+	<select id="selectAll"
+		resultType="com.kaactueail.dto.CockInfoBoardDTO">
+		<!-- select * from InfoBoard where infoBoardTitle in (select cImgName from 
+			Cockit) -->
+		<!-- select * from InfoBoard order by infoboardNum desc -->
+ 		<![CDATA[select rn, infoboardNum, infoboardTitle, infoboardContent, infoboardRecipe, infoboardDate, infoboardWriter, 
+ 		infoboardReadcount, infoboardImgname, infoboardAdminNum from(select 
+ 		rownum as rn, infoboardNum, infoboardTitle, infoboardContent, infoboardRecipe, infoboardDate, infoboardWriter, 
+ 		infoboardReadcount, infoboardImgname, infoboardAdminNum from infoboard where rownum <= #{pageNum} * #{amount}]]>
+		<if test="keyword != null">
+		<include refid="criteria" />
+		</if>
+		<![CDATA[ order by infoboardNum desc) where rn > (#{pageNum}-1) * #{amount}]]>
+	</select>
+ 	
+ 	
    	<!-- 게시물 총 개수 -->
     <select id="getTotal" resultType="int">    
-        select count(*) from InfoBoard    
+        select count(*) from InfoBoard   
+        <if test="keyword != null">
+        	where infoboardNum > 0 <include refid="criteria"></include>
+        </if> 	
     </select>
- 	 
-<!--  	 <insert id="insert"   parameterType="com.kaactueail.dto.CockInfoBoardDTO">
- 	 	insert into infoboard(infoBoardNum,infoBoardTitle,infoBoardContent,infoBoardRecipe,
- 	 	 infoBoardDate,infoBoardWriter,infoBoardReadcount,infoBoardAdminNum)
- 	 	values(infoboardSeq.nextval,#{infoBoardTitle},#{infoBoardContent},
- 	 	 #{infoBoardRecipe},sysdate,#{infoBoardWriter},#{infoBoardReadcount},#{infoBoardAdminNum})
- 	 </insert> -->
  	  
  	 <insert id="write">
- 	 	insert into infoboard(infoBoardNum,infoBoardTitle,infoBoardContent,infoBoardRecipe, infoBoardWriter,infoBoardReadcount,infoBoardDate,infoBoardAdminNum,infoboardImgname)
- 	 	values(infoboardNumSeq.nextval,#{infoBoardTitle}, #{infoBoardContent}, #{infoBoardRecipe}, #{infoBoardWriter},#{infoBoardReadcount},sysdate,1,#{infoBoardTitle})
+ 	 	insert into infoboard(infoboardNum,infoboardTitle,infoboardContent,infoboardRecipe, infoboardWriter,infoboardReadcount,infoboardDate,infoboardAdminNum,infoboardImgname)
+ 	 	values(infoboardNumSeq.nextval,#{infoboardTitle}, #{infoboardContent}, #{infoboardRecipe}, #{infoboardWriter},#{infoboardReadcount},sysdate,1,#{infoboardTitle})
  	 </insert>
  	 <select id="getDetail"  resultType="com.kaactueail.dto.CockInfoBoardDTO">
- 	 	select * from infoboard where infoBoardNum = #{infoBoardNum}
+ 	 	select * from infoboard where infoboardNum = #{infoboardNum}
  	 </select>
  	 
  	 
+	<update id="updateReadcount"> 
+		update infoboard set infoboardReadcount = infoboardReadcount+1 where infoboardNum = #{ infoboardNum } 
+	</update>
+	<!--  게시판 번호로 게시글 조회  -->
+	<select id="getByinfoboardNum" resultType="com.kaactueail.dto.CockInfoBoardDTO"> 
+		select*from infoboard where infoboardNum = #{infoboardNum} 
+	</select>
+	<!--  게시글 삭제  -->
+	<delete id="deleteByinfoboardNum" parameterType="com.kaactueail.dto.CockInfoBoardDTO"> 
+		delete from infoboard where infoboardNum= #{infoboardNum} 
+	</delete>
+	<!--  게시글 수정  -->
+	<update id="updateByinfoboardNum" parameterType="com.kaactueail.dto.CockInfoBoardDTO"> 
+		update infoboard set infoboardContent = #{infoboardContent}, 
+		infoboardRecipe = #{infoboardRecipe} where infoboardNum = #{infoboardNum} 
+	</update>
+ 	
+ 	
  	<!--  <delete id="delete" parameterType="int">
  	 	DELETE FROM infoboard WHERE SEQ = #{SEQ}
  	 </delete>

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+.wrapper {
+	max-heghit: 100%;
+	display: flex;
+	padding-top: 2%;
+}
+
+.contents {
+	margin: 0 auto;
+	z-index: 1;
+	width: 1000px;
+	height: 100%;
+	background-color: white;
+	width: auto;
+	min-height: 100%;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	padding: 3%;
+}
+
+.card-img-top:hover {
+   -webkit-filter: grayscale(100%) blur(3px);
+  filter: grayscale(100%) blur(3px);
+}

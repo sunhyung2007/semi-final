@@ -4,6 +4,7 @@
 	border: 2px solid;
 	float: left;
 	margin: 5px;
+	justify-content: space-between;
 }
 
 .card-title {
@@ -25,18 +26,22 @@
 	background-color: #cdd5ec;
 }
 
-  .pageInfo{
+.pageInfo{
       list-style : none;
-      display: inline-block;
-    margin: 50px 0 0 100px;      
+      display: inline-block;    
+      width: auto;
+      justify-content: space-between;
+      margin-right: 32px;
   }
-  .pageInfo li{
-      float: left;
+.pageInfo li{
+    float: left;
     font-size: 20px;
-    margin-left: 18px;
     padding: 7px;
     font-weight: 500;
+    width: auto;
+    justify-content: space-between;
   }
+
  a:link {color:black; text-decoration: none;}
  a:visited {color:black; text-decoration: none;}
  a:hover {color:black; text-decoration: underline;}

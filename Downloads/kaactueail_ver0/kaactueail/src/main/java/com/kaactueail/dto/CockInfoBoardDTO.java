@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class CockInfoBoardDTO {
 	
-	private int infoBoardNum, infoBoardReadcount, infoBoardAdminNum;
-	private String infoBoardTitle, infoBoardContent, infoBoardRecipe;
+	private int infoboardNum, infoboardReadcount, infoboardAdminNum;
+	private String infoboardTitle, infoboardContent, infoboardRecipe;
 	
-	private Date infoBoardDate; 
-	private String infoBoardWriter;
+	private Date infoboardDate; 
+	private String infoboardWriter;
 	
 
 //	   infoBoardNum number(8) primary key,                      -- 소개 게시판 게시글 번호 (기본키) -- 

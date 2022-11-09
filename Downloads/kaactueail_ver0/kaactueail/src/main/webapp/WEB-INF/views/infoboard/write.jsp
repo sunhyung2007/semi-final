@@ -9,84 +9,87 @@
 <link rel="stylesheet" href="/resources/css/upload.css">
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
-<title>write.jsp</title>
+<!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
+<%@ include file="../layout/icon_contents.jsp"%>
+<title>칵테일 정보 등록 페이지</title>
+<!-- bootstrap -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
+
+<script type="text/javascript">
+   function wirte(){
+      alert("등록합니다!")   ;
+      if(document.writeform.infoboardTitle.value==""){
+         alert("제목을 입력해주세요");
+      }else if(document.writeform.infoboardContent.value==""){
+         alert("내용을 입력해주세요");
+         document.writeform.infoboardContent.focus();
+      }else if(document.writeform.infoboardRecipe.value==""){
+         alert("내용을 입력해주세요");
+         document.writeform.infoboardRecipe.focus();
+      }else if(document.writeform.infoboardWriter.value==""){
+         alert("내용을 입력해주세요");
+         document.writeform.infoboardWriter.focus();     
+      }else{
+         //alert("쓰기")   ;
+         document.writeform.submit(); //전송
+      }
+   }
+</script>
+
+
 </head>
+
+
+
 <body>
-	<h1>여기는 칵테일정보 작성 페이지</h1>
+	<!-- header삽입 -->
+	<%@ include file="../layout/header.jsp"%>
 	<div class="wrapper">
-
-		<div class="header">
-			<div class="navbar_logo">
-				<a href="#"><img class="logo" src="/resources/images/LOGO.png" /></a>
-			</div>
-			<div class="navbar_left">
-				<ul class="left">
-					<li><a class="menu_left" href="/infoboard/list">칵테일 소개</a></li>
-					<li><a class="menu_left" href="/mycocktailboard/list">나만의
-							칵테일</a></li>
-					<li><a class="menu_left" href="/freeboard/list">자유게시판</a></li>
-					<li><a class="menu_left" href="#">스토어</a></li>
-				</ul>
-			</div>
-
-			<div class="search-box">
-				<form action="." method="post">
-					<input class="search-txt" type="text" placeholder="검색어를 입력해 주세요" />
-					<button class="search-btn" type="submit">찾기</button>
-				</form>
-			</div>
-			<div>
-				<ul class="right">
-					<li><a href="#">카트</a></li>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="/login/list">로그인</a></li>
-					<li><a href="/join/list">회원가입</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="main_bar">
-			<img class="img_bar" src="/resources/images/Bar_main.jpg" />
-		</div>
 		<!-- 중요한게 form태그안에 enctype="multipart/form-data를 입력 해주어야한다. -->
 		<div class="contents">
 			<div class="main_contents">
-				<form action="upload_ok" method="post" enctype="multipart/form-data">
-					파일 선택: <input type="file" name="file"> 
-					<input type="submit" value="전송">
-				</form>
-<!-- 				<form method="post" action="/upload" enctype="multipart/form-data">
+				<div class="write_contents"
+					style="border: solid 2px; width: 500px; height: 500px; margin: auto;">
+					<form action="upload_ok" method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+						파일 선택: <input type="file" name="file"> <input
+							type="submit" value="전송">
+					</form>
+					<!-- 				<form method="post" action="/upload" enctype="multipart/form-data">
 					<input type="file" name="uploadfile" multiple="multiple" /> <input
 						type="submit" value="결과 확인" />
 				</form> -->
 
-				<br />
+					<br />
 
-				<form action="/infoboard/write" method="post">
-					<div class="input_wrap">
-						<label>Title</label> <input name="infoBoardTitle">
-					</div>
-					<div class="input_wrap">
-						<label>Content</label>
-						<textarea rows="3" name="infoBoardContent"></textarea>
-					</div>
-					<div class="input_wrap">
-						<label>Recipe</label>
-						<textarea rows="3" name="infoBoardRecipe"></textarea>
-					</div>
-					<div class="input_wrap">
-						<label>Writer</label> <input name="infoBoardWriter">
-					</div>
-<!-- 					<div class="input_wrap">
+					<form name="writeform" action="/infoboard/write" method="post">
+						<div class="input_wrap">
+							<label>Title</label> <input name="infoboardTitle">
+						</div>
+						<div class="input_wrap">
+							<label>Content</label>
+							<textarea rows="3" name="infoboardContent"></textarea>
+						</div>
+						<div class="input_wrap">
+							<label>Recipe</label>
+							<textarea rows="3" name="infoboardRecipe"></textarea>
+						</div>
+						<div class="input_wrap">
+							<label>Writer</label> <input name="infoboardWriter">
+						</div>
+						<!-- 					<div class="input_wrap">
 						<label>Date</label> <input name="date" type="date">
 					</div> -->
-					<button class="btn">등록</button>
-				</form>
+
+						<input class="btn" type="button" value="등록" onclick="wirte()" />
+						<!-- <button class="btn">등록</button> -->
+					</form>
 
 
-<%-- 				<div class="pageInfo_wrap">
+					<%-- 				<div class="pageInfo_wrap">
 					<div class="pageInfo_area">
 						<ul id="pageInfo" class="pageInfo">
 
@@ -118,23 +121,12 @@
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> 
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				</form> --%>
-
+				</div>
+				<!-- write_form div -->
 			</div>
 		</div>
-
-		<div class="footer">
-			<div class="foo_enterprise">
-				<ul>
-					<li>사업자번호: 123-45-67890</li>
-					<li>대표자명: 홍길동</li>
-					<li>주소: 서울특별시 종로구 창경궁로 254 7층</li>
-				</ul>
-			</div>
-			<div class="foo_help">
-				<a href="#">고객센터</a>
-			</div>
-
-		</div>
+		<!-- footer삽입 -->
+		<%@ include file="../layout/footer.jsp"%>
 	</div>
 	<script>
 /*     $("#gdsImg").change(function(){

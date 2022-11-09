@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kaactueail.dto.Criteria;
 import com.kaactueail.dto.FreeBoardDTO;
 
 import lombok.Setter;
@@ -56,8 +57,8 @@ public class FreeBoardMapperTest {
 	}
 */	
 		@Test
-	public void testGetList() {
-		mapper.selectAll().forEach(infoboard -> log.info(infoboard));
+	public void testGetList(Criteria cri) {
+		mapper.selectAll(cri).forEach(infoboard -> log.info(infoboard));
 	}
 /*		
 	@Test

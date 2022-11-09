@@ -13,6 +13,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -24,8 +28,7 @@
 			<div class="navbar_left">
 				<ul class="left">
 					<li><a class="menu_left" href="/infoboard/list">칵테일 소개</a></li>
-					<li><a class="menu_left" href="/mycocktailboard/list">나만의
-							칵테일</a></li>
+					<li><a class="menu_left" href="/mycocktailboard/list">나만의 칵테일</a></li>
 					<li><a class="menu_left" href="/freeboard/list">자유게시판</a></li>
 					<li><a class="menu_left" href="#">스토어</a></li>
 				</ul>
@@ -54,22 +57,15 @@
 
 		<div class="contents">
 			<div class="main_contents">
-				             <%--   <form id="moveForm" method="get">
-                	<input type="hidden" name="authorId" value='<c:out value="${authorInfo.authorId }"/>'>
-                	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
-                	<input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>' >
-                	<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
-                </form> --%>
 				<div class="form_section">
 				<img
-							src="${path}/resources/images/${pageInfo.infoBoardTitle}.png"
+							src="${path}/resources/images/${pageInfo.infoboardTitle}.png"
 							class="card-img-top" alt="NO IMAGE" width="100px" height="100px" style="cursor:pointer;">
                    			<div class="form_section_title">
                    				<label>칵테일 번호</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" name="infoBoardNum" readonly="readonly" value="<c:out value='${pageInfo.infoBoardNum }'></c:out>">
-                   				
+                   				<input class="input_block" name="infoboardNum" readonly="readonly" value="<c:out value='${pageInfo.infoboardNum }'></c:out>">                   				
                    			</div>
                    		</div>                    
                    		<div class="form_section">
@@ -77,7 +73,7 @@
                    				<label>작성자</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" name="infoBoardWriter" readonly="readonly" value="<c:out value='${pageInfo.infoBoardWriter }'></c:out>" >
+                   				<input class="input_block" name="infoboardWriter" readonly="readonly" value="<c:out value='${pageInfo.infoboardWriter }'></c:out>" >
                    			</div>
                    		</div>
 <%--                    		<div class="form_section">
@@ -97,7 +93,7 @@
                    				<label>칵테일명</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<textarea class="input_block" name="infoBoardTitle" readonly="readonly"><c:out value='${pageInfo.infoBoardTitle }'/></textarea>
+                   				<textarea class="input_block" name="infoboardTitle" readonly="readonly"><c:out value='${pageInfo.infoboardTitle }'/></textarea>
                    			</div>
                    		</div>
                    		<div class="form_section">
@@ -105,7 +101,7 @@
                    				<label>등록 날짜</label>
                    			</div>
                    			<div class="form_section_content">
-                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${pageInfo.infoBoardDate}" pattern="yyyy-MM-dd"/>">
+                   				<input class="input_block" type="text" readonly="readonly" value="<fmt:formatDate value="${pageInfo.infoboardDate}" pattern="yyyy-MM-dd"/>">
                    			</div>
                    		</div>
                    		<%-- <div class="form_section">
@@ -123,13 +119,22 @@
 				<br/>
 				<br/>
 				<br/>
-			<div class="btn_section">
-               <button id="cancelBtn" class="btn">칵테일 정보 목록</button>
-	           <button id="modifyBtn" class="btn modify_btn">수 정</button>
-	         </div> 
+				<div class="btn_section">
+	           		<button type="submit" class="btn btn-dark" id="list_btn" onclick="location.href='list'">칵테일 정보 목록</button>
+					<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?infoboardNum=${pageInfo.infoboardNum}'">수정</button>
+	        	</div> 
+	        		<form id="detailForm" action="/infoboard/modify" method="get">
+						<input type="hidden" id="infoboardNum" name="infoboardNum" value="<c:out value= '${pageInfo.infoboardNum}'/>">
+					</form>
 			</div>
 		</div>
-
+<%-- 		<form id="infoForm" action="/infoboard/modify" method="get">
+			<input type="hidden" id="infoboardNum" name="infoboardNum" value='<c:out value="${pageInfo.infoboardNum}"/>'> 
+			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'> 
+			<input type="hidden" name="type" value="${cri.type }"> 
+			<input type="hidden" name="keyword" value="${cri.keyword }">
+		</form> --%>
 		<div class="footer">
 			<div class="foo_enterprise">
 				<ul>
@@ -144,5 +149,24 @@
 
 		</div>
 	</div>
+	<script>
+/* 		let form = $("#infoForm");
+		
+		$("#cancelBtn").on("click", fucntion(e){
+			console.log("click")
+			form.find("#infoboardNum").remove();
+			form.attr("action", "/infoboard/list");
+			form.submit();			
+		}); */
+/* 		$("#cancelBtn").on("click", function(e){
+			console.log("cancelClick");
+			location.href = "list";
+		})
+		$("#modifyBtn").on("click", function(e){
+			console.log("modifyClick");
+			location.href = "modify?infoboardNum=${pageInfo.infoboardNum}";
+		})		 */
+		
+	</script>
 </body>
 </html>
