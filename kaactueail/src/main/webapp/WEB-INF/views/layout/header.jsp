@@ -31,7 +31,7 @@
 			</div>
 			<div>
 				<ul class="right">
-					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='#'">shopping_cart</span></li>
+					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/bucketlist/list'">shopping_cart</span></li>
 					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='#'">person</span></li>
 				<!-- 로그인 안 했을 경우 -->
 				<c:if test="${ mId == null }">
