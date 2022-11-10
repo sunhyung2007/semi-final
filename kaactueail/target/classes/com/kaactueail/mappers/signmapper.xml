@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- signmapper.xml  DML 명령 처리 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 	
+ <mapper namespace="com.kaactueail.mappers.signmapper">
+ 	 
+ 	 <!-- 회원가입 -->
+ 	 <insert id="insertmember"   parameterType="com.kaactueail.dto.MemberDTO">
+ 	 	INSERT INTO MEMBER VALUE(MNUM, MID, MPWD, MNAME, MTEL,MBIRTH, MROLE)
+ 	 	VALUES(#{mNum}, #{mId},#{mPwd},#{mName},#{mTel} ,#{mBirth}, #{mRole})
+ 	 </insert>
+ 	                                               
+ 	 <!-- 회원번호 중복체크 -->
+ 	 <select id = "selectmNum" parameterType="int" resultType="int">
+ 	 	SELECT COUNT(*) FROM MEMBER WHERE MNUM = #{mNum}
+ 	 </select>
+ 	 
+ 	  <!-- 아이디 비밀번호 체크(로그인)  -->
+ 	 <select id = "checkMember" parameterType="com.kaactueail.dto.MemberDTO" resultType="String">
+ 	 	SELECT COUNT(*) FROM MEMBER WHERE MID = #{mId} AND MPWD = #{mPwd}
+ 	 </select> 
+ 	 
+ 	 <!-- 로그인한 사용자 권한 가져오기 -->
+ 	 <select id="memberRole" parameterType = "String" resultType = "String">
+ 	 	SELECT MROLE FROM MEMBER WHERE MID = #{mId}
+ 	 </select>
+ 	 
+ 	 <!-- 로그인한 사용자 회원번호 가져오기 -->
+ 	 <select id="memberNum" parameterType = "String" resultType = "int">
+ 	 	SELECT MNUM FROM MEMBER WHERE MID = #{mId}
+ 	 </select>
+ 	 
+ 	 <!-- 로그인 ID 중복 확인 -->
+ 	 <select id="checkId" parameterType = "String" resultType = "int">
+ 	 	SELECT COUNT(*) FROM MEMBER WHERE MID = #{mId}
+ 	 </select>
+ 	 
+ 	 <!-- 이름, 전화번호로 아이디 찾기 -->
+ 	 <select id="findmyId" parameterType=  "com.kaactueail.dto.MemberDTO" resultType = "String">
+ 	 	Select mId from member where mName = #{mName} and mTel = #{mTel}
+ 	 </select>
+ 	 
+ 	 <!-- 랜덤 번호를 알려주기 위해 이름, 전화번호, 아이디가 일치하는지 확인 -->
+ 	 <select id="findmypwd" parameterType = "com.kaactueail.dto.MemberDTO" resultType = "int">
+ 	 	Select COUNT(*) from member where mId = #{mId} AND mTel = #{mTel} AND mName = #{mName}
+ 	 </select>
+ 	 
+ 	 <!-- 임시 비밀번호 발급 -->
+	<insert id="tkIssued" parameterType = "hashMap">
+		update member set mPwd = #{random} where mId = #{mId} and mName = #{mName} and mTel = #{mTel}
+	</insert> 	 
+	
+	<!-- 현재 로그인한 사용자 정보 얻어오기 (업데이트를 위해서) -->
+	<select id = "selectMinfo" parameterType = "String" resultType = "com.kaactueail.dto.MemberDTO">
+		select mId, mName, mTel, mBirth from member where mId = '${mId}'
+	</select>
+	
+	<!-- 사용자 비밀번호 업데이트 -->
+	<update id = "updateminfo" parameterType = "com.kaactueail.dto.MemberDTO">
+		update member set mPwd = #{mPwd} where mId = #{mId}
+	</update>
+ </mapper>

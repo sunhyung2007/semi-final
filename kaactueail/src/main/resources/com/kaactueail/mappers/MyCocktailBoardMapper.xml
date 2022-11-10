@@ -11,12 +11,18 @@
  		select*from mycocktailboard order by mycocktailNum desc
  	</select>
  	
+ 	<!-- 나만의 칵테일 게시판의 좋아요 횟수 최신화 -->
+ 	<update id="updatelikenum">
+ 		update mycocktailboard set mycocktaillikenum = (select count(*) from likeboard where likeboard.likeboardmycocktailnum = mycocktailnum)
+ 	</update>
+ 	
  	<select id="getBymycocktailNum" resultType="com.kaactueail.dto.MyCocktailBoardDTO">
  		select*from mycocktailboard where mycocktailNum = #{mycocktailNum}
  	</select>
  	
- 	<insert id="insert">
- 		insert into mycocktailboard values(mycocktailNum.nextval, #{mycocktailTitle}, #{mycocktailContent}, #{mycocktailRecipe},sysdate, #{mycocktailWriter}, #{mycocktailReadcount} , #{mycocktailImgName}, #{mycocktailMemberNum})
+ 	<!-- 게시글 쓰기 -->
+ 	<insert id="insertmycocktailBoard">
+ 		insert into mycocktailboard values(mycocktailboardNumSeq.nextval, #{mycocktailTitle}, #{mycocktailContent}, #{mycocktailRecipe}, sysdate, #{mycocktailWriter}, 0,'mycocktail021',0, 1)
  	</insert>
  	
  	<delete id="deleteBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
@@ -26,4 +32,25 @@
  	<update id="updateBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
 		update mycocktailboard set mycocktailTitle = #{mycocktailTitle}, mycocktailContent = #{mycocktailContent} where mycocktailNum = #{mycocktailNum}
  	</update>
+ 	
+ 	<!-- 좋아요 여부 체크 -->
+ 	<select id="findLike" resultType="int" parameterType="map">
+ 		select count(*) from likeboard where likeboardMyCocktailNum = #{likeboardMyCocktailNum} and likeboardMemberNum = #{likeboardMemberNum}
+ 	</select>
+ 	
+ 	<!-- 좋아요 갯수 카운팅 -->
+ 	<select id="checklike" parameterType="int" resultType="int">
+ 		select count(*) from likeboard where likeboardMyCocktailNum = #{likeboardMyCocktailNum}
+ 	</select>
+ 	
+ 	<!-- 좋아요 추가 -->
+ 	<insert id="makeolike">
+ 		insert into likeboard values(likeboardNumSeq.nextval,#{likeboardMyCocktailNum},#{likeboardMemberNum})
+ 	</insert>
+ 	
+ 	<!-- 좋아요 취소 -->
+ 	<delete id="makeunlike" parameterType="map">
+ 		delete from likeboard where likeboardMyCocktailNum = #{likeboardMyCocktailNum} and likeboardMemberNum = #{likeboardMemberNum}
+ 	</delete>
+ 	
  </mapper>

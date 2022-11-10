@@ -12,16 +12,19 @@
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- jqeury cdn -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
 </head>
 <body>
+
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
 				<h3>자유게시판</h3>
-
 				<table class="table table-hover">
 					<tr class="table-dark">
 						<th scope="col">게시글번호</th>
@@ -33,56 +36,129 @@
 
 					<c:forEach items="${ list }" var="list">
 						<tr>
-							<td scope="row"><c:out value="${list.FB_num}" /></td>
-							<td><a class="move_detail"
-								href='/freeboard/detail?FB_num=<c:out value="${list.FB_num}"/>'>
-									<c:out value="${list.FB_title}" />
-							</a></td>
-							<td><c:out value="${list.FB_writer}" /></td>
-							<td><fmt:formatDate value="${list.FB_date}"
-									pattern="yyyy.MM.dd" /></td>
-							<td><c:out value="${list.FB_readcount}" /></td>
+							<td scope="row"><c:out value="${list.freeboardNum}" /></td>
+ 							<td>
+ 								<a class="move" href='<c:out value="${list.freeboardNum}" />'>
+ 								<c:out value="${list.freeboardTitle}" />
+ 								</a>
+ 							</td>
+							<td><c:out value="${list.freeboardWriter}" /></td>
+							<td><fmt:formatDate value="${list.freeboardDate}" pattern="yyyy.MM.dd" /></td>
+							<td><c:out value="${list.freeboardReadcount}" /></td>
 						</tr>
 					</c:forEach>
 				</table>
 
-				<form id="moveForm" method="get"></form>
-				<script>
-					let moveForm = $("#moveForm");
 
-					$(".move").on("click",function(e) {
-							e.preventDefault();
-							moveForm.append("<intput type='hidden' name='FB_num' value=''"+ $(this).attr("href")+ "'>'");
-										moveForm.submit();
-									});
-				</script>
 
-				<button type="button" class="btn btn-dark" id="write_btn">글쓰기</button>
-				<button type="button" class="btn btn-dark" id="modifty_btn">수정</button>
-				<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
-				<div class="btn-toolbar" role="toolbar"
-					aria-label="Toolbar with button groups">
-					<div class="btn-group me-2" role="group" aria-label="First group">
-						<button type="button" class="btn btn-secondary">1</button>
-						<button type="button" class="btn btn-secondary">2</button>
-						<button type="button" class="btn btn-secondary">3</button>
-						<button type="button" class="btn btn-secondary">4</button>
-					</div>
-					<div class="btn-group me-2" role="group" aria-label="Second group">
-						<button type="button" class="btn btn-secondary">5</button>
-						<button type="button" class="btn btn-secondary">6</button>
-						<button type="button" class="btn btn-secondary">7</button>
-					</div>
-					<div class="btn-group" role="group" aria-label="Third group">
-						<button type="button" class="btn btn-secondary">8</button>
+				<div class="numbers_wrap" style="display:flex; justify-content: space-around;">
+					<div>
+						<ul class="pagination">
+							<!-- 이전버튼 -->
+							<c:if test="${ paging.prev }">
+								<li class="page-item"><a class="page-link" href="${ paging.startPage-1 }">&laquo;</a></li>
+							</c:if>
+							<!-- 페이지개수 -->
+							<c:forEach var="num" begin="${ paging.startPage }" end="${ paging.endPage }">
+								<li class="page-item ${ paging.cri.pageNum == num ? "active":"" }">
+									<a class="page-link" href="${ num }">${ num }</a>
+								</li>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${ paging.next }">
+								<li class="page-item"><a class="page-link" href="${ paging.endPage+1 }">&raquo;</a></li>
+							</c:if>
+						</ul>
 					</div>
 				</div>
+				
+				<div class="btns_wrap" style="display: flex; justify-content: flex-end; align-items: center;">
+					<div class="dropbox" style="display: flex; align-items: center; padding-right: 1%">
+								<select name="type">
+									<option value="" <c:out value="${ paging.cri.type == null ? 'selected' : ''}"/> >선택</option>
+									<option value="T" <c:out value="${ paging.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
+									<option value="C" <c:out value="${ paging.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+									<option value="W" <c:out value="${ paging.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+									<option value="TC" <c:out value="${ paging.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
+									<option value="TW" <c:out value="${ paging.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
+									<option value="TCW" <c:out value="${ paging.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
+								</select>
 
-			</div>
-		</div>
-	</div>
+								<input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
+								<button id="search_btn" class="btn btn-secondary my-2 my-sm-0" type="submit" href="keyword=${ paging.cri.keyword }&type=${ paging.cri.type }">Search</button>
+					</div>
+					
+					<!-- 회원가입 한 경우에만 글 작성 가능 -->
+					<c:if test="${ mRole != null }">
+					<div class="btn_wrap" style="float: right;">
+						<button type="button" class="btn btn-dark" id="write_btn"
+							onclick="location.href='write'" formmethod="get">글쓰기</button>
+					</div>
+					</c:if>
+				</div>
+				<form id="moveForm" method="get">
+					<input type="hidden" name="pageNum" value="${ paging.cri.pageNum }">
+					<input type="hidden" name="amount" value="${ paging.cri.amount }">
+					<input type="hidden" name="keyword" value="${ paging.cri.keyword }">
+					<input type="hidden" name="type" value="${ paging.cri.type }">
+				</form>
 
+
+			</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->
+	
+	
+<script type="text/javascript">
+
+let moveForm = $("#moveForm");
+
+$(document).on("click", ".move", function(e){
+	e.preventDefault();
+	
+	moveForm.append("<input type='hidden' name='freeboardNum' value='"+ $(this).attr("href")+ "'>");
+	moveForm.attr("action", "/freeboard/detail");
+	moveForm.submit();
+});
+
+$(".pagination a").on("click", function(e){
+	e.preventDefault();
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	moveForm.attr("action", "/freeboard/list");
+	moveForm.submit();
+	
+});	
+
+
+$("#search_btn").on("click", function(e){
+	e.preventDefault();
+	
+	let type = $(".dropbox select").val();
+	let keyword = $(".dropbox input[name='keyword']").val();
+	
+	if(!type){
+		alert("검색 종류를 선택하세요.");
+		return false;
+	}
+	
+	if(!keyword){
+		alert("키워드를 입력하세요.");
+		return false;
+	}		
+	
+	moveForm.find("input[name='type']").val(type);
+	moveForm.find("input[name='keyword']").val(keyword);
+	moveForm.find("input[name='pageNum']").val(1);
+	moveForm.submit();
+});
+
+
+
+</script>	
+	
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>
+
+	
 </body>
 </html>

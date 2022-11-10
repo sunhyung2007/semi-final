@@ -13,81 +13,78 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/detailLayout.css">
+<link rel="stylesheet" href="/resources/css/detailLayout_freeb.css"/>
 </head>
 <body>
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
-	
+
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
 
 				<h3>자유게시판</h3>
-				<div class="btn_wrap">
-					<button type="button" class="btn btn-dark" id="write_btn">글쓰기</button>
-					<button type="button" class="btn btn-dark" id="list_btn">목록</button>
-					<button type="button" class="btn btn-dark" id="modifty_btn">수정</button>
-					<button type="button" class="btn btn-dark" id="delete_btn">삭제</button>
-				</div>
-				<form id="detailForm" action="/freeboard/modify" method="get">
-					<input type="hidden" id="FB_num" name="FB_num"
-						value="<c:out value= '${pageDetail.FB_num}'/>">
-				</form>
+
+
+					<div class="btn_wrap">
+						<button class="btn btn-dark" id="list_btn" onclick="location.href='list?pageNum=${ cri.pageNum }&amount=${ cri.amount }' ">목록</button>
+						<!-- 회원가입되어 있으면 -->
+						<c:if test="${ mRole != null }">
+						<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
+						<c:if test="${ mRole eq 'ROLE_ADMIN' }">
+							<form action="/freeboard/delete" method="post">
+								<button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'">삭제</button>
+								<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
+							</form>
+						</c:if>
+
+						<!-- 로그인한 세션 ID와 작성자 ID가 같거나 관리자 권한이면 수정 버튼 보임 -->
+						<c:if test="${ mId == pageDetail.freeboardWriter}">
+							<button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?freeboardNum=${pageDetail.freeboardNum}'">수정</button>
+							<form action="/freeboard/delete" method="post">
+								<button type="submit" class="btn btn-dark" id="delete_btn" onclick="loaction.href='delete'">삭제</button>
+								<input type="hidden" id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>">
+							</form>
+						</c:if>
+						</c:if>
+					</div>
+
+
 				<div class="layout_all">
 					<div class="layout_title">
 						<div>
-							<input name="FB_num" readonly
-								value='<c:out value="${pageDetail.FB_num}"/>'>
+							<input id="freeboardNum" name="freeboardNum" value="<c:out value= '${pageDetail.freeboardNum}'/>" readonly>
+						</div>
+						<div class="title">
+							<input id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pageDetail.freeboardTitle}'/>" readonly>
+						</div>
+					</div>
+					<hr />
+
+					<div class="layout_middle">
+						<div class="text-secondary" id="writer">
+							<input id="freeboardWriter" name="freeboardWriter" value="<c:out value= '${pageDetail.freeboardWriter}'/>" readonly>
+						</div>
+						<div class="text-secondary" id="writedate">
+							<input id="freeboardDate" name="freeboardDate" value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.freeboardDate}" />" readonly>
 						</div>
 						<div>
-							<input style="border: 0 solid balck;"
-								name="FB_title" readonly
-								value='<c:out value="${pageDetail.FB_title}"/>'>
-						</div>
-					</div>
-						<div class="layout_middle">
-							<div>
-								<input style="border: 0 solid balck;"
-									name="FB_writer" readonly
-									value='<c:out value="${pageDetail.FB_writer}"/>'>
-							</div>
-							<div>
-								<input name="FB_date"
-									value='<fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.FB_date}"/>'
-									readonly>
-							</div>
-							<div>
-								<input name="FB_readcount" readonly
-									value='<c:out value="${pageDetail.FB_readcount}"/>'>
-							</div>
-						</div>
-						<div class="layout_content">
-							<div>
-								<input name="FB_content" readonly
-									value='<c:out value="${pageDetail.FB_content}"/>'>
-							</div>
-						</div>
-					</div>
+							<input id="freeboardReadcount" name="freeboardReadcount" value="<c:out value="${pageDetail.freeboardReadcount}" />" readonly>
 
-								
-				</div> <!-- main contents end -->	
-			</div> <!-- contents end -->
-		</div> <!-- wrapper end -->
-		
-	<!-- 목록/수정버튼 클릭 시 이동하는 로직 -->
-<script>
-	let form = ${"#detailForm"};
-	
-	$("#list_btn").on("click", function(e){
-		form.find("#FB_num").remove();
-		form.attr("action", "/freeboard/list");
-	});
-	
-	$("#modify_btn").on("click", function(e){
-		form.attr("action", "/board/modify");
-	});
-</script>
+						</div>
+					</div>
+					<div class="layout_content">
+						<textarea name="freeboardContent" class="form-control" id="exampleTextarea"
+							rows="15" readonly style="border: none; "><c:out value="${pageDetail.freeboardContent}" /></textarea>
+					</div>
+				</div>
+
+
+			</div> 	<!-- main contents end -->
+		</div> 	<!-- contents end -->
+	</div> 	<!-- wrapper end -->
+
+
 
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

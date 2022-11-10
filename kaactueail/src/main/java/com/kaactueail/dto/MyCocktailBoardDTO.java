@@ -16,8 +16,9 @@ public class MyCocktailBoardDTO {
 	private String mycocktailTitle, mycocktailContent, mycocktailRecipe;
 	private Date mycocktailDate;
 	private String mycocktailWriter;
-	private int mycocktailReadcount, mycocktailMemberNum;
+	private int mycocktailReadcount;
 	private String mycocktailImgName;
 	
+	private int  mycocktailLikeNum,mycocktailMemberNum;
 	
 }
