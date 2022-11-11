@@ -147,9 +147,9 @@ $(".order_btn").on("click", function(){
 		let cNum = $(element).find(".cockitNum_input").val();
 		let bucketlistAmount = $(element).find(".itemscount_input").val();
 		
-		let cockitNum_input = "<input name='order["+orderNum+"].cNum' type='hidden' value='"+cNum+"'>";
+		let cockitNum_input = "<input name='order["+orderNum+"].cnum' type='hidden' value='"+cNum+"'>";
 		form_content += cockitNum_input;
-		let itemscount_input= "<input name='order["+orderNum+"].Amount' type='hidden' value='"+bucketlistAmount+"'>";
+		let itemscount_input= "<input name='order["+orderNum+"].amount' type='hidden' value='"+bucketlistAmount+"'>";
 		form_content += itemscount_input;
 		
 		orderNum += 1;

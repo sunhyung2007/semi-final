@@ -10,16 +10,16 @@ import lombok.NoArgsConstructor;
 public class OrderItemDTO {
 	
 	// 이전 페이지에서 넘겨 받을 값
-	private int cNum, Amount;
+	private int cnum, amount;
 	
 	// DB에서 꺼내 올 값 
-	private String cName;
-	private int cPrice;
+	private String cname;
+	private int cprice;
 	
 	private int totalPrice;
 	
 	
 	public void Total() {
-		 this.totalPrice = this.cPrice * this.Amount;
+		 this.totalPrice = this.cprice * this.amount;
 	}
 }

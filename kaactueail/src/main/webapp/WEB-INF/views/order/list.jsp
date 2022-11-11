@@ -25,11 +25,22 @@
 		<div class="contents">
 			<div class="main_contents">
 			
-			<div>
-			${ orderlist }
-			</div>
-			
-			
+				<table class="table table-hover">
+					<tr class="table-secondary">
+						<th scope="col">칵키트명</th>
+						<th>상품수량</th>
+						<th>판매금액</th>
+						<th>주문금액</th>
+					</tr>
+					<c:forEach items="${orderlist}" var="orderlist">
+						<tr>
+							<td scope="row"><c:out value="${orderlist.cname}"/></td>
+							<td><c:out value="${orderlist.amount}"/></td>
+							<td><fmt:formatNumber value="${orderlist.cprice}" pattern="###,###,###원"/></td>
+							<td><fmt:formatNumber value="${orderlist.totalPrice}" pattern="###,###,###원"/></td>
+						</tr>
+					</c:forEach>
+				</table>
 			
 			
 			
