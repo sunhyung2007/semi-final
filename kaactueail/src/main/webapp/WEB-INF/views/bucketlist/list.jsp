@@ -46,6 +46,7 @@
 								<input type="checkbox" class="form-check-input" id="check_items" checked="checked">
 								<input type="hidden" class="tprice_input" value="${ list.cPrice * list.bucketlistAmount }" >
 								<input type="hidden" class="itemscount_input" value="${ list.bucketlistAmount }" >
+								<input type="hidden" class="cockitNum_input" value="${ list.cNum }">
 							</td>
 							
 							<td class="cName"><c:out value="${ list.cName }" /></td>
@@ -76,7 +77,7 @@
 						 최종 가격: 	<span class="totalprice"></span>원
 					</div>
 					<div>
-						<button type="button" class="btn btn-secondary btn-lg">구매하기</button>
+						<button class="btn btn-secondary btn-lg order_btn">구매하기</button>
 					</div>
 				</div>
 				
@@ -88,6 +89,9 @@
 				<!-- 상품 삭제 폼 -->
 				<form action="/bucketlist/delete" method="post" class="bucket_delete"> 
 					<input type="hidden" name="bucketlistNum" class="delete_bucketNum">
+				</form>
+				<form action="/order/list" method="get" class="order_move">
+				
 				</form>
 
 
@@ -130,6 +134,30 @@ $(".delete_btn").on("click", function(e){
 	console.log(bucketlistNum);
 	$(".bucket_delete").submit();
 	
+});
+
+
+// 물품 구매
+$(".order_btn").on("click", function(){
+	let form_content = '';
+	let orderNum = 0;
+	$(".bucket_info").each(function(index, element){
+		
+		if($(element).find(".form-check-input").is(":checked")=== true) { // 체크박스 체크 되면
+		let cNum = $(element).find(".cockitNum_input").val();
+		let bucketlistAmount = $(element).find(".itemscount_input").val();
+		
+		let cockitNum_input = "<input name='order["+orderNum+"].cNum' type='hidden' value='"+cNum+"'>";
+		form_content += cockitNum_input;
+		let itemscount_input= "<input name='order["+orderNum+"].bucketlistAmount' type='hidden' value='"+bucketlistAmount+"'>";
+		form_content += itemscount_input;
+		
+		orderNum += 1;
+		}
+	});
+
+ 	$(".order_move").html(form_content);
+   	$(".order_move").submit();
 });
 
 	

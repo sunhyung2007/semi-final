@@ -7,7 +7,7 @@
  
  <!-- 장바구니 조회 -->
  <select id="getBucketList" resultType="com.kaactueail.dto.BucketDTO">
- 	select row_number() over(order by a.bucketlistNum desc) as rn, a.bucketlistNum, a.bucketlistMemberNum, a.bucketlistCockitNum, a.bucketlistAmount, b.cName, b.cPrice
+ 	select row_number() over(order by a.bucketlistNum desc) as rn, a.bucketlistNum, a.bucketlistMemberNum, a.bucketlistCockitNum, a.bucketlistAmount, b.cName, b.cPrice, b.cNum
 	from BucketList a left outer join Cockit b on a.bucketlistcockitNum = b.cNum
 	where bucketlistMemberNum = #{ bucketlistMemberNum }
  </select>

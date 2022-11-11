@@ -40,14 +40,14 @@
  	<![CDATA[
  		select freeboardNum, freeboardTitle, freeboardWriter, freeboardDate, freeboardReadcount from(
    	     	select rownum as rn, freeboardNum, freeboardTitle, freeboardwriter, freeboardDate, freeboardReadcount 
-        	from freeboard where rownum <= #{pageNum} * #{amount}
+        	from(select*from freeboard order by freeboardNum desc) where rownum <= #{pageNum} * #{amount}
       	]]>   	
         <if test="keyword != null">
  			<include refid="criteria"></include>
  		</if>
 
   	<![CDATA[       	
-        	order by freeboardNum desc)
+        	)
  			where rn > (#{pageNum}-1) * #{amount}
  	]]>		
 	</select>

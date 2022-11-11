@@ -34,8 +34,6 @@ public class bucketlistController {
 		System.out.println(mNum);
 		System.out.println(mId);
 		
-		System.out.println(dto);
-		
 	}
 	
 	@PostMapping("update")
