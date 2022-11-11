@@ -87,7 +87,7 @@ public class SignUpController extends HttpServlet{
 	
 	//로그인
 	@PostMapping("login")
-	public void authenticationMember(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+	public void authenticationMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String mId = request.getParameter("mId");
 		String mPwd = request.getParameter("mPwd");
 		
@@ -97,22 +97,23 @@ public class SignUpController extends HttpServlet{
 		
 		//로그인이 되면
 		if(check == true) {
+			HttpSession session;
 			String mRole = dao.memberRole(mId);
 			int mNum = dao.memberNum(mId); 
+			session = request.getSession();
 			System.out.println(dto);
 			
 			//로그인 세션값 설정
 			session.setAttribute("mId", mId);
 			session.setAttribute("mRole", mRole);
 			session.setAttribute("mNum", mNum);
-			
 			System.out.println("login mId 확인: " + session.getAttribute("mId"));
 			System.out.println("login mRole 확인: " +  session.getAttribute("mRole"));
 			System.out.println("login mNum 확인: " +  session.getAttribute("mNum"));
 			//세션 유지시간 설정(초단위) 20분
 			session.setMaxInactiveInterval(20*60);
 			
-			response.sendRedirect((String)session.getAttribute("url"));
+			response.sendRedirect("/main");
 		} else {
 			System.out.println("실패");
 			response.sendRedirect("/Ioginform");

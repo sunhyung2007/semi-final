@@ -21,8 +21,8 @@
  	</select>
  	
  	<!-- 게시글 쓰기 -->
- 	<insert id="insertmycocktailBoard">
- 		insert into mycocktailboard values(mycocktailboardNumSeq.nextval, #{mycocktailTitle}, #{mycocktailContent}, #{mycocktailRecipe}, sysdate, #{mycocktailWriter}, 0,'mycocktail021',0, 1)
+ 	<insert id="write">
+ 		insert into mycocktailboard values(mycocktailboardNumSeq.nextval, #{mycocktailTitle}, #{mycocktailContent}, #{mycocktailRecipe}, sysdate, #{mycocktailWriter}, 0,#{mycocktailImgName},0, #{mycocktailMemberNum})
  	</insert>
  	
  	<delete id="deleteBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
@@ -30,7 +30,7 @@
  	</delete>
  	
  	<update id="updateBymycocktailNum" parameterType="com.kaactueail.dto.MyCocktailBoardDTO">
-		update mycocktailboard set mycocktailTitle = #{mycocktailTitle}, mycocktailContent = #{mycocktailContent} where mycocktailNum = #{mycocktailNum}
+		update mycocktailboard set mycocktailTitle = #{mycocktailTitle}, mycocktailContent = #{mycocktailContent}, mycocktailRecipe = #{mycocktailRecipe} where mycocktailNum = #{mycocktailNum}
  	</update>
  	
  	<!-- 좋아요 여부 체크 -->
@@ -53,4 +53,8 @@
  		delete from likeboard where likeboardMyCocktailNum = #{likeboardMyCocktailNum} and likeboardMemberNum = #{likeboardMemberNum}
  	</delete>
  	
+ 	
+ 	<select id="selectTitle" resultType="int" parameterType="String">
+ 		select count(*) from mycocktailboard where mycocktailTitle = #{mycocktailTitle}
+ 	</select>
  </mapper>

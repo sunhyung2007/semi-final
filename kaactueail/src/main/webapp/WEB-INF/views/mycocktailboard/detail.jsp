@@ -13,8 +13,9 @@
 </head>
 <body>
 	<script>
-		
+		var random;
 	 	$.ajax({
+	 		syanc = false;
 			success : function() {
 				if(${member} == 0){
 					$("#nonlike").css("color", "red");
@@ -97,15 +98,26 @@
 			<div class="main_contents">
 				<h3>나만의 칵테일 게시판</h3>
 				<div class="btn_wrap">
-					<button type="submit" class="btn btn-dark" id="write_btn"
-						onclick="location.href='write'">글쓰기</button>
-					<button type="submit" class="btn btn-dark" id="list_btn"
+					<button class="btn btn-dark" id="list_btn"
 						onclick="location.href='list'">목록</button>
-					<button class="btn btn-dark" id="modifty_btn"
-						onclick="location.href='modify?mycocktailboardNum=${pageDetail.mycocktailNum}'">수정</button>
-					<button type="submit" class="btn btn-dark" id="delete_btn"
-						onclick="loaction.href='delete'"
-						formaction="/mycocktailboard/delete" formmethod="post">삭제</button>
+					<!-- 회원가입되어 있으면 -->
+					<c:if test="${ mRole != null }">
+						<button type="submit" class="btn btn-dark" id="write_btn"
+							onclick="location.href='write'">글쓰기</button>
+						<!-- 로그인한 세션의 사용자번호와 게시글 작성자의 번호가 일치하면 삭제, 수정버튼이 보임 -->
+						<c:if test="${ mNum eq pageDetail.mycocktailMemberNum }">
+							<button class="btn btn-dark" id="modifty_btn"
+								onclick="location.href='modify?mycocktailNum=${pageDetail.mycocktailNum}'">수정</button>
+							<form action="/mycocktailboard/delete" method="post">
+								<button type="submit" class="btn btn-dark" id="delete_btn"
+									onclick="loaction.href='delete'">삭제</button>
+								<input type="hidden" id="mycocktailNum" name="mycocktailNum"
+									value="<c:out value= '${pageDetail.mycocktailNum}'/>">
+							</form>
+						</c:if>
+
+
+					</c:if>
 				</div>
 				<form id="detailForm" action="/mycocktailboard/modify" method="get">
 					<input type="hidden" id="mycocktailNum" name="mycocktailNum"
@@ -140,17 +152,21 @@
 					<div class="layout_content" style="position: relative;">
 						<div class="img_id">
 							<img
-								src="/resources/images/mycocktailImagefolder/${pageDetail.mycocktailImgName}.jpg"
+								src="/resources/images/mycocktailImagefolder/${pageDetail.mycocktailImgName}"
 								width=600px, height=450px; /> <span
 								style="display: flex; width: 600px; justify-content: flex-end; margin-top: 5px;">
-								<c:out value=" 좋아요 " />&nbsp; 
-								<a class="fa fa-heart" aria-hidden="true" id="nonlike" style="margin-top: 3px; text-decoration: none;"></a>
-								<a class="fa fa-heart" aria-hidden="true" id="olike" style="margin-top: 3px; text-decoration: none;" onclick="makeunlike()"></a>
-								<a class="fa fa-heart-o" aria-hidden="true" id="unlike" style="margin-top: 3px;text-decoration: none;" onclick="makeolike()"></a>
-								&nbsp;
+								<c:out value=" 좋아요 " />&nbsp; <a class="fa fa-heart"
+								aria-hidden="true" id="nonlike"
+								style="margin-top: 3px; text-decoration: none;"></a> <a
+								class="fa fa-heart" aria-hidden="true" id="olike"
+								style="margin-top: 3px; text-decoration: none;"
+								onclick="makeunlike()"></a> <a class="fa fa-heart-o"
+								aria-hidden="true" id="unlike"
+								style="margin-top: 3px; text-decoration: none;"
+								onclick="makeolike()"></a> &nbsp;
 								<div class="likenum" id="aaa"></div>
-								
-								 
+
+
 							</span>
 						</div>
 

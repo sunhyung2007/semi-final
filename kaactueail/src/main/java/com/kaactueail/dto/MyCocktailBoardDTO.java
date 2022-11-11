@@ -21,4 +21,6 @@ public class MyCocktailBoardDTO {
 	
 	private int  mycocktailLikeNum,mycocktailMemberNum;
 	
+	
+	
 }

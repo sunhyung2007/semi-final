@@ -47,14 +47,13 @@ public class MyCocktailBoardDAOImpl implements MyCocktailBoardDAO {
 	}
 
 	@Override
-	public MyCocktailBoardDTO getBymycockNum(int mycocktailNum) {
+	public MyCocktailBoardDTO getBymycocktailNum(int mycocktailNum) {
 		return mapper.getBymycocktailNum(mycocktailNum);
 	}
 
 	@Override
 	public void write(MyCocktailBoardDTO mycocktaildto) {
-		mapper.insertmycocktailBoard(mycocktaildto);
-
+		mapper.write(mycocktaildto);
 	}
 	// 좋아요 누른지 확인
 	@Override
@@ -72,5 +71,6 @@ public class MyCocktailBoardDAOImpl implements MyCocktailBoardDAO {
 	public void makeunlike(LikeDTO like) {
 		mapper.makeunlike(like);
 	}
+	
 	
 }

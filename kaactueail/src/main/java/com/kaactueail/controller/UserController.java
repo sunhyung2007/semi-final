@@ -33,7 +33,7 @@ public class UserController {
 		dto.setMPwd(mPwd);
 		
 		dao.updateminfo(dto);
-		System.out.println("asd");
+		
 		response.sendRedirect("updateminfo");
 	}
 	@GetMapping("updateminfo")
