@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class OrderItemDTO {
 	
 	// 이전 페이지에서 넘겨 받을 값
-	private int cNum, bucketlistAmount;
+	private int cNum, Amount;
 	
 	// DB에서 꺼내 올 값 
 	private String cName;
@@ -20,6 +20,6 @@ public class OrderItemDTO {
 	
 	
 	public void Total() {
-		 this.totalPrice = this.cPrice * this.bucketlistAmount;
+		 this.totalPrice = this.cPrice * this.Amount;
 	}
 }

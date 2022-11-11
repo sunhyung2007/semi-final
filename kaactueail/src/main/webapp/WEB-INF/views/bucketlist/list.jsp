@@ -149,7 +149,7 @@ $(".order_btn").on("click", function(){
 		
 		let cockitNum_input = "<input name='order["+orderNum+"].cNum' type='hidden' value='"+cNum+"'>";
 		form_content += cockitNum_input;
-		let itemscount_input= "<input name='order["+orderNum+"].bucketlistAmount' type='hidden' value='"+bucketlistAmount+"'>";
+		let itemscount_input= "<input name='order["+orderNum+"].Amount' type='hidden' value='"+bucketlistAmount+"'>";
 		form_content += itemscount_input;
 		
 		orderNum += 1;
@@ -157,6 +157,7 @@ $(".order_btn").on("click", function(){
 	});
 
  	$(".order_move").html(form_content);
+
    	$(".order_move").submit();
 });
 

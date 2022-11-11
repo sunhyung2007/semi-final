@@ -27,7 +27,7 @@ public class OrderDAOImpl implements OrderDAO {
 			
 			mapper.getItemInfo(oid.getCNum());
 			OrderItemDTO iteminfo = mapper.getItemInfo(oid.getCNum()); // 칵키트 번호 기준으로 상품 조회하며 주문 리스트에 저장
-			iteminfo.setBucketlistAmount(oid.getBucketlistAmount()); // view에서 전달받은 amount 값 대입
+			iteminfo.setAmount(oid.getAmount()); // view에서 전달받은 amount 값 대입
 			iteminfo.Total(); // 상품가격*상품개수 값 계산
 			
 			result.add(iteminfo); // 상품정보 세팅해서 리스트에 저장
