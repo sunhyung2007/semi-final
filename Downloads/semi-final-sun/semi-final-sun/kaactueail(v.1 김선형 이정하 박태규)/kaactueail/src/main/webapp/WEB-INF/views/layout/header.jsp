@@ -19,7 +19,7 @@
 					<li><a class="menu_left" href="/infoboard/list">칵테일 소개</a></li>
 					<li><a class="menu_left" href="/mycocktailboard/list">나만의 칵테일</a></li>
 					<li><a class="menu_left" href="/freeboard/list">자유게시판</a></li>
-					<li><a class="menu_left" href="#">스토어</a></li>
+					<li><a class="menu_left" href="/store/list">스토어</a></li>
 				</ul>
 			</div>
 

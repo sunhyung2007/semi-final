@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<title>Insert title here</title>
+<title>칵테일 정보 목록 세부페이지</title>
 <!-- jqeury cdn -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
 	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="

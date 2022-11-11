@@ -26,7 +26,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 
 <script type="text/javascript">
-	function wirte() {
+	function write() {
 		alert("등록합니다!");
 
 		if (document.writeform.infoboardTitle.value == "") {
@@ -43,16 +43,7 @@
 			document.writeform.submit(); //전송
 		}
 	}
-	/*    function filename(){
-	 $.ajax({
-	 url: "upload_ok",
-	 success: function(){
-	 console.log("sadfd");
-	 }
-	 })
-	 } */
 </script>
-
 
 </head>
 
@@ -73,11 +64,6 @@
 					</form>
 
 					${message }
-					<!--<form method="post" action="/upload" enctype="multipart/form-data">
-					<input type="file" name="uploadfile" multiple="multiple" /> <input
-						type="submit" value="결과 확인" />
-				</form> -->
-
 					<br />
 					<c:set var="filename" value="${filename}" />
 					<form name="writeform" action="/infoboard/write" method="post">
@@ -103,63 +89,18 @@
 							<input type="text" class="form-control" id="inputDefault" 
 							name="infoboardWriter" placeholder="작성자를 입력하세요">
 						</div>						
-						<input class="btn" type="button" value="등록" onclick="wirte()" />
+						<input class="btn" type="button" value="등록" onclick="write()" />
 
 					</form>
 					<button type="submit" class="btn btn-dark" id="list_btn"
 						onclick="location.href='list'">취소</button>
-
-					<%-- <div class="pageInfo_wrap">
-					<div class="pageInfo_area">
-						<ul id="pageInfo" class="pageInfo">
-
-							<!-- 이전페이지 버튼 -->
-							<c:if test="${pageMaker.prev}">
-								<li class="pageInfo_btn previous"><a
-									href="${pageMaker.startPage-1}">Previous</a></li>
-							</c:if>
-
-							<!-- 각 번호 페이지 버튼 -->
-							<c:forEach var="num" begin="${pageMaker.startPage}"
-								end="${pageMaker.endPage}">
-								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a
-									href="${num}">${num}</a></li>
-							</c:forEach>
-
-							<!-- 다음페이지 버튼 -->
-							<c:if test="${pageMaker.next}">
-								<li class="pageInfo_btn next"><a
-									href="${pageMaker.endPage + 1 }">Next</a></li>
-							</c:if>
-
-						</ul>
-					</div>
-				</div>
-
-
-				<form id="menuForm" method="get">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> 
-					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-				</form> --%>
-				</div>
-				<!-- write_form div -->
 			</div>
 		</div>
 		
 	</div>
+	</div>
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>
-	<script>
-		/*     $("#gdsImg").change(function(){
-		 if(this.files &amp;&amp; this.files[0]) {
-		 var reader = new FileReader;
-		 reader.onload = function(data) {
-		 $(".select_img img").attr("src", data.target.result).width(500);          
-		 }
-		 reader.readAsDataURL(this.files[0]);
-		 }
-		 }); */
-	</script>
 
 </body>
 </html>

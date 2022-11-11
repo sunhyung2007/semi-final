@@ -53,9 +53,9 @@ public class infoboardController {
 
 	}
 
-	// 업로드로 가는 메소드
-	@GetMapping("/uploadSuccess")
-	public void form() {}
+//	// 업로드로 가는 메소드
+//	@GetMapping("/uploadSuccess")
+//	public void form() {}
 	
 	@PostMapping("/upload")
 	public String upload(@RequestParam("file") MultipartFile file) {
@@ -66,7 +66,7 @@ public class infoboardController {
 		System.out.println("용량크기(byte) : " + size);
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "C:\\test\\upload";
+		String uploadFolder = "C:/Users/KOSA/Downloads/semi-final-sun/semi-final-sun/kaactueail(v.1 김선형 이정하 박태규)/kaactueail/src/main/webapp/resources/images/cocktailInfoImage";
 		
 		/*
 		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
