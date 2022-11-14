@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- boardmapper.xml  DML 명령 처리 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 	
+ <!-- Mapper 인터페이스와 동일한 이름 주어야 하므로 패키지명+mapper이름으로 작명 --> 
+ <!-- 쿼리문 id는 인터페이스 메소드와 동일하게 설정 --> 
+  	
+ <mapper namespace="com.kaactueail.mappers.CockInfoBoardMapper">
+ 	
+ 		<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							infoboardTitle like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'C'.toString()">
+							infoboardContent like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'W'.toString()">
+							infoboardWriter like '%'||#{keyword}||'%' 
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="selectAll"
+		resultType="com.kaactueail.dto.CockInfoBoardDTO">
+		<!-- select * from InfoBoard where infoBoardTitle in (select cImgName from 
+			Cockit) -->
+		<!-- select * from InfoBoard order by infoboardNum desc -->
+ 		<![CDATA[select rn, infoboardNum, infoboardTitle, infoboardContent, infoboardRecipe, infoboardDate, infoboardWriter, 
+ 		infoboardReadcount from(select 
+ 		rownum as rn, infoboardNum, infoboardTitle, infoboardContent, infoboardRecipe, infoboardDate, infoboardWriter, 
+ 		infoboardReadcount from infoboard where rownum <= #{pageNum} * #{amount}]]>
+		<if test="keyword != null">
+		<include refid="criteria" />
+		</if>
+		<![CDATA[ order by infoboardNum desc) where rn > (#{pageNum}-1) * #{amount}]]>
+	</select>
+ 	
+ 	<select id="selectTitle" resultType="int" parameterType="String">
+ 		select count(*) from InfoBoard where infoboardTitle = #{infoboardTitle}
+ 	</select>
+ 	
+   	<!-- 게시물 총 개수 -->
+    <select id="getTotal" resultType="int">    
+        select count(*) from InfoBoard   
+        <if test="keyword != null">
+        	where infoboardNum > 0 <include refid="criteria"/>
+        </if> 	
+    </select>
+ 	  
+ 	 <insert id="write">
+ 	 	insert into infoboard(infoboardNum,infoboardTitle,infoboardContent,infoboardRecipe, infoboardWriter,infoboardReadcount,infoboardDate)
+ 	 	values(infoboardNumSeq.nextval,#{infoboardTitle}, #{infoboardContent}, #{infoboardRecipe}, #{infoboardWriter},#{infoboardReadcount},sysdate)
+ 	 </insert>
+ 	 <!--  게시판 번호로 게시글 조회  -->
+ 	 <select id="getDetail"  resultType="com.kaactueail.dto.CockInfoBoardDTO">
+ 	 	select * from infoboard where infoboardNum = #{infoboardNum}
+ 	 </select>
+ 	 
+ 	 
+	<update id="updateReadcount"> 
+		update infoboard set infoboardReadcount = infoboardReadcount+1 where infoboardNum = #{ infoboardNum } 
+	</update>
+	<!--  게시글 삭제  -->
+	<delete id="deleteByinfoboardNum" parameterType="com.kaactueail.dto.CockInfoBoardDTO"> 
+		delete from infoboard where infoboardNum= #{infoboardNum}
+	</delete>
+	<!--  게시글 수정  -->
+	<update id="updateByinfoboardNum" parameterType="com.kaactueail.dto.CockInfoBoardDTO"> 
+		update infoboard set infoboardContent = #{infoboardContent},
+		infoboardRecipe = #{infoboardRecipe} where infoboardNum = #{infoboardNum} 
+	</update>
+ 	
+ 	
+ 	<!--  <delete id="delete" parameterType="int">
+ 	 	DELETE FROM infoboard WHERE SEQ = #{SEQ}
+ 	 </delete>
+ 	 
+ 	 
+ 	  <update id="update" parameterType="dto">
+    	UPDATE infoboard
+    		SET title=#{title} , writer=#{writer} , content=#{content} 	
+    		WHERE seq = #{seq}
+    </update>
+    
+     <select id="selectSearch" parameterType="hashMap" resultType="dto">
+    	 
+    		 1. Java 코드
+    		 Map<String, String> map = new HashMap<>(); //collection
+      		 map.put("column",column ); //column : title or writer or content
+      		 map.put("keyvalue", keyvalue); //keyvalue : 김연아
+             
+             2. 함수 호출시 
+             session.selectList("GUEST.selectSearch" ,map);
+    	
+    	     3. xml에서 
+    		 parameterType="hashMap"
+    		
+    		map key   : column , keyvalue
+    		map value : #{column} , ${column}
+    		
+    		Tip : ${column} : 컬럼명
+    	
+    	
+    	SELECT * FROM infoboard
+    	where writer like '%김연아%'
+    	<if test="column != null">
+    		where ${column} like '%' || #{keyvalue} || '%'    	
+    	</if>
+    </select>
+    
+     <select id="selectSearch2" parameterType="hashMap" resultType="dto">
+    	SELECT * FROM infoboard
+    	<where>
+    		<if test="name != null">
+    			title = #{keyvalue}
+    		</if>
+    	    <if test="email != null">
+    	    	or writer = #{keyvalue}
+    	    </if>
+			<if test="home != null">
+				or content = #{keyvalue}
+			</if>    	
+    	</where>    	
+    </select> -->
+ 	 
+ </mapper>

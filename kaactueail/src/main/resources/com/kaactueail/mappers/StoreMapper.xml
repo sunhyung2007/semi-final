@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- boardmapper.xml  DML 명령 처리 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <!-- Mapper 인터페이스와 동일한 이름 주어야 하므로 패키지명+mapper이름으로 작명 --> 
+ <!-- 쿼리문 id는 인터페이스 메소드와 동일하게 설정 --> 
+<mapper namespace="com.kaactueail.mappers.StoreMapper">
+
+ 		<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							cTitle like '%'||#{keyword}||'%' 
+						</when>
+						<when test="type == 'C'.toString()">
+							cContent like '%'||#{keyword}||'%' 
+						</when>
+<!-- 						<when test="type == 'W'.toString()">
+							cWriter like '%'||#{keyword}||'%' 
+						</when> -->
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="selectAll"
+		resultType="com.kaactueail.dto.StoreDTO">
+		<!-- select * from InfoBoard where infoBoardTitle in (select cImgName from 
+			Cockit) -->
+		<!-- select * from InfoBoard order by infoboardNum desc -->
+ 		<![CDATA[select rn, cNum, cTitle, cName, cContent, cRecipe from(select 
+ 		rownum as rn, cNum, cTitle, cName, cContent, cRecipe from cockit where rownum <= #{pageNum} * #{amount}]]>
+		<if test="keyword != null">
+		<include refid="criteria" />
+		</if>
+		<![CDATA[ order by cNum desc) where rn > (#{pageNum}-1) * #{amount}]]>
+	</select>
+ 	
+<!--  	<select id="selectTitle" resultType="int" parameterType="String">
+ 		select count(*) from cockit where cName = #{cId}
+ 	</select> -->
+ 	
+   	<!-- 게시물 총 개수 -->
+    <select id="getTotal" resultType="int">    
+        select count(*) from cockit   
+        <if test="keyword != null">
+        	where cNum > 0 <include refid="criteria"/>
+        </if> 	
+    </select>
+ 	  
+<!--  	 <insert id="write">
+ 	 	insert into cockit(cNum, cTitle, cName,cContent,cRecipe)
+ 	 	values(cNumSeq.nextval,#{cTitle}, #{cName},#{cContent}, #{cRecipe})
+ 	 </insert> -->
+ 	 <!--  게시판 번호로 게시글 조회  -->
+ 	 <select id="getDetail"  resultType="com.kaactueail.dto.StoreDTO">
+ 	 	select * from cockit where cNum = #{cNum} 
+ 	 </select>
+ 	 <insert id="insertByCartNum">
+ 	 	insert into bucketlist(bucketlistNum, bucketlistAmount, bucketlistMemberNum, bucketlistCockitNum)
+ 	 	values(bucketlistNumSeq.nextval,#{bucketlistAmount},#{mNum},#{cNum})
+ 	 </insert>
+ 	 <insert id="insertByPaymentNum">
+ 	 	insert into purchasehistory(purchaseNum, purchaseCost, purchaseAmount, purchaseDate, purchaseMemberNum, purchaseCockitNum)
+ 	 	values(purchaseNumSeq.nextval,#{tPrice},#{cAmount},sysdate,#{mNum},#{cNum})
+ 	 </insert>
+</mapper>

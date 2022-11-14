@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 	
+ 	
+ 	<mapper namespace="com.kaactueail.mappers.AdminMapper">
+ 		
+ 	<!-- 모든 회원 정보 보기 -->
+ 	<select id="SelectAllUser" resultType = "com.kaactueail.dto.MemberDTO">
+ 	SELECT MNUM, MID,MPWD,MNAME,MBIRTH,MTEL,MROLE FROM MEMBER
+	</select> 
+	
+	<!--  특정 회원 삭제하기 -->
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM MEMBER WHERE MNUM = #{mNum}
+	</delete>
+	
+	<!--  회원 수 구하기 -->
+	<select id = "countalluser" resultType = "int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<!-- 회원 검색 (아이디로)-->
+	<select id = "selectmember" resultType = "com.kaactueail.dto.MemberDTO" parameterType = "String">
+		select MNUM, MID,MPWD,MNAME,MBIRTH,MTEL,MROLE from member where mId LIKE  '%'||#{mId}||'%'
+	</select>
+	
+	<!-- 회원 검색 (이름)-->
+	<select id = "selectnamemember" resultType = "com.kaactueail.dto.MemberDTO" parameterType = "String">
+		select MNUM, MID,MPWD,MNAME,MBIRTH,MTEL,MROLE from member where mName LIKE  '%'||#{mName}||'%' 
+	</select>
+	
+	<!-- 재고모두보기 -->
+	<select id = "SelectAllCockitStock" resultType = "com.kaactueail.dto.CockitDTO">
+		select cNum, cName, cAmount, cPrice from Cockit order by cAmount
+	</select>
+	
+	<!-- 재고검색 -->
+	<select id = "selectcockit" resultType = "com.kaactueail.dto.CockitDTO" parameterType = "String">
+		select cNum, cName, cAmount, cPrice from Cockit where cName LIKE  '%'||#{cName}||'%'  order by cAmount desc
+	</select>
+	
+	<!-- 재고 삭제 -->
+	<delete id = "deleteproduct" parameterType = "String">
+	delete from cockit where cNum = #{cNum} 
+	</delete>
+	
+	<!-- 재고 수정 -->
+	<update id="updateproduct" parameterType = "com.kaactueail.dto.CockitDTO">
+	 	update cockit set cName = #{cName}, cPrice = #{cPrice}, cAmount = #{cAmount} where cNum = #{cNum}
+	</update>
+	
+	<!-- 타이틀 중복확인 -->
+	<select id = "selectcName" parameterType = "String" resultType = "int">
+		select count(*) from cockit where cName = #{cName}
+	</select>
+	
+	<!-- 칵키트 정보입력 -->
+	<insert id = "writeCockit" parameterType = "com.kaactueail.dto.CockitDTO">
+		insert into cockit values(cNumSeq.nextval, #{cName}, #{cTitle}, #{cRecipe},#{cContent}, #{cIngredient}, #{cAmount}, #{cPrice})
+	</insert>
+	
+ 	</mapper>
