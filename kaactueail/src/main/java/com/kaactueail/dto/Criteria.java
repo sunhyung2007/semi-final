@@ -22,9 +22,9 @@ public class Criteria {
 	
 	// 기본 세팅 pageNum = 1, amount = 10
 	public Criteria() {
-		this(1, 15);
+		this(1, 10);
 	}
-	
+		
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;

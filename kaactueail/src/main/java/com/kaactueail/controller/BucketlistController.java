@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 @RequestMapping("/bucketlist")
-public class bucketlistController {
+public class BucketlistController {
 	
 	@Autowired
 	private BucketDAO dao;
@@ -29,18 +29,16 @@ public class bucketlistController {
 		String mId = (String)session.getAttribute("mId"); 
 		int mNum = (Integer)session.getAttribute("mNum");
 		
-		
 		model.addAttribute("list", dao.getBucketList(mNum));
-		System.out.println(mNum);
-		System.out.println(mId);
-		
 	}
+	
 	
 	@PostMapping("update")
 	public String PostupdateAmount(BucketDTO bucket) {
 		dao.modifyCount(bucket);
 		return "redirect:/bucketlist/list";
 	}
+	
 	
 	@PostMapping("delete")
 	public String Postdeletebucket(int bucketlistNum) {

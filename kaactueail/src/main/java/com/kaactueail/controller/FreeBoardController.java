@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kaactueail.dao.FreeBoardDAO;
 import com.kaactueail.dto.Criteria;
 import com.kaactueail.dto.FreeBoardDTO;
-import com.kaactueail.dto.PageDTO;
+import com.kaactueail.dto.PageMakerDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 @RequestMapping("/freeboard")
-public class freeBoardController {
+public class FreeBoardController {
 	
 	@Autowired
 	private FreeBoardDAO dao;
@@ -33,9 +33,8 @@ public class freeBoardController {
 		
 		model.addAttribute("list", dao.getListPaging(cri));
 		int total = dao.getTotal();
-		PageDTO page = new PageDTO(cri, total);
+		PageMakerDTO page = new PageMakerDTO(cri, total);
 		
-		System.out.println(cri);
 		
 		model.addAttribute("paging", page);
 		
@@ -67,7 +66,6 @@ public class freeBoardController {
 		String mRole = (String)session.getAttribute("mRole");
 		String mId = (String)session.getAttribute("mId");
 		
-		System.out.println(cri);
 		model.addAttribute("cri", cri);
 		
 		dao.updateReadcount(freeboardNum);
@@ -94,9 +92,8 @@ public class freeBoardController {
 	// 삭제버튼 클릭시
 	@PostMapping("delete")
 	public String Postdelete(int freeboardNum) {
-		dao.remove(freeboardNum);
 		
-		System.out.println(freeboardNum);
+		dao.remove(freeboardNum);
 		return "redirect:/freeboard/list";
 	}
 }

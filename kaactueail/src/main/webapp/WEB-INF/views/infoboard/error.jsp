@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>error.jsp Common Page</title>
 </head>
 <body>
-<a href = "checkpwd" >내 정보 수정</a>
+	<h2>Error Page...</h2>
 </body>
 </html>

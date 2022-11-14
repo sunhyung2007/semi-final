@@ -16,7 +16,7 @@ import com.kaactueail.dao.MemberDAO;
 import com.kaactueail.dto.MemberDTO;
 
 @Controller
-public class formController {
+public class FormController {
 
 	//@Inject
 	@Autowired

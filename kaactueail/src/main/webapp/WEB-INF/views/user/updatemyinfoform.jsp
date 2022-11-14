@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!-- 추가 -->
-	<meta charset="UTF-8" />
+<!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
+<%@ include file="../layout/icon_contents.jsp"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <title>내 정보 수정</title>
 </head>
 <body>
@@ -51,16 +51,40 @@ function checkPwd2() {
 }
 </script>
 
-<h1>내정보 수정</h1>
+	<!-- header삽입 -->
+	<%@ include file="../layout/header.jsp"%>
+	<div class="wrapper">
+		<div class="contents">
+			<div class="main_contents">
+
 <form action="updateminfo" method = "post">
-ID : <font>${mId }</font><br/>
-생년월일 : <font>${mBirth }</font><br/>
-전화번호 : <font>${mTel }</font><br/>
-이름  : <font>${mName} </font><br/>
-비밀번호 : <input type = "password" oninput = "checkPwd(), checkPwd2()" name = "mPwd" id = "mPwd"> 
-<font color = "red" id = "failpwd" style = "display:none">8자 이상 16자 미만 영문자를 조합해서 적어주세요.</font>
-비밀번호 확인: <input type = "password" oninput = "checkPwd(), checkPwd2()"name = "pwcheck" id = "pwCheck"><br>
-<input type = "submit" value = "수정"> &nbsp; &nbsp; &nbsp; <input type = "button" value = "뒤로가기" onclick = "window.location.href='mypage'">
+<h1 class="display-1">내 정보 수정</h1>
+<div class="alert alert-secondary" role="alert" style = "width: 250px;">
+ ID: <font class="alert-link">${mId}</font>
+</div>
+<div class="alert alert-success" role="alert" style = "width: 250px;">
+생년월일:  <font class="alert-link">${mBirth }</font>
+</div>
+<div class="alert alert-primary" role="alert"style = "width: 250px;">
+ 전화번호: <font class="alert-link">${mTel }</font> 
+</div>
+<div class="alert alert-info" role="alert" style = "width: 250px;">
+이름: <font class="alert-link">${mName }</font> 
+</div>
+
+<div class="form-floating" style = "display: flex">
+    <input type="password" class="form-control" name = "mPwd" id = "mPwd" style = "width:250px" id="floatingPassword" oninput = "checkPwd(), checkPwd2()" placeholder="Password">
+    <label for="floatingPassword" >New Password</label> </div>
+    <font color = "red" id = "failpwd" style = "display:none">8자 이상 16자 미만 영문자를 조합해서 적어주세요.</font><br/> 
+    <input type="password" class="form-control" name = "pwcheck" id = "pwCheck" style = "width:250px; height:58px;" id="floatingPassword" oninput = "checkPwd(), checkPwd2()" placeholder="패스워드확인"> <br/><br/>
+	<input type = "submit" class="btn btn-primary"    value = "UPDATE"> &nbsp; &nbsp; &nbsp; <input type = "button" class="btn btn-primary" value = "go back" onclick = "window.location.href='mypage'">
 </form>
+
+			</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->
+
+	<!-- footer삽입 -->
+	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>

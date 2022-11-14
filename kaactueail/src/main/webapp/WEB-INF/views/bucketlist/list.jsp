@@ -9,13 +9,6 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
 <title>장바구니</title>
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
 </head>
 <body>
 
@@ -25,7 +18,10 @@
 		<div class="contents">
 			<div class="main_contents">
 				<h3>장바구니</h3>
-				<p class="text-secondary" style="padding-bottom: 2%;">${ mId }님께서 장바구니에 등록한 상품의 목록입니다.</p>
+				<c:if test="${ empty list }">
+				<p class="text-secondary" style="padding-bottom: 2%;">${ mId }님께서 장바구니에 등록한 상품이 없습니다.</p>
+				</c:if>
+
 				<table class="table table-hover">
 					<tr class="table-secondary">
 						<th scope="col">
@@ -39,7 +35,9 @@
 						<th>주문금액</th>
 						<th>삭제</th>
 					</tr>
-
+					
+				<c:if test="${ !empty list }">
+				<p class="text-secondary" style="padding-bottom: 2%;">${ mId }님께서 장바구니에 등록한 상품의 목록입니다.</p>
 					<c:forEach items="${ list }" var="list">
 						<tr>
 							<td scope="row" class="bucket_info">
@@ -67,7 +65,9 @@
 							
 							</tr>
 					</c:forEach>
+					</c:if>
 				</table>
+
 				<hr>
 				<div class="buyinfo_wrap" style="display: flex; align-items:center; justify-content:space-around;">
 					<div>
@@ -80,6 +80,7 @@
 						<button class="btn btn-secondary btn-lg order_btn">구매하기</button>
 					</div>
 				</div>
+
 				
 				<!-- 수량 업데이트 폼 -->
 				<form action="/bucketlist/update" method="post" class="amount_update">
@@ -98,6 +99,10 @@
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->
+	
+	
+	
+	
 	
 <script type="text/javascript">
 

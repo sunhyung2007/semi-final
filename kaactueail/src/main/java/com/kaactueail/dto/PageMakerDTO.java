@@ -3,7 +3,7 @@ package com.kaactueail.dto;
 import lombok.Data;
 
 @Data
-public class PageDTO {
+public class PageMakerDTO {
 	
 	// 시작페이지
 	private int startPage;
@@ -21,7 +21,7 @@ public class PageDTO {
 	private Criteria cri;
 
 	
-	public PageDTO(Criteria cri, int total) {
+	public PageMakerDTO(Criteria cri, int total) {
 		this.cri = cri;
 		this.total = total;
 		

@@ -9,24 +9,17 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
 <title>자유게시판</title>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-	crossorigin="anonymous"></script>
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/modifyLayout_freeb.css" />
 </head>
 <body>
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
-
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
-
 				<h3>글수정</h3>
+				
+				
 				<form action="/freeboard/modify" id="modifyForm" method="post">
 					<div class="btn_wrap">
 						<button type="submit" class="btn btn-dark" id="write_btn" onclick="location.href='write'">글쓰기</button>
@@ -45,7 +38,7 @@
 							<input type="text" class="form-control" id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pagemodify.freeboardTitle}'/>">
 						</div>
 					</div>
-					<hr />
+					<hr/>
 
 					<div class="layout_middle">
 						<div class="text-secondary" id="writer">
@@ -56,7 +49,6 @@
 						</div>
 						<div>
 							<input type="text" class="form-control" id="freeboardReadcount" name="freeboardReadcount" value="<c:out value="${pagemodify.freeboardReadcount}" />" readonly style="border: none">
-
 						</div>
 					</div>
 					<div class="layout_content">

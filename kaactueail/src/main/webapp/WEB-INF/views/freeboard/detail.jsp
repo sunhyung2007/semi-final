@@ -9,15 +9,12 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp" %>
 <title>자유게시판</title>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/detailLayout_freeb.css"/>
 </head>
 <body>
 	<!-- header삽입 -->
 	<%@ include file="../layout/header.jsp"%>
+
 
 	<div class="wrapper">
 		<div class="contents">
@@ -59,12 +56,9 @@
 							<input id="freeboardTitle" name="freeboardTitle" value="<c:out value= '${pageDetail.freeboardTitle}'/>" readonly>
 						</div>
 					</div>
-					<hr />
+					<hr/>
 
 					<div class="layout_middle">
-						<div class="text-secondary" id="writer">
-							<input id="freeboardWriter" name="freeboardWriter" value="<c:out value= '${pageDetail.freeboardWriter}'/>" readonly>
-						</div>
 						<div class="text-secondary" id="writedate">
 							<input id="freeboardDate" name="freeboardDate" value="<fmt:formatDate pattern="yyyy.MM.dd" value="${pageDetail.freeboardDate}" />" readonly>
 						</div>
@@ -83,7 +77,6 @@
 			</div> 	<!-- main contents end -->
 		</div> 	<!-- contents end -->
 	</div> 	<!-- wrapper end -->
-
 
 
 	<!-- footer삽입 -->

@@ -16,8 +16,7 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
-				<p>메인내용입니다입력해주세요</p>
-				<p>메인내용입니다입력해주세요</p>
+				<p>mId= <%= (String)session.getAttribute("mId") %></p>
 				<p>메인내용입니다입력해주세요</p>
 				<p>메인내용입니다입력해주세요</p>
 				<p>메인내용입니다입력해주세요</p>

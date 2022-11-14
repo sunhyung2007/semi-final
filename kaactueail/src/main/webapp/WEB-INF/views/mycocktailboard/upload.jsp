@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<meta http-equiv="Refresh" content="2;url=./write">
+<title>업로드 성공 알림페이지</title>
 </head>
 <body>
-<a href = "checkpwd" >내 정보 수정</a>
+	<h4>UPLOAD SUCCESS!!</h1>
 </body>
 </html>

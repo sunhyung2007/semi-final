@@ -7,8 +7,6 @@
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp" %>
 <title>자유게시판</title>
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
 
 </head>
 <body>
@@ -34,17 +32,14 @@
 						<input type="text" class="form-control" placeholder="제목을 입력하세요"
 							id="inputDefault" name="freeboardTitle" required>
 					</div>
-					<div class="form-group">
+					
+				<!-- 	<div class="form-group">
 						<input type="hidden" class="form-control" id="inputDefault" name="freeboardWriter">
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label for="exampleTextarea" class="form-label mt-4">내용</label>
 						<textarea name="freeboardContent" class="form-control" id="exampleTextarea"
 							rows="15" placeholder="내용을 입력하세요" required></textarea>
-					</div>
-					<div class="form-group">
-						<label for="formFile" class="form-label mt-4">이미지 첨부</label>
-						<input class="form-control" type="file" id="formFile">
 					</div>
 				</form>
 

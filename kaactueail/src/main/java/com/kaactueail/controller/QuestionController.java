@@ -13,7 +13,7 @@ import com.kaactueail.dao.AnswerDAO;
 import com.kaactueail.dao.QuestionDAO;
 import com.kaactueail.dto.AnswerDTO;
 import com.kaactueail.dto.Criteria;
-import com.kaactueail.dto.PageDTO;
+import com.kaactueail.dto.PageMakerDTO;
 import com.kaactueail.dto.QuestionDTO;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 @RequestMapping("/question")
-public class questionController {
+public class QuestionController {
 	
 	@Autowired
 	private QuestionDAO dao;
@@ -37,7 +37,7 @@ public class questionController {
 		model.addAttribute("list", dao.getListPaging(cri));
 		
 		int total = dao.getTotal();
-		PageDTO page = new PageDTO(cri, total);
+		PageMakerDTO page = new PageMakerDTO(cri, total);
 		
 		
 		model.addAttribute("paging", page);

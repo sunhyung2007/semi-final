@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+input:focus{
+	outline: none;
+}
+
 .btn_wrap button{
 	float:right;
 }
@@ -53,3 +57,4 @@ hr {
 	color : #575151;
 	border-top: 2px solid;
 }
+
