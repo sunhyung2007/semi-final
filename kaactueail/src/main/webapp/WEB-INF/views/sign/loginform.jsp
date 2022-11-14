@@ -44,27 +44,9 @@
 						<button type="submit" class="btn btn-secondary" onclick="location.href='/findform'" formaction="/findform" style="padding: 2% 0 2%;">ID/비밀번호 찾기</button>
 						</div>
 						
-						
-<%-- 
-							<input type="text" name="mId" style=${css }> <br />
-							${Message } <input type="password" name="mPwd"> <br /> <input
-								type="submit" value="로그인"><br />
-							<button>
-								<a href="/findform">아이디/비밀번호찾기</a>
-							</button>
- --%>
 						</form>
 
 					</div>
-
-
-
-
-
-
-
-
-
 
 
 

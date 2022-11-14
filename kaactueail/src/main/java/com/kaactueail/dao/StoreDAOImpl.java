@@ -49,6 +49,11 @@ public class StoreDAOImpl implements StoreDAO {
 	public int selectMemeberId(String mId) {
 		return mapper.selectMemeberId(mId);
 	}
+
+//	@Override
+//	public List<StoreDTO> getStoreList(int cNum) {
+//		return mapper.getStoreList(cNum);
+//	}
 	
 	
 //	@Override

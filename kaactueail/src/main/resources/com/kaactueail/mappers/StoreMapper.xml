@@ -18,9 +18,6 @@
 						<when test="type == 'C'.toString()">
 							cContent like '%'||#{keyword}||'%' 
 						</when>
-<!-- 						<when test="type == 'W'.toString()">
-							cWriter like '%'||#{keyword}||'%' 
-						</when> -->
 					</choose>
 				</trim>
 			</foreach>
@@ -65,7 +62,7 @@
  	 	values(bucketlistNumSeq.nextval,#{bucketlistAmount},#{mNum},#{cNum})
  	 </insert>
  	 <insert id="insertByPaymentNum">
- 	 	insert into purchasehistory(purchaseNum, purchaseCost, purchaseAmount, purchaseDate, purchaseMemberNum, purchaseCockitNum)
- 	 	values(purchaseNumSeq.nextval,#{tPrice},#{cAmount},sysdate,#{mNum},#{cNum})
+ 	 	insert into Orders(OrderNum, OrderMemberNum, CNum, AMount, CName, CPrice, TOtalPrice)
+ 	 	values(OrderNumSeq.nextval,#{mNum},#{cNum},#{bucketlistAmount},#{cName},#{cPrice},#{tPrice})
  	 </insert>
 </mapper>

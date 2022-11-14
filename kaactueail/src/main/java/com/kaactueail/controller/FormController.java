@@ -100,7 +100,7 @@ public class FormController {
 		setAuthNumber(randomNumber);
 		System.out.println(getAuthNumber());
 		MessageService ms = new MessageService();
-		ms.sendMessage(request, Integer.toString(randomNumber));
+		//ms.sendMessage(request, Integer.toString(randomNumber));
 	}
 	//인증코드가 맞는지 확인
 			@RequestMapping(value = "/checkMessage", method = {RequestMethod.GET, RequestMethod.POST})
@@ -129,6 +129,10 @@ public class FormController {
 	@RequestMapping("/findiderror")
 	public String findiderrorPage() {
 		return "error/findiderror";
+	}
+	@RequestMapping("/checkpwderror")
+	public String checkpwderror() {
+		return "error/checkpwderror";
 	}
 	
 	@RequestMapping("/successfindid")

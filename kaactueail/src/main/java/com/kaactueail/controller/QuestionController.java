@@ -62,6 +62,8 @@ public class QuestionController {
 	public void Getdetail(int questionNum, Model model, Criteria cri, HttpSession session) {
 		String mRole = (String)session.getAttribute("mRole");
 		
+		System.out.println(mRole);
+		
 		model.addAttribute("pagedetail", dao.getByquestionNum(questionNum));
 		model.addAttribute("answer", answerdao.getByQuestionNum(questionNum));
 		model.addAttribute("cri", cri);
@@ -69,8 +71,10 @@ public class QuestionController {
 	}
 	
 	@GetMapping("answer")
-	public String Getanswer(AnswerDTO answer) {
+	public String Getanswer(AnswerDTO answer, HttpSession session) {
+		int mNum = (Integer)session.getAttribute("mNum");
 		
+		answer.setAnswerAdminNum(mNum);
 		
 		answerdao.write(answer);
 		return "redirect:/question/list";

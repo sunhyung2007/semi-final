@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ public class InfoboardController {
 		
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "C:/Users/kOSA/git/semi-final/kaactueail/src/main/webapp/resources/images/mycocktailImagefolder";
+		String uploadFolder = "C:/Users/kOSA/git/semi-final/kaactueail/src/main/webapp/resources/images/infoboard";
 		
 		/*
 		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 
@@ -98,24 +99,23 @@ public class InfoboardController {
 		if(newfilename.length() > 0) {
 			model.addAttribute("filename", newfilename);
 		}
-		System.out.println("getWrite");
 	}
 	
 	// 칵테일 정보 등록(관리자만 접근가능)
 	@PostMapping("/write")
-	public String writePost(HttpServletRequest request, CockInfoBoardDTO board, RedirectAttributes rttr, Model model) {
+	public String writePost(HttpServletRequest request, CockInfoBoardDTO board, RedirectAttributes rttr, Model model, HttpSession session) {
 		newfilename = "";
+		String mId = (String)session.getAttribute("mId");
 		String infoTitle = request.getParameter("infoboardTitle");
 		int result = dao.selectTitle(infoTitle);
 		if(result == 1) {	
 			model.addAttribute("message", "<font size = \"3\" color =\"red\">중복된 칵테일 이름입니다.</font>");
 			return "/infoboard/write";
 		}
-		log.info("BoardDTO : " + board);
+		board.setInfoboardWriter(mId);
 		dao.write(board);
-		log.info("BoardDTO : " + board);
+		System.out.println(board);
 		rttr.addFlashAttribute("result", "write success");
-		System.out.println("postWrite");
 		return "redirect:/infoboard/list";
 	}
 	

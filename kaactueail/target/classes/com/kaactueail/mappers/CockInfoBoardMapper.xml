@@ -58,7 +58,7 @@
  	  
  	 <insert id="write">
  	 	insert into infoboard(infoboardNum,infoboardTitle,infoboardContent,infoboardRecipe, infoboardWriter,infoboardReadcount,infoboardDate)
- 	 	values(infoboardNumSeq.nextval,#{infoboardTitle}, #{infoboardContent}, #{infoboardRecipe}, #{infoboardWriter},#{infoboardReadcount},sysdate)
+ 	 	values(infoboardNumSeq.nextval, #{infoboardTitle}, #{infoboardContent}, #{infoboardRecipe}, #{infoboardWriter},#{infoboardReadcount}, sysdate)
  	 </insert>
  	 <!--  게시판 번호로 게시글 조회  -->
  	 <select id="getDetail"  resultType="com.kaactueail.dto.CockInfoBoardDTO">
@@ -79,57 +79,5 @@
 		infoboardRecipe = #{infoboardRecipe} where infoboardNum = #{infoboardNum} 
 	</update>
  	
- 	
- 	<!--  <delete id="delete" parameterType="int">
- 	 	DELETE FROM infoboard WHERE SEQ = #{SEQ}
- 	 </delete>
- 	 
- 	 
- 	  <update id="update" parameterType="dto">
-    	UPDATE infoboard
-    		SET title=#{title} , writer=#{writer} , content=#{content} 	
-    		WHERE seq = #{seq}
-    </update>
-    
-     <select id="selectSearch" parameterType="hashMap" resultType="dto">
-    	 
-    		 1. Java 코드
-    		 Map<String, String> map = new HashMap<>(); //collection
-      		 map.put("column",column ); //column : title or writer or content
-      		 map.put("keyvalue", keyvalue); //keyvalue : 김연아
-             
-             2. 함수 호출시 
-             session.selectList("GUEST.selectSearch" ,map);
-    	
-    	     3. xml에서 
-    		 parameterType="hashMap"
-    		
-    		map key   : column , keyvalue
-    		map value : #{column} , ${column}
-    		
-    		Tip : ${column} : 컬럼명
-    	
-    	
-    	SELECT * FROM infoboard
-    	where writer like '%김연아%'
-    	<if test="column != null">
-    		where ${column} like '%' || #{keyvalue} || '%'    	
-    	</if>
-    </select>
-    
-     <select id="selectSearch2" parameterType="hashMap" resultType="dto">
-    	SELECT * FROM infoboard
-    	<where>
-    		<if test="name != null">
-    			title = #{keyvalue}
-    		</if>
-    	    <if test="email != null">
-    	    	or writer = #{keyvalue}
-    	    </if>
-			<if test="home != null">
-				or content = #{keyvalue}
-			</if>    	
-    	</where>    	
-    </select> -->
  	 
  </mapper>

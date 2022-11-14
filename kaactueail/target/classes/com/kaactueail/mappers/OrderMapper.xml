@@ -8,4 +8,8 @@
 	<select id="getItemInfo" resultType="com.kaactueail.dto.OrderItemDTO">
 		select cNum, cName, cPrice from cockit where cNum = #{ cNum }
 	</select>
+	
+	<insert id="insertOrder">
+		insert into Orders values( OrderNumSeq.nextval, #{ OrderMemberNum }, #{ CNum }, #{ AMount }, #{ CName }, #{ CPrice }, #{ TOtalPrice } )
+	</insert>
 </mapper>

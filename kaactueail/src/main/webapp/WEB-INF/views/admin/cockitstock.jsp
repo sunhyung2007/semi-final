@@ -5,23 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!-- 추가 -->
-	<meta charset="UTF-8" />
-<title>Insert title here</title>
+<!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
+<%@ include file="../layout/icon_contents.jsp"%>
+<title>상품관리</title>
 </head>
 <body>
-	<h1>재고관리</h1>
+	<!-- header삽입 -->
+	<%@ include file="../layout/header.jsp"%>
+	<div class="wrapper">
+		<div class="contents">
+			<div class="main_contents">
+				<h3>상품관리</h3>
+				
+
 	<form action = "cockit" name = "search" id = "search">
 	<input type = "text" id = "cName" name = "cName" >
 	<input type = "submit" value = "검색" placeholder = "이름을 입력하세요" id = "searchsubmit">
 	</form>
 	<br/>
-	<input type = "button" value = "상품 추가" onclick = "window.location.href='write'">
-	<table border="1" style = "width : 750px">
+	<div class="btn_wrap" style="float: right;">
+	<button type="submit" class="btn btn-dark" id="list_btn" onclick="window.location.href='write'">상품추가</button>
+	</div>
+	
+	<div class="content_wrap">
+	<table class="table table-hover">
 	<tr>
-		<th>상품 번호</th>
-		<th>상품명</th>
+		<th>NO</th>
+		<th>칵키트명</th>
 		<th>수량</th>
 		<th>가격</th>
 		<th>수정</th>
@@ -30,27 +40,34 @@
 	
 	<c:forEach items = "${cockit}" var = "product">
 		<tr>
-			<td><input type = "text" value = "${product.cNum }"></td><td><input type = "text" value = "${product.cName }" ></td>
+			<td><input type="text" value = "${ product.cNum }" style="border: none;"></td>
 			
-			<c:if test = "${product.cAmount  lt 1}" >
-				<td><input type = "text" value = "품절" style ="background-color:red; color:white; font-weight:bold;"></td>
+			<td><input type="text" value = "${ product.cName }" style="border: none;"></td>
+			
+			<!-- 칵키트수량 -->
+			<c:if test = "${ product.cAmount  lt 1}" >
+				<td><input type = "text" value = "품절" style ="background-color:red; color:white; font-weight:bold; border: none;"></td>
 			</c:if>
 			
 			<c:if test = "${product.cAmount  lt 30 && product.cAmount ne 0}" >
-				<td><input type = "text" value = "${product.cAmount }" style ="background-color:tomato; color:white;"></td>
+				<td><input type = "text" value = "${ product.cAmount }" style ="background-color:tomato; color:white; border: none;"></td>
 			</c:if>
 			
 			<c:if test = "${product.cAmount ge 30 }" >
-				<td><input type = "text" value = "${product.cAmount }"></td>
+				<td><input type = "text" value = "${ product.cAmount }" style="border: none;"></td>
 			</c:if>
-			<td><input type = "text" value = "${product.cPrice }"></td>
-			<td><input type = "button" value = "수정" class ="productupdate"></td>
-			<td><input type = "button" value = "삭제" class = "productdelete"></td>
+			<td><input type = "text" value = "${ product.cPrice }" style="border: none;"></td>
+			<td><button type="button" class="btn btn-light productupdate">수정</button></td>
+			<td><button type="button" class="btn btn-light productdelete">삭제</button></td>
 		</tr>
 	</c:forEach>
 	</table>
+	</div>
 	
 	
+				</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->
 	<script>
 	$(".productdelete").on("click", function () {
 		//현재 row
@@ -92,5 +109,11 @@
 		})
 	})
 	</script>
+	
+	
+	
+	<!-- footer삽입 -->
+	<%@ include file="../layout/footer.jsp"%>
+	
 </body>
 </html>

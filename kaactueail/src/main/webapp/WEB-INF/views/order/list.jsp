@@ -34,10 +34,10 @@
 					</tr>
 					<c:forEach items="${orderlist}" var="orderlist">
 						<tr>
-							<td scope="row"><c:out value="${orderlist.cname}"/></td>
-							<td><c:out value="${orderlist.amount}"/></td>
-							<td><fmt:formatNumber value="${orderlist.cprice}" pattern="###,###,###원"/></td>
-							<td><fmt:formatNumber value="${orderlist.totalPrice}" pattern="###,###,###원"/></td>
+							<td scope="row"><c:out value="${orderlist.CName}"/></td>
+							<td><c:out value="${orderlist.AMount}"/></td>
+							<td><fmt:formatNumber value="${orderlist.CPrice}" pattern="###,###,###원"/></td>
+							<td><fmt:formatNumber value="${orderlist.TOtalPrice}" pattern="###,###,###원"/></td>
 						</tr>
 					</c:forEach>
 				</table>

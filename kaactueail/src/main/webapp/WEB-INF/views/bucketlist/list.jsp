@@ -45,6 +45,10 @@
 								<input type="hidden" class="tprice_input" value="${ list.cPrice * list.bucketlistAmount }" >
 								<input type="hidden" class="itemscount_input" value="${ list.bucketlistAmount }" >
 								<input type="hidden" class="cockitNum_input" value="${ list.cNum }">
+								<input type="hidden" class="cockitName_input" value="${ list.cName }">
+								<input type="hidden" class="cockitPrice_input" value="${ list.cPrice }">
+								<input type="hidden" class="mNum_input" value="${ mNum }">
+								
 							</td>
 							
 							<td class="cName"><c:out value="${ list.cName }" /></td>
@@ -149,20 +153,40 @@ $(".order_btn").on("click", function(){
 	$(".bucket_info").each(function(index, element){
 		
 		if($(element).find(".form-check-input").is(":checked")=== true) { // 체크박스 체크 되면
+			
 		let cNum = $(element).find(".cockitNum_input").val();
 		let bucketlistAmount = $(element).find(".itemscount_input").val();
+		let cName = $(element).find(".cockitName_input").val();
+		let cPrice = $(element).find(".cockitPrice_input").val();
+		let totalPrice = $(element).find(".tprice_input").val();
+		let mNum = $(element).find(".mNum_input").val();
 		
-		let cockitNum_input = "<input name='order["+orderNum+"].cnum' type='hidden' value='"+cNum+"'>";
+		let cockitNum_input = "<input name='order["+orderNum+"].CNum' type='hidden' value='"+cNum+"'>";
 		form_content += cockitNum_input;
-		let itemscount_input= "<input name='order["+orderNum+"].amount' type='hidden' value='"+bucketlistAmount+"'>";
+		
+		let itemscount_input= "<input name='order["+orderNum+"].AMount' type='hidden' value='"+bucketlistAmount+"'>";
 		form_content += itemscount_input;
 		
+		let cockitName_input= "<input name='order["+orderNum+"].CName' type='hidden' value='"+cName+"'>";
+		form_content += cockitName_input;
+		
+		let cockitPrice_input= "<input name='order["+orderNum+"].CPrice' type='hidden' value='"+cPrice+"'>";
+		form_content += cockitPrice_input;
+		
+		let tprice_input= "<input name='order["+orderNum+"].TOtalPrice' type='hidden' value='"+totalPrice+"'>";
+		form_content += tprice_input;
+		
+		let mNum_input= "<input name='order["+orderNum+"].ORderMemberNum' type='hidden' value='"+mNum+"'>";
+		form_content += mNum_input;
+		
+		
 		orderNum += 1;
+		
 		}
 	});
-
+	
  	$(".order_move").html(form_content);
-
+ 	
    	$(".order_move").submit();
 });
 

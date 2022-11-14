@@ -42,10 +42,6 @@
 						<textarea name="questionContent" class="form-control" id="exampleTextarea"
 							rows="15" placeholder="내용을 입력하세요" required></textarea>
 					</div>
-					<div class="form-group">
-						<label for="formFile" class="form-label mt-4">이미지 첨부</label>
-						<input class="form-control" type="file" id="formFile">
-					</div>
 				</form>
 
 			</div>

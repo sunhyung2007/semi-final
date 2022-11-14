@@ -20,12 +20,20 @@
 			<h3>칵테일 소개</h3>
 			
 			
+			<!-- 회원가입 한 경우에만 글 작성 가능 -->
+			<c:if test="${ mRole eq 'ROLE_ADMIN' }">
+				<div class="btn_wrap" style="float: right;">
+					<button type="button" class="btn btn-dark" id="write_btn" onclick="location.href='write'" formmethod="get">글쓰기</button>
+				</div>
+			</c:if>
+			
+			
 			<div style="justify-content: space-around; flex-wrap: wrap; display: flex; margin-top: 30px;">
 			
 				<c:forEach var="cocklist" items="${list}">
 					<div class="card" style="width: 18rem">
 						<a class="move" href='/infoboard/get?infoboardNum=<c:out value="${cocklist.infoboardNum }"/>'>
-							<img src="${path}/resources/images/cocktailInfoImage/${cocklist.infoboardTitle}.png"
+							<img src="${path}/resources/images/infoboard/${cocklist.infoboardTitle}.png"
 							class="card-img-top" alt="NO IMAGE" width=350px, height=230px
 							style="cursor: pointer;">
 							<div class="card-body">
@@ -43,18 +51,9 @@
 				</div>
 
 			
-
-<%-- 				<form id="menuForm" method="get">
-					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> 
-					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-					<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">	
-					<input type="hidden" name="type" value="${pageMaker.cri.type }">	
-				</form> --%>
-				
 		
 			<!-- main_contents -->
 			
-				<!-- <div class="pageInfo_wrap" style="display:flex; justify-content: space-around;"> -->
 					<div class="pageInfo_area">
 						<ul id="pageInfo" class="pageInfo" style="list-style:none;">
 							<!-- 이전페이지 버튼 -->
@@ -82,15 +81,16 @@
 					style="display: flex; justify-content: flex-end; align-items: center;">
 					<div class="dropbox"
 						style="display: flex; align-items: center; padding-right: 1%">
-							<form class="d-flex" action="list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">
+						
+							<form class="d-flex" action="list?pageNum=${ pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">
 								<select name="type">
-									<option value="" <c:out value="${ paging.cri.type == null ? 'selected' : ''}"/> >선택</option>
-									<option value="T" <c:out value="${ paging.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
-									<option value="C" <c:out value="${ paging.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
-									<option value="W" <c:out value="${ paging.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
-									<option value="TC" <c:out value="${ paging.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
-									<option value="TW" <c:out value="${ paging.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
-									<option value="TCW" <c:out value="${ paging.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
+									<option value="" <c:out value="${ pageMaker.cri.type == null ? 'selected' : ''}"/> >선택</option>
+									<option value="T" <c:out value="${ pageMaker.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
+									<option value="C" <c:out value="${ pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+									<option value="W" <c:out value="${ pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+									<option value="TC" <c:out value="${ pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
+									<option value="TW" <c:out value="${ pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
+									<option value="TCW" <c:out value="${ pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
 								</select>
 
 								<input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
@@ -98,7 +98,8 @@
 							</form>
 					</div>
 				</div>				
-				<a href="write">칵테일정보등록하기</a>
+
+				
 				
 				
 			</div> 
@@ -109,66 +110,9 @@
 	
 	
 	<script>
-/* 		$(document).ready(function (){
-			let result = '<c:out value="${result}"/>';
-			checkAlert(result);
-			console.log(result);
-			
-			function checkAlert(result){
-				if(result === ''){
-					return;
-				}
-				if(result === "write success"){
-					alert("등록이 완료되었습니다.");
-				}
-		 		if(result === "modify success"){
-					alert("수정이 완료되었습니다.");
-				}
-				
-				if(result === "delete success"){
-					alert("삭제가 완료되었습니다.");
-				} 
-					
-			}
-		})
-		let menuForm = $("#menuForm");
-		 $(".move").on("click", function(e){
-		 e.preventDefault();
-		 console.log("클릭성공");
-		 //location.href = "detailList?id=${cocklist.infoboard_num}";
-		 menuForm.append("<input type='hidden' name='infoboardNum' value='"+ $(this).attr("href") + "'>");
-		 menuForm.attr("action", "/infoboard/get");
-		 menuForm.submit(); 
-		 }); 
-		 $(".pageInfo a").on("click", function(e) {
-		 e.preventDefault();
-		 menuForm.find("input[name='pageNum']").val($(this).attr("href"));
-		 menuForm.attr("action", "/infoboard/list");
-		 menuForm.submit();
-		 }); 
-		 
-
-	 	$(".search_area button").on("click", function(e) {
-			e.preventDefault();
-
-			let type = $(".search_area select").val();
-			let keyword = $(".search_area input[name='keyword']").val();
-
-			if (!type) {
-				alert("검색 종류를 선택하세요.");
-				return false;
-			}
-
-			if (!keyword) {
-				alert("키워드를 입력하세요.");
-				return false;
-			}
-
-			moveForm.find("input[name='type']").val(type);
-			moveForm.find("input[name='keyword']").val(keyword);
-			moveForm.find("input[name='pageNum']").val(1);
-			moveForm.submit();
-		});  */
+	
+	
+	
 	</script>
 </body>
 </html>

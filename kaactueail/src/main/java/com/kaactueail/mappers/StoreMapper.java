@@ -19,4 +19,7 @@ public interface StoreMapper {
 //	public int updateReadcount(int cNum);
 	public int insertByCartNum(StoreDTO dto);
 	public int insertByPaymentNum(StoreDTO dto);
+	
+//	public List<StoreDTO>getStoreList(int cNum);
+	
 }

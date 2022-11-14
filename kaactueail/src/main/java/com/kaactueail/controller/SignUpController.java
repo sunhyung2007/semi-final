@@ -101,7 +101,6 @@ public class SignUpController extends HttpServlet{
 			String mRole = dao.memberRole(mId);
 			int mNum = dao.memberNum(mId); 
 			session = request.getSession();
-			System.out.println(dto);
 			
 			//로그인 세션값 설정
 			session.setAttribute("mId", mId);
@@ -122,18 +121,16 @@ public class SignUpController extends HttpServlet{
 	
 	//로그아웃
 	@GetMapping("logout")
-	public void sessionOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session;
-		session = request.getSession();
+	public void sessionOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		session.invalidate();
-		response.sendRedirect("/main");
+		response.sendRedirect("/loginform");
 	}
 	
 	
 	
 	//아이디 찾기
 	@PostMapping("findid") 
-	public String findId(HttpServletRequest request,HttpServletResponse response, Model model) throws IOException {
+	public String findId(HttpServletRequest request,HttpServletResponse response, Model model, HttpSession session) throws IOException {
 		
 		String mName = request.getParameter("mName");
 		String mTel = request.getParameter("mTel");
@@ -190,4 +187,24 @@ public class SignUpController extends HttpServlet{
 		return "error/errorfindpwd";
 	}
 	
+	//현재 사용자가 정보수정으로 들어가기 위한 인증폼
+	@GetMapping("checkpwd")
+	public String checkpwdform() {
+		return "user/checkpwdform";
+	}
+	//현재 사용자가 정보수정으로 들어가기 위한 인증처리
+	@PostMapping("checkpwd") 
+	public void checkpwd(HttpServletRequest request, HttpServletResponse response,  HttpSession session) throws IOException {
+		String mPwd = request.getParameter("mPwd");
+		String mId = (String)session.getAttribute("mId");
+		MemberDTO dto = new MemberDTO(mId, mPwd);
+		boolean result = dao.checkMember(dto);
+		System.out.println(result);
+		if (result) {
+			response.sendRedirect("updatemyinfo");
+		}
+		else {
+			response.sendRedirect("/checkpwderror");
+		}
+	}
 }

@@ -14,6 +14,8 @@ public interface StoreDAO {
 	
 	public int getTotal();	
 	
+//	public List<StoreDTO>getStoreList(int cNum);
+	
 //	// 게시글 조회수 
 //	public int updateReadcount(int cNum);
 	
@@ -22,4 +24,5 @@ public interface StoreDAO {
 	public int selectMemeberId(String mId);
 	
 	public boolean payment(StoreDTO dto);
+	
 }

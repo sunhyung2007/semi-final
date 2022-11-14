@@ -38,6 +38,11 @@ public class UserController {
 	}
 	@GetMapping("updateminfo")
 	public String successupdate() {
-		return "user/successupdate";
+		return "user/checkpwdform";
+	}
+	
+	@GetMapping("payment") 
+	public String paymentform() {
+		return "user/payment";
 	}
 }

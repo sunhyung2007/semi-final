@@ -3,20 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="/resources/css/menu.css">    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<title>상품 목록 페이지</title>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<title>스토어</title>
+<!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
+<%@ include file="../layout/icon_contents.jsp"%>
 </head>
 <body>
 	<!-- header삽입 -->
@@ -24,6 +19,9 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents" style="justify-content: space-between;">
+			<title>스토어</title>
+			
+			
 			<div style="justify-content: space-around; flex-wrap: wrap; display: flex; margin-top: 30px;">
 				<c:forEach var="cocklist" items="${list}">
 					<div class="card" style="width: 18rem">

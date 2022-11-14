@@ -18,10 +18,9 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
-
-
-
 				<h1>글쓰기</h1>
+				
+				
 				<form action="/freeboard/write" method="post">
 					<div class="btn_wrap" style="float: right;">
 						<button type="submit" class="btn btn-dark" id="write_btn">글쓰기</button>
