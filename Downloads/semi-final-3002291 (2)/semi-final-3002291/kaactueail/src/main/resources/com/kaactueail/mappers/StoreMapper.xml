@@ -62,7 +62,7 @@
  	 	values(bucketlistNumSeq.nextval,#{bucketlistAmount},#{mNum},#{cNum})
  	 </insert>
  	 <insert id="insertByPaymentNum">
- 	 	insert into purchasehistory(purchaseNum, purchaseCost, purchaseAmount, purchaseDate, purchaseMemberNum, purchaseCockitNum)
- 	 	values(purchaseNumSeq.nextval,#{tPrice},#{bucketlistAmount},sysdate,#{mNum},#{cNum})
+ 	 	insert into Orders(OrderNum, OrderMemberNum, CNum, AMount, CName, CPrice, TOtalPrice)
+ 	 	values(OrderNumSeq.nextval,#{mNum},#{cNum},#{bucketlistAmount},#{cName},#{cPrice},#{tPrice})
  	 </insert>
 </mapper>

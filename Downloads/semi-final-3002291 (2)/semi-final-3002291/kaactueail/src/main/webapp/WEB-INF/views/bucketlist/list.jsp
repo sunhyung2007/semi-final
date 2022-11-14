@@ -95,6 +95,9 @@
 				</form>
 
 
+
+
+
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->
@@ -135,7 +138,6 @@ $(".delete_btn").on("click", function(e){
 	$(".bucket_delete").submit();
 	
 });
-
 
 // 물품 구매
 $(".order_btn").on("click", function(){

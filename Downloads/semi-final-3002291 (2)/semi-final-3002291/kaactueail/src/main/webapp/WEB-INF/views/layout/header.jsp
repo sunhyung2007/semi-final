@@ -26,8 +26,8 @@
 			<div class="search-box">
 				<form action="." method="post">
 					<input class="search-txt" type="text" placeholder="검색어를 입력해 주세요" />
-					<button class="search-btn" type="submit">찾기</button>
-				</form>
+					<button class="search-btn" type="submit"><img class="search-img" src="../../../resources/images/search.png"></button>
+				</form>	
 			</div>
 			<div>
 				<ul class="right">

@@ -45,12 +45,16 @@ public class StoreController {
 	}
 	
 	@GetMapping("get")
-	public void getDetail(int cNum, Model model, Criteria cri) {
+	public void getDetail(int cNum, Model model, Criteria cri, HttpSession session) {
 		log.info("/get");
 		System.out.println(cNum);
 //		dao.updateReadcount(cNum);
+		String mId = (String)session.getAttribute("mId");
+		int mNum = (Integer)session.getAttribute("mNum");
 		model.addAttribute("pageInfo", dao.getDetail(cNum));
 		model.addAttribute("cri", cri);
+
+//		model.addAttribute("list", dao.getStoreList(cNum));
 	}
 	@PostMapping("cart")
 	public String cartPost(@RequestParam("bucketlistAmount") int bucketlistAmount, StoreDTO dto, HttpSession session, Model model) {
@@ -65,24 +69,23 @@ public class StoreController {
 		dao.addCart(dto);
 		return "cart/list";
 	}
-	@GetMapping("payment")
 	@PostMapping("payment")
-	public String paymentPost(HttpServletRequest request, StoreDTO dto, HttpSession session, Model model) {
+	public String paymentPost(@RequestParam("bucketlistAmount") int bucketlistAmount,
+							@RequestParam("tPrice")int tPrice, StoreDTO dto, HttpSession session, Model model) {
 		
-		String cName = request.getParameter("cName");
-		System.out.println(cName);
 		System.out.println("buylist POST 진입");
 		System.out.println(dto.getselectAmt());
+		System.out.println(dto.gettPrice());
 		int mNum = (int)session.getAttribute("mNum");
 		System.out.println("상품구매를 위해 로그인된 회원번호는 " + mNum);
 		dto.setMNum(mNum);
+		int category = 1;
+		model.addAttribute("category", category);
 		
 		dao.payment(dto);
 		
-		return "payment/list";
+		return "order/list";
 	}
-	
-	
 	
 	
 }

@@ -23,10 +23,6 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents" style="justify-content: space-between;">
-			<div class="sort_contents" style="margin-right: 150px;">
-				<button type="button" onclick="location.href='/store/DownSortPrice'">낮은 가격순</button>
-				<button type="button" onclick="location.href='/store/UpSortPrice'">높은 가격순</button>
-			</div>		
 			<div style="justify-content: space-around; flex-wrap: wrap; display: flex; margin-top: 30px;">
 				<c:forEach var="cocklist" items="${list}">
 					<div class="card" style="width: 18rem">

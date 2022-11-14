@@ -23,7 +23,7 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
-				<form action="cart" method="post">
+				<form method="post">
 					<div class="form_section">
 						<div style="width: 18rem; text-align: center; margin: auto;">
 							<img
@@ -65,9 +65,12 @@
 							<label>칵키트 가격</label>
 						</div>
 						<div class="form_section_content">
-							<input class="input_block" id="cPrice" name="cPrice"
+<%-- 							<input class="input_block" id="cPrice" name="cPrice" type="text"
 								readonly="readonly" style="border: none"
-								value="<fmt:formatNumber value="${pageInfo.cPrice}" pattern="#,### 원"/>">
+								value="<fmt:formatNumber value="${pageInfo.cPrice}" pattern="#,### 원"/>"> --%>
+							<input class="input_block" id="cPrice" name="cPrice" type="text"
+							 readonly name="cPrice" style="border: none"
+								value="${pageInfo.cPrice}">															
 						</div>
 					</div>
 					<div class="form_section">
@@ -113,18 +116,20 @@
 						<div class="form_section_content">
 							<%-- <input class="input_block" id="tPrice" name="tPrice" type="text" readonly  
 						value= "<fmt:formatNumber value="${pageInfo.tPrice}" pattern="#,### 원"/>"> --%>
-							<input class="input_block" id="tPrice" type="text" readonly
+							<input class="input_block" id="tPrice" type="text" readonly name="tPrice"
 								value="${pageInfo.cPrice}">
 						</div>
 					</div>
 					<br /> <br /> <br />
 					<div class="btn_wrap">
 						<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?cNum=${pageInfo.cNum}'">수정</button> --%>
-						<button type="submit" class="btn btn-dark" id="addCart_btn">장바구니 담기</button>
+						<!-- <button type="submit" class="btn btn-dark" id="addCart_btn">장바구니 담기</button> -->
+						<input type="submit" value="장바구니 담기" class="btn btn-dark" id="addCart_btn" onclick="javascript: form.action='cart';"/>
 					</div>
 					<div class="btn_wrap">
 						<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?cNum=${pageInfo.cNum}'">수정</button> --%>
-						<input type="button" class="btn btn-dark" id="immeBuy_btn" onclick = "window.location.href='payment'">바로 결제하기</button>						
+						<!-- <input type="button" class="btn btn-dark" id="immeBuy_btn" onclick = "window.location.href='payment'"/>바로 결제하기 -->
+						<input type="submit" value="바로 결제하기" class="btn btn-dark" id="immeBuy_btn" onclick="javascript: form.action='payment';"/>					
 					</div>					
 				</form>
 				<button type="submit" class="btn btn-dark" id="list_btn" onclick="location.href='list'">목록으로 돌아가기</button>				
@@ -160,6 +165,14 @@
 			}
 								
 		});	
+		
+/* 		//바로 구매하기
+		$("#immeBuy_btn").on("click", function(){
+			let form_content = '';
+			let orderNum = 0;
+			
+		}); */
+		
  		/* $("#immeBuy_btn").on("click", function(){
  			var cName = $("#cName").val();
  			var bucketlistAmount = $("#quantityinput").val();

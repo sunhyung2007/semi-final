@@ -12,5 +12,13 @@ import lombok.NoArgsConstructor;
 public class OrderDTO {
 	
 	private List<OrderItemDTO> order;
+	private int OrderMemberNum;
+	
+//	public void setOrder(List<OrderDTO> orderList) {
+//		// TODO Auto-generated method stub
+//	}
+//	public void setOneOrder(List<String>oneorderList) {
+//		
+//	}
 
 }

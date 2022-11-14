@@ -8,7 +8,7 @@
 	type="image/x-icon">
 <!-- <link rel="stylesheet" href="/resources/css/menu.css">
 <link rel="stylesheet" href="/resources/css/upload.css"> -->
-<!DOCTYPE html>	
+<!DOCTYPE html>
 <html>
 
 <head>
