@@ -55,10 +55,11 @@ public class StoreController {
 
 //		model.addAttribute("list", dao.getStoreList(cNum));
 	}
+	
+
 	@PostMapping("cart")
 	public String cartPost(@RequestParam("bucketlistAmount") int bucketlistAmount, StoreDTO dto, HttpSession session, Model model) {
 		System.out.println("장바구니 담기 POST 진입");
-//		System.out.println(session.getAttribute("mNum"));
 		System.out.println(dto.getselectAmt());
 		int mNum = (int)session.getAttribute("mNum");
 		System.out.println("로그인한 회원번호는 " + mNum);
@@ -66,8 +67,10 @@ public class StoreController {
 		//model.addAttribute("mId", mId);
 		//dao.selectMemeberId(mId);
 		dao.addCart(dto);
-		return "cart/list";
+		return "redirect:/store/list";
 	}
+	
+
 	@PostMapping("payment")
 	public String paymentPost(@RequestParam("bucketlistAmount") int bucketlistAmount,
 							@RequestParam("tPrice")int tPrice, StoreDTO dto, HttpSession session, Model model) {

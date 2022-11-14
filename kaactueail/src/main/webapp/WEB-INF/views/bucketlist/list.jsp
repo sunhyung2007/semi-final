@@ -95,7 +95,7 @@
 				<form action="/bucketlist/delete" method="post" class="bucket_delete"> 
 					<input type="hidden" name="bucketlistNum" class="delete_bucketNum">
 				</form>
-				<form action="/order/list" method="get" class="order_move">
+				<form action="/order/makeOrder" method="get" class="order_move">
 				
 				</form>
 

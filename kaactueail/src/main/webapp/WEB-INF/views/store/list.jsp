@@ -70,23 +70,24 @@
 					style="display: flex; justify-content: flex-end; align-items: center;">
 					<div class="dropbox"
 						style="display: flex; align-items: center; padding-right: 1%">
-							<form class="d-flex" action="list?pageNum=${ paging.endPage+1 }&amount=${ paging.cri.amount}">
+							<form class="d-flex" action="list?pageNum=${ pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">
 								<select name="type">
-									<option value="" <c:out value="${ paging.cri.type == null ? 'selected' : ''}"/> >선택</option>
-									<option value="T" <c:out value="${ paging.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
-									<option value="C" <c:out value="${ paging.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
-									<option value="W" <c:out value="${ paging.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
-									<option value="TC" <c:out value="${ paging.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
-									<option value="TW" <c:out value="${ paging.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
-									<option value="TCW" <c:out value="${ paging.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
+									<option value="" <c:out value="${ pageMaker.cri.type == null ? 'selected' : ''}"/> >선택</option>
+									<option value="T" <c:out value="${ pageMaker.cri.type eq 'T'? 'selected' : ''}"/>>제목</option>
+									<option value="C" <c:out value="${ pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+									<option value="W" <c:out value="${ pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+									<option value="TC" <c:out value="${ pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목+내용</option>
+									<option value="TW" <c:out value="${ pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목+작성자</option>
+									<option value="TCW" <c:out value="${ pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>제목+내용+작성자</option>
 								</select>
 
 								<input class="form-control me-sm-2" type="text" placeholder="Search" name="keyword">
-								<button id="search_btn" class="btn btn-secondary my-2 my-sm-0" type="submit" href="keyword=${ paging.cri.keyword }&type=${ paging.cri.type }">Search</button>
+								<button id="search_btn" class="btn btn-secondary my-2 my-sm-0" type="submit" href="keyword=${ pageMaker.cri.keyword }&type=${ pageMaker.cri.type }">Search</button>
 							</form>
 					</div>
+					
+					
 				</div>
-								
 		</div> <!-- contents -->
 	</div>  <!-- wrapper -->
 	<!-- footer삽입 -->

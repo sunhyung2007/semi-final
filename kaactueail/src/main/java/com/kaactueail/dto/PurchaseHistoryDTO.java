@@ -1,5 +1,6 @@
 package com.kaactueail.dto;
 
+import java.sql.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -9,8 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class OrderDTO {
+public class PurchaseHistoryDTO {
 	
-	private List<OrderItemDTO> Order;
+	private int PUrchaseNum, PUrchaseCost, PUrchaseAmount, PUrchaseMemberNum, PUrchaseCockitNum;
 	private int OrderMemberNum;
+	private Date PUrchaseDate;
+	private String PUrchaseCockitName;
 }

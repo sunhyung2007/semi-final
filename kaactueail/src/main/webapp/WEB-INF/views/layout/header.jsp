@@ -31,7 +31,7 @@
 			
 			<ul class="right">
 				<c:if test="${mRole == 'ROLE_USER'}">
-					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" >shopping_cart</span></li>
+					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" onclick="location.href='bucketlist/list'">shopping_cart</span></li>
 					 <!-- 회원일시 -->
 					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/checkpwd'">person</span></li>
 				</c:if>
@@ -88,7 +88,7 @@
 			<img class="img_bar" src="/resources/images/Bar_main.jpg" />
 		</div>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 
 // 로그인 해야 장바구니로 이동 가능
 $("#cart").on("click", function(){
@@ -103,6 +103,6 @@ $("#cart").on("click", function(){
 
 
 </script>
-	
+ --%>	
 </body>
 </html>
