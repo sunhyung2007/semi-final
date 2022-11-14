@@ -11,7 +11,7 @@
 <meta charset="UTF-8" />
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<title>칵테일 정보 등록 페이지</title>
+<title>나만의 칵테일</title>
 
 <script type="text/javascript">
 	function wirte() {
@@ -63,13 +63,11 @@
 						</div>
 						<div class="form-group" style="text-align: left;">
 							<label for="exampleTextarea" class="form-label mt-4">제목</label>
-							<textarea name="mycocktailTitle" class="form-control"
-								id="exampleTextarea" rows="1" placeholder="제목을 입력하세요" required></textarea>
+							<input name="mycocktailTitle" class="form-control" id="exampleTextarea" placeholder="제목을 입력하세요" required/>
 						</div>
 						<div class="form-group" style="text-align: left;">
 							<label for="exampleTextarea" class="form-label mt-4">내용</label>
-							<textarea name="mycocktailContent" class="form-control"
-								id="exampleTextarea" rows="15" placeholder="내용을 입력하세요" required></textarea>
+							<textarea name="mycocktailContent" class="form-control" id="exampleTextarea" rows="15" placeholder="내용을 입력하세요" required></textarea>
 						</div>
 						<div class="form-group" style="text-align: left;">
 							<label for="exampleTextarea" class="form-label mt-4">레시피</label>

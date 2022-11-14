@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class StoreDTO {
 	private int cNum, cAmount;
 	private String bucketlistAmount;
+	private String tPrice;
 	private String cName, cTitle, cContent, cRecipe, cPrice;
 	private int mNum;
 	
@@ -67,6 +68,13 @@ public class StoreDTO {
 	}
 	public void setmId(int mNum) {
 		this.mNum = mNum;
+	}
+	public String gettPrice() {
+		return tPrice;
+	}
+	public void settPrice(String tPrice) {
+		this.tPrice = tPrice;
 	} 
+	
 	
 }

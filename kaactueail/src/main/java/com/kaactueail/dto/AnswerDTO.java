@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AnswerDTO {
 	
-	private int answerNum, answerAdminNun, answerQuestionNum;
+	private int answerNum, answerAdminNum, answerQuestionNum;
 	private String answerContent;
 	private Date answerDate;
 

@@ -8,15 +8,8 @@
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<title>상품 목록 세부페이지</title>
-<!-- jqeury cdn -->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-	integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-	crossorigin="anonymous"></script>
-  <!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/sandstone/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/menu.css">
+<title>스토어</title>
+<link rel="stylesheet" href="/resources/css/detailLayout_freeb.css"/>
 </head>
 <body>
 	<!-- header삽입 -->
@@ -24,157 +17,122 @@
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
-				<form action="cart" method="post">
-					<div class="form_section">
+				<h3>칵키트 상세</h3>		
+			
+					<button type="submit" class="btn btn-dark" id="list_btn" onclick="location.href='list'" style="float: right;">목록</button>
+					
+		<form method="post">
+			<div class="layout_all">
+				<div class="layout_title">
+					<div>
+						<input class="input_block" name="cNum" readonly	style="border: none" value="<c:out value='${ pageInfo.cNum }'/>">
+					</div>
+					<div>
+						<input class="input_block" name="cTitle" readonly style="border: none; resize: none;" value="<c:out value='${ pageInfo.cTitle }' />">
+					</div>
+				</div>
+					<hr>
+
+					<div class="layout_content">
 						<div style="width: 18rem; text-align: center; margin: auto;">
 							<img
 								src="${path}/resources/images/cockitImage/${pageInfo.cName}.png"
 								class="card-img-top" alt="NO IMAGE" width=350px, height=230px
 								style="cursor: pointer;">
 						</div>
-						<div class="form_section_title">
-							<label>칵키트 번호</label>
-						</div>
-						<div class="form_section_content">
-							<input class="input_block" name="cNum" readonly="readonly"
-								style="border: none"
-								value="<c:out value='${pageInfo.cNum }'></c:out>">
-						</div>
-					</div>
-					<div class="form_section">
-						<div class="form_section_title">
-							<label>칵키트 이름</label>
-						</div>
-						<div class="form_section_content">
-							<textarea class="input_block" name="cTitle" readonly="readonly"
-								style="border: none; resize: none;"><c:out
-									value='${pageInfo.cTitle }' /></textarea>
-						</div>
-					</div>
-					<div class="form_section">
-						<div class="form_section_title">
-							<label>칵키트 가격</label>
-						</div>
-						<div class="form_section_content">
-							<input class="input_block" id="cPrice" name="cPrice"
-								readonly="readonly" style="border: none"
-								value="<fmt:formatNumber value="${pageInfo.cPrice}" pattern="#,### 원"/>">
-						</div>
-					</div>
-					<div class="form_section">
-						<div class="form_section_title">
-							<label>칵테일 내용</label>
-						</div>
-						<div class="form_section_content">
-							<textarea class="input_block" name="cContent" readonly="readonly"
-								style="border: none; resize: none;"><c:out
-									value='${pageInfo.cContent }' /></textarea>
-						</div>
-					</div>
-					<div class="form_section">
-						<div class="form_section_title">
-							<label>칵테일 레시피</label>
-						</div>
-						<div class="form_section_content">
-							<textarea class="input_block" name="cRecipe" readonly="readonly"
-								style="border: none; resize: none;"><c:out
-									value='${pageInfo.cRecipe }' /></textarea>
-						</div>
-					</div>
+						<div class="item_info" style="display: flex; justify-content: flex-end;">
+							<div class="buy_info">
+								<div class="item_price" style="display: flex; align-items: center;">
+									<div>
+										<label>가격</label>
+									</div>
+									<div>
+										<input class="input_block" readonly style="border: none" value="<fmt:formatNumber value="${pageInfo.cPrice}" pattern="#,###원"/>">
+										<input id="cPrice" name="cPrice" value="${pageInfo.cPrice}">
+									</div>
+									<div style="display: flex; align-items:center;">
+										<div>
+											<label>수량</label>
+										</div>
+										<div>
+											<div class="table_text_align_center quantity_div" style="width: 60%;">
+												<input type="text" class="quantity_input" id="quantityinput" readonly name="bucketlistAmount" value="1" style="width: 25%; padding-left:10%;">
+													<button type="button" class="btn btn-light quantity_btn plus_btn">+</button>
+													<button type="button" class="btn btn-light quantity_btn minus_btn">-</button>
+											</div>
+										</div>
+									</div>
+									<div style="display: flex; align-items: center; justify-content:flex-end;"> 
+										<div>
+											<label>상품 결제가격</label>
+										</div>
+										<div class="form_section_content" style="width: 50%;">
+											<input class="input_block" id="tPrice" type="text" readonly	value="${pageInfo.cPrice}" style="width: 50%; padding-left:15%;">
+										</div>
+									</div>
+								</div>
+									<div class="btn_buy" style="display: flex; justify-content: flex-end; padding-top:2%;">
+										<div style="margin-right: 5%;">
+											<button type="submit" class="btn btn-dark" id="list_btn" formaction="cart" >장바구니	담기</button>
+										</div>
+										<div style="margin-right: 5%;">
+											<button type="submit" class="btn btn-dark" id="list_btn">결제하기</button>
+										</div>
+									</div>
+								</div> <!-- buy_info -->
+							</div><!-- item_info -->
 
-					<div class="form_section">
-						<div class="form_section_title">
-							<label>수량 선택하기</label>
-						</div>
-						<div class="form_section_content">
-							<div class="table_text_align_center quantity_div">
-								<%-- <input type="text" value="${pageInfo.bucketlistAmount}" class="quantity_input"> --%>
-								<input type="text" class="quantity_input" id="quantityinput"
-									readonly name="bucketlistAmount" value="1">
-								<button type="button" class="quantity_btn plus_btn">+</button>
-								<button type="button" class="quantity_btn minus_btn">-</button>
+							<div class="item_content">
+								<div class="form_section_title">
+									<label>칵테일 내용</label>
+								</div>
+								<div class="form_section_content">
+									<textarea class="input_block" name="cContent" readonly style="border: none; resize: none;"><c:out value='${pageInfo.cContent }' /></textarea>
+								</div>
+							</div>
+							<div class="item_recipe">
+								<div class="form_section_title">
+									<label>칵테일 레시피</label>
+								</div>
+									<div class="form_section_content">
+										<textarea class="input_block" name="cRecipe" readonly style="border: none; resize: none;"><c:out value='${pageInfo.cRecipe }' /></textarea>
+									</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="form_section">
-						<div class="form_section_titie">
-							<label>상품 결제가격</label>
-						</div>
-						<div class="form_section_content">
-							<%-- <input class="input_block" id="tPrice" name="tPrice" type="text" readonly  
-						value= "<fmt:formatNumber value="${pageInfo.tPrice}" pattern="#,### 원"/>"> --%>
-							<input class="input_block" id="tPrice" type="text" readonly
-								value="${pageInfo.cPrice}">
-
-						</div>
-					</div>
-					<br /> <br /> <br />
-					<div class="btn_wrap">
-						<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?cNum=${pageInfo.cNum}'">수정</button> --%>
-						<button type="submit" class="btn btn-dark" id="list_btn">
-						장바구니 담기</button>
-					</div>
-					<div class="btn_wrap">
-						<%-- <button class="btn btn-dark" id="modifty_btn" onclick="location.href='modify?cNum=${pageInfo.cNum}'">수정</button> --%>
-						<button type="submit" class="btn btn-dark" id="list_btn">
-						바로 결제하기</button>
-					</div>					
 				</form>
-				<button type="submit" class="btn btn-dark" id="list_btn"
-						onclick="location.href='list'">목록으로 돌아가기</button>				
+						
+										
 				<form id="detailForm" action="/store/modify" method="get">
-						<input type="hidden" id="cNum" name="cNum" value="<c:out value= '${pageInfo.cNum}'/>">
+					<input type="hidden" id="cNum" name="cNum" value="<c:out value= '${pageInfo.cNum}'/>">
 				</form>
 				
-			</div>
-		</div>
-<%-- 		<form id="infoForm" action="/store/modify" method="get">
-			<input type="hidden" id="cNum" name="cNum" value='<c:out value="${pageInfo.cNum}"/>'> 
-			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
-			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'> 
-			<input type="hidden" name="type" value="${cri.type }"> 
-			<input type="hidden" name="keyword" value="${cri.keyword }">
-		</form> --%>
-	</div> <!-- wrapper div -->
+				
+				
+				
+			</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->
+	
+	
 	<script>
-		//let cprice = $("#cPrice").val();
 		$(".plus_btn").on("click", function(){
-			//var quantity = $(this).parent("div").find("input").val();
 			var quantity = $("#quantityinput").val();
 			var cprice = $("#tPrice").val();
-			//$(this).parent("div").find("input").val(++quantity);
 			$("#quantityinput").val(++quantity);
 		    $("#tPrice").val(quantity * ${pageInfo.cPrice});
 
 		});
 		$(".minus_btn").on("click", function(){
-			//var quantity = $(this).parent("div").find("input").val();
 			var quantity = $("#quantityinput").val();
 			var cprice = $("#tPrice").val();
 			if(quantity > 1){
-				//$(this).parent("div").find("input").val(--quantity);
 				$("#quantityinput").val(--quantity);
 				console.log(cprice);
 			    $("#tPrice").val(quantity * ${pageInfo.cPrice});
 			}
 								
 		});		
-/* 		let form = $("#infoForm");		
-		$("#cancelBtn").on("click", fucntion(e){
-			console.log("click")
-			form.find("#cNum").remove();
-			form.attr("action", "/store/list");
-			form.submit();			
-		}); */
-/* 		$("#cancelBtn").on("click", function(e){
-			console.log("cancelClick");
-			location.href = "list";
-		})
-		$("#modifyBtn").on("click", function(e){
-			console.log("modifyClick");
-			location.href = "modify?cNum=${pageInfo.cNum}";
-		})		 */
 	</script>
 	<!-- footer삽입 -->
 	<%@ include file="../layout/footer.jsp"%>

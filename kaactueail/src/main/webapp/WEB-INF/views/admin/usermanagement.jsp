@@ -5,69 +5,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> <!-- 추가 -->
-	<meta charset="UTF-8" />
+<!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
+<%@ include file="../layout/icon_contents.jsp"%>
 <title>회원관리</title>
 </head>
 <body>
 
+	<!-- header삽입 -->
+	<%@ include file="../layout/header.jsp"%>
+	<div class="wrapper">
+		<div class="contents">
+			<div class="main_contents">
+				<h3>회원관리</h3>
+				<p>현재 회원 수 : ${ personcount }명</p>
 
 
-<h3>회원수 : ${personcount }</h3>
-<form action="usermanagement">
-회원찾기: 
-<select name = "option">
-	<option value = "mName">이름</option>
-	<option value = "mId">아이디</option>
-</select> 
-<input type = "text" id = "mId" name = "mId" >
-<input type = "submit" value = "검색">
-</form>
-	<table border="1" id = "membertable">
-		<tr>
-			<th>회원번호</th>
-			<th>아이디</th>
-			<th>비밀번호</th>
-			<th>회원이름</th>
-			<th>생년월일</th>
-			<th>연락처</th>
-			<th>성인인가요?</th>
-			<th>회원삭제</th>
-		</tr>
+			<div class="content_wrap">
+				<form action="usermanagement">
+					회원검색: <select name="option">
+						<option value="">선택</option>
+						<option value="mName">이름</option>
+						<option value="mId">아이디</option>
+					</select> <input type="text" id="mId" name="mId"> <input
+						type="submit" value="검색">
+				</form>
+				<table class="table table-hover" style="table-layout: fixed;">
+					<tr>
+						<th>회원번호</th>
+						<th>ID</th>
+						<th>비밀번호</th>
+						<th>회원이름</th>
+						<th>생년월일</th>
+						<th>연락처</th>
+						<th>성인여부</th>
+						<th>회원삭제</th>
+					</tr>
 
+				
+					<c:forEach items="${ list }" var="member">
+						<tr>
+						<td><input value="${member.MNum }" readonly style="border: none;"></td>
+						<td><input value="${member.MId }" readonly style="border: none;"></td>
+						<td><input value="${member.MPwd }" readonly style="border: none;"></td>
+						<td><input value="${member.MName }" readonly style="border: none;"></td>
+						<td><input value="${member.MBirth }" readonly style="border: none;"></td>
+						<td><input value="${member.MTel }" readonly style="border: none;"></td>
+						
+						<c:if test="${member.MRole eq 'ROLE_ADMIN'}">
+							<td><input value="관리자" readonly style="border: none; background-color: silver; width: 60%;"></td>
+							<td><button type="button" class="btn btn-light admindelete" disabled>삭제</button></td>
+						</c:if>
+						<c:if test="${member.MRole eq 'ROLE_USER' }">
+							<td><input value="성인" readonly style="border: none;"></td>
+							<td><button type="button" class="btn btn-light memberdelete">삭제</button></td>
+						</c:if>
+						<c:if test="${member.MRole eq 'ROLE_NOTUSER' }">
+							<td><input value="미성년자" readonly style="border: none; background-color: #FF2F2F; width: 60%;"></td>
+							<td><button type="button" class="btn btn-light memberdelete">삭제</button></td>
+
+						</c:if>
+						</tr>
+
+					</c:forEach>
+
+				</table>
+			</div>
+
+
+			</div> <!-- main_contents -->
+		</div> <!-- contents -->
+	</div> <!-- wrapper -->	
 	
-	<c:forEach items="${ list}" var = "member">
 	
-	<c:if test = "${member.mRole eq 'ROLE_ADMIN'}">
-	<tr class = "memberinfo" style = "background-color:black;">
-	</c:if>
-	<c:if test="${member.mRole eq 'ROLE_USER' }">
-	<tr class = "memberinfo">
-	</c:if>
-	<c:if test="${member.mRole eq 'ROLE_NOTUSER' }">
-	<tr class = "memberinfo" style = "background-color:tomato;">
-	</c:if>
-	<td><input value = "${member.mNum }" readonly></td><td><input value = "${member.mId }" readonly></td><td><input value = "${member.mPwd }" readonly></td>
-	<td><input value = "${member.mName }"  readonly></td><td><input value = "${member.mBirth }"  readonly></td><td><input value = "${member.mTel }"  readonly></td>
-	<c:if test = "${member.mRole eq 'ROLE_ADMIN'}">
-	<td><input value = "관리자" readonly ></td>
-	<td><button type = "button" class = "admindelete" disabled="disabled">삭제</button></td>
-	</c:if>
-	<c:if test = "${member.mRole eq 'ROLE_USER' }">
-	<td><input value = "성인" readonly></td>
-	<td><button type = "button" class = "memberdelete" >삭제</button></td>
-	</c:if>
-	<c:if test = "${member.mRole eq 'ROLE_NOTUSER' }">
-	<td><input value = "미성년자" readonly></td>
-	<td><button type = "button" class = "memberdelete" >삭제</button></td>
-	
-	</c:if>
-	</tr>
-	
-	</c:forEach>
-	
-	</table>
 	
 	<script>
 	$(".memberdelete").on("click", function () {
@@ -87,5 +96,8 @@
 		})
 	})
 </script>
+	<!-- footer삽입 -->
+	<%@ include file="../layout/footer.jsp"%>
+
 </body>
 </html>

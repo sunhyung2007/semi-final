@@ -18,7 +18,6 @@ import com.kaactueail.dto.PageMakerDTO;
 import com.kaactueail.dto.StoreDTO;
 
 import lombok.extern.log4j.Log4j;
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Log4j
@@ -45,17 +44,22 @@ public class StoreController {
 	}
 	
 	@GetMapping("get")
-	public void getDetail(int cNum, Model model, Criteria cri) {
+	public void getDetail(int cNum, Model model, Criteria cri, HttpSession session) {
 		log.info("/get");
 		System.out.println(cNum);
 //		dao.updateReadcount(cNum);
+		String mId = (String)session.getAttribute("mId");
+		int mNum = (Integer)session.getAttribute("mNum");
 		model.addAttribute("pageInfo", dao.getDetail(cNum));
 		model.addAttribute("cri", cri);
+
+//		model.addAttribute("list", dao.getStoreList(cNum));
 	}
+	
+
 	@PostMapping("cart")
-	public String cartPost(@RequestParam("bucketlistAmount") int bucketlistAmount ,StoreDTO dto, HttpSession session, Model model) {
+	public String cartPost(@RequestParam("bucketlistAmount") int bucketlistAmount, StoreDTO dto, HttpSession session, Model model) {
 		System.out.println("장바구니 담기 POST 진입");
-//		System.out.println(session.getAttribute("mNum"));
 		System.out.println(dto.getselectAmt());
 		int mNum = (int)session.getAttribute("mNum");
 		System.out.println("로그인한 회원번호는 " + mNum);
@@ -63,19 +67,27 @@ public class StoreController {
 		//model.addAttribute("mId", mId);
 		//dao.selectMemeberId(mId);
 		dao.addCart(dto);
-		return "cart/list";
-	}
-	  
-	@PostMapping("payment")
-	public String paymentPost(StoreDTO dto, HttpSession session, Model model) {
-		log.info("GetCart 페이지 진입");		
-		
-		model.addAttribute("mNum", session.getAttribute("mNum"));
-		dao.payment(dto);
-		
-		return "redirect:/payment";
+		return "redirect:/store/list";
 	}
 	
+
+	@PostMapping("payment")
+	public String paymentPost(@RequestParam("bucketlistAmount") int bucketlistAmount,
+							@RequestParam("tPrice")int tPrice, StoreDTO dto, HttpSession session, Model model) {
+		
+		System.out.println("buylist POST 진입");
+		System.out.println(dto.getselectAmt());
+		System.out.println(dto.gettPrice());
+		int mNum = (int)session.getAttribute("mNum");
+		System.out.println("상품구매를 위해 로그인된 회원번호는 " + mNum);
+		dto.setMNum(mNum);
+		int category = 1;
+		model.addAttribute("category", category);
+		
+		dao.payment(dto);
+		
+		return "order/list";
+	}
 	
 	
 }

@@ -27,22 +27,24 @@
 					<li><a class="menu_left" href="/store/list">스토어</a></li>
 				</ul>
 			</div>
-
-			<div class="search-box">
-				<form action="." method="post">
-					<input class="search-txt" type="text" placeholder="검색어를 입력해 주세요" />
-					<button class="search-btn" type="submit">찾기</button>
-				</form>
-			</div>
-			<div>
-				<ul class="right">
-					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" >shopping_cart</span></li>
+			
+			
+			<ul class="right">
+				<c:if test="${mRole == 'ROLE_USER'}">
+					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" onclick="location.href='bucketlist/list'">shopping_cart</span></li>
 					 <!-- 회원일시 -->
 					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/checkpwd'">person</span></li>
-					 
+				</c:if>
+				<c:if test = "${mRole ==  'ROLE_ADMIN'}">
+				<li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" onclick = "window.location.href='/admin/cockitmanagement'"><i class="fa-sharp fa-solid fa-martini-glass-citrus"></i></span></li>
+					 <!-- 회원일시 -->
+					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/admin/usermanagement'"><i class="fa-solid fa-users"></i></span></li>
+				</c:if>
+				
 				<!-- 로그인 안 했을 경우 -->
 				<c:if test="${ mId == null }">
 					<li><a href="/loginform">로그인</a></li>
+					<li><a href="/signupform">회원가입</a></li>
 				</c:if>
 				
 				<!-- 로그인 한 경우 -->
@@ -50,9 +52,35 @@
 					<li><a href="/logout">로그아웃</a></li>
 				</c:if>
 				
-					<li><a href="/signupform">회원가입</a></li>
+					
 				
 				</ul>
+			
+<!-- 			<div class="search-box">
+				<form action="." method="post">
+					<input class="search-txt" type="text" placeholder="검색어를 입력해 주세요" />
+					<button class="search-btn" type="submit">찾기</button>
+				</form>
+			</div> 
+			<div>
+				<ul class="right">
+					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" >shopping_cart</span></li>
+					 <!-- 회원일시 
+					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/checkpwd'">person</span></li>
+					 
+				<!-- 로그인 안 했을 경우
+				<c:if test="${ mId == null }">
+					<li><a href="/loginform">로그인</a></li>
+				</c:if>
+				
+				<!-- 로그인 한 경우
+				<c:if test="${ mId != null }">
+					<li><a href="/logout">로그아웃</a></li>
+				</c:if>
+				
+					<li><a href="/signupform">회원가입</a></li>
+				
+				</ul> -->
 			</div>
 		</div>
 
@@ -60,12 +88,11 @@
 			<img class="img_bar" src="/resources/images/Bar_main.jpg" />
 		</div>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 
 // 로그인 해야 장바구니로 이동 가능
 $("#cart").on("click", function(){
 	let mId = <%=(String)session.getAttribute("mId") %>
-	console.log(mId);
 	if( mId == null){
 		alert("로그인 후 이용해주세요");
 		location.href= '/main';
@@ -76,6 +103,6 @@ $("#cart").on("click", function(){
 
 
 </script>
-	
+ --%>	
 </body>
 </html>

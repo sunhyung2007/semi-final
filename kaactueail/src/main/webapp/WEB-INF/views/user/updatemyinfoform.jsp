@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <!-- 뷰포트 및 탭 아이콘, main css 삽입 -->
 <%@ include file="../layout/icon_contents.jsp"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<title>내 정보 수정</title>
+<title>MyPage</title>
 </head>
 <body>
 <script>
@@ -49,6 +48,12 @@ function checkPwd2() {
 		}
 	})
 }
+
+
+
+$("#update").on("click", function(){
+	alert("변경이 완료되었습니다")
+});
 </script>
 
 	<!-- header삽입 -->
@@ -56,30 +61,46 @@ function checkPwd2() {
 	<div class="wrapper">
 		<div class="contents">
 			<div class="main_contents">
+			<h3>내 정보 수정</h3>
+			
+			
+			<div class="layout_all" style="margin: 1% 23%">
+				<form action="updateminfo" method = "post">
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputLarge">ID</label>
+  						<input class="form-control form-control-lg" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" value="${mId}">
+					</div>
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputLarge">이름</label>
+  						<input class="form-control form-control-lg" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" value="${mName}">
+					</div>
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputLarge">생년월일</label>
+  						<input class="form-control form-control-lg" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" value="${mBirth}">
+					</div>
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputLarge">전화번호</label>
+  						<input class="form-control form-control-lg" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="" value="${mTel}">
+					</div>
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputDefault">New Password</label>
+  						<input type="password" class="form-control form-control-lg"  name="mPwd" id="mPwd" oninput = "checkPwd(), checkPwd2()" placeholder="Password">
+					</div>
+					<font color = "red" id = "failpwd" style = "display:none">8자 이상 16자 미만 영문자를 조합해서 적어주세요.</font>
+					<div class="form-group">
+  						<label class="col-form-label mt-4" for="inputDefault">New Password 확인</label>
+  						<input type="password" class="form-control form-control-lg"  name="pwcheck" id="pwCheck" oninput = "checkPwd(), checkPwd2()" placeholder="Password 확인">
+					</div>
+					
+					<div class="btns_wrap" style="display: grid; padding-top:4%;">
+						<input id="update" type = "submit" class="btn btn-secondary" value ="UPDATE" style="margin-bottom: 1%; padding: 1.8%;">
+						<input type = "button" class="btn btn-secondary" value = "go back" style="padding: 1.8%;" onclick = "window.location.href='/main'">
+					</div>
 
-<form action="updateminfo" method = "post">
-<h1 class="display-1">내 정보 수정</h1>
-<div class="alert alert-secondary" role="alert" style = "width: 250px;">
- ID: <font class="alert-link">${mId}</font>
-</div>
-<div class="alert alert-success" role="alert" style = "width: 250px;">
-생년월일:  <font class="alert-link">${mBirth }</font>
-</div>
-<div class="alert alert-primary" role="alert"style = "width: 250px;">
- 전화번호: <font class="alert-link">${mTel }</font> 
-</div>
-<div class="alert alert-info" role="alert" style = "width: 250px;">
-이름: <font class="alert-link">${mName }</font> 
-</div>
-
-<div class="form-floating" style = "display: flex">
-    <input type="password" class="form-control" name = "mPwd" id = "mPwd" style = "width:250px" id="floatingPassword" oninput = "checkPwd(), checkPwd2()" placeholder="Password">
-    <label for="floatingPassword" >New Password</label> </div>
-    <font color = "red" id = "failpwd" style = "display:none">8자 이상 16자 미만 영문자를 조합해서 적어주세요.</font><br/> 
-    <input type="password" class="form-control" name = "pwcheck" id = "pwCheck" style = "width:250px; height:58px;" id="floatingPassword" oninput = "checkPwd(), checkPwd2()" placeholder="패스워드확인"> <br/><br/>
-	<input type = "submit" class="btn btn-primary"    value = "UPDATE"> &nbsp; &nbsp; &nbsp; <input type = "button" class="btn btn-primary" value = "go back" onclick = "window.location.href='mypage'">
-</form>
-
+				</form>
+			</div>
+			
+			
 			</div> <!-- main_contents -->
 		</div> <!-- contents -->
 	</div> <!-- wrapper -->

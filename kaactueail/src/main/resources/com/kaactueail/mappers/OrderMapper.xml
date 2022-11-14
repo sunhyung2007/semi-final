@@ -6,6 +6,35 @@
 <mapper namespace="com.kaactueail.mappers.OrderMapper">
 
 	<select id="getItemInfo" resultType="com.kaactueail.dto.OrderItemDTO">
-		select cNum, cName, cPrice from cockit where cNum = #{ cNum }
+		select cNum, cName, cPrice from cockit where cNum = #{cNum}
 	</select>
+	
+	<insert id="pushToPurchaseHistory" parameterType="com.kaactueail.dto.OrderItemDTO">
+		insert into purchasehistory values(purchaseNumSeq.nextval, #{CPrice}, #{AMount},sysdate, #{ORderMemberNum},#{CNum}, #{CName})
+	</insert>
+	
+	<delete id="popFromBucketlist" parameterType="com.kaactueail.dto.OrderItemDTO">
+		delete from bucketlist where bucketlistCockitNum = #{CNum} and bucketlistMemberNum = #{ORderMemberNum}
+	</delete>
+	
+	<insert id="pushToOrders" parameterType="com.kaactueail.dto.OrderItemDTO">
+		insert into orders values(OrderNumSeq.nextval,#{ORderMemberNum}, #{CNum}, #{AMount}, #{CName}, #{CPrice}, #{TOtalPrice})
+	</insert>
+	
+	<select id="getOrderList" resultType="com.kaactueail.dto.OrderItemDTO">
+ 		select*from orders order by orderNum desc
+ 	</select>
+	
+	<delete id="deleteOrder">
+		delete from orders
+	</delete>
+	
+	<delete id="removeCAmount" parameterType="com.kaactueail.dto.OrderItemDTO">
+		update cockit set camount = (camount - #{AMount}) where cNum = #{CNum}
+	</delete>
+	
+	
+	<select id="getPurchaseHistory" resultType="com.kaactueail.dto.PurchaseHistoryDTO">
+ 		select*from purchasehistory where purchasemembernum = ${PUrchaseMemberNum} order by purchasenum desc
+ 	</select>
 </mapper>

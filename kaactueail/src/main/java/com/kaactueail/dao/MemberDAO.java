@@ -13,7 +13,7 @@ public interface MemberDAO {
 	// 회원번호 중복체크
 	public int selectmNum(int mNum);
 
-	// 로그인
+	// 로그인 (업데이트를 들어가기 전에도 사용)
 	public boolean checkMember(MemberDTO dto);
 
 	// 로그인한 사용자 권한 얻어오기
@@ -34,9 +34,11 @@ public interface MemberDAO {
 	//임시키 발급
 	public void tkIssued(HashMap<String,Object> map);
 	
+	
 	//로그인한 사용자 정보 얻어오기 (내정보수정)
 	public MemberDTO selectMinfo(String mId);
 	
 	//사용자 비밀번호 수정
 	public void updateminfo(MemberDTO dto);
+	
 }

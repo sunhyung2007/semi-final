@@ -42,7 +42,6 @@ public class MemberDAOImpl implements MemberDAO{
 			System.out.println(dto.getMId());
 			System.out.println(dto.getMPwd());
 			String result = mapper.checkMember(dto);
-			
 			if(result.equals("1"))  return true;
 			else return false;
 		} catch (Exception e) {
@@ -101,4 +100,5 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updateminfo(MemberDTO dto) {
 		mapper.updateminfo(dto);
 	}
+	
 }

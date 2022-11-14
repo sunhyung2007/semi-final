@@ -10,7 +10,7 @@
 	</select>
 	
 	<insert id="insertanswer">
-		insert into answer values (answerNumSeq.nextval, #{ answerContent }, sysdate, 1, #{ answerQuestionNum })
+		insert into answer values (answerNumSeq.nextval, #{ answerContent }, sysdate, #{ answerAdminNum }, #{ answerQuestionNum })
 	</insert>
 
 	<select id="getByQuestionNum" resultType="com.kaactueail.dto.AnswerDTO">

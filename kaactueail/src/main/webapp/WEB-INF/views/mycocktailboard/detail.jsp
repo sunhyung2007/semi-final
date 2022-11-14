@@ -166,7 +166,6 @@
 								onclick="makeolike()"></a> &nbsp;
 								<div class="likenum" id="aaa"></div>
 
-
 							</span>
 						</div>
 

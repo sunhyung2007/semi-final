@@ -70,7 +70,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/cockit")
+	@GetMapping("/cockitmanagement")
 	public String SelectAllCockitStock(Model model, String cName) {
 		
 		List<CockitDTO> list;
@@ -90,7 +90,7 @@ public class AdminController {
 	public @ResponseBody void deleteProduct(String cNum, HttpServletResponse response, HttpSession session) throws IOException {
 	
 		dao.deleteProduct(cNum);
-		response.sendRedirect("/admin/cockit");
+		response.sendRedirect("/admin/cockitmanagement");
 	}
 
 	
@@ -104,7 +104,7 @@ public class AdminController {
 		dto.setcNum(Integer.parseInt(cNum));
 		
 		dao.updateProduct(dto);
-		response.sendRedirect("/admin/cockit");
+		response.sendRedirect("/admin/cockitmanagement");
 	}
 	//-----------------------------------------------------------------------------------------------------//
 
@@ -166,6 +166,6 @@ public class AdminController {
 	  
 	      rttr.addFlashAttribute("result", "write success");
 	      System.out.println("postWrite");
-	      return "redirect:/admin/usermanagement";
+	      return "redirect:/admin/cockitmanagement";
 	   }
 }
