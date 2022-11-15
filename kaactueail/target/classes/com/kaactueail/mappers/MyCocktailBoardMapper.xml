@@ -57,4 +57,11 @@
  	<select id="selectTitle" resultType="int" parameterType="String">
  		select count(*) from mycocktailboard where mycocktailTitle = #{mycocktailTitle}
  	</select>
+ 	
+ 	
+ 	<!-- 메인 페이지 리스트 출력(좋아요순) -->
+    <select id="mainSelect" resultType="com.kaactueail.dto.MyCocktailBoardDTO">
+       SELECT * FROM (SELECT * FROM mycocktailboard ORDER BY mycocktailLikeNum DESC) 
+      <![CDATA[where rownum <= 3]]>
+    </select>
  </mapper>

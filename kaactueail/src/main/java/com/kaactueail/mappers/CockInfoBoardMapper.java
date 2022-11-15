@@ -38,4 +38,6 @@ public interface CockInfoBoardMapper {
 	
 	// 게시글 수정
 	public int updateByinfoboardNum(CockInfoBoardDTO dto);
+	
+	public List<CockInfoBoardDTO> mainSelect();
 }

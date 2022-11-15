@@ -112,7 +112,7 @@ public class SignUpController extends HttpServlet{
 			//세션 유지시간 설정(초단위) 20분
 			session.setMaxInactiveInterval(20*60);
 			
-			response.sendRedirect("/main");
+			response.sendRedirect("/");
 		} else {
 			System.out.println("실패");
 			response.sendRedirect("/Ioginform");
@@ -123,7 +123,7 @@ public class SignUpController extends HttpServlet{
 	@GetMapping("logout")
 	public void sessionOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		session.invalidate();
-		response.sendRedirect("/loginform");
+		response.sendRedirect("/");
 	}
 	
 	

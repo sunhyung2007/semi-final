@@ -59,7 +59,7 @@ public class InfoboardController {
 		
 		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."),fileRealName.length());
-		String uploadFolder = "C:/Users/kOSA/git/semi-final/kaactueail/src/main/webapp/resources/images/infoboard";
+		String uploadFolder = "C:/Users/kOSA/git/semi-final/kaactueail/src/main/webapp/resources/images/cocktailInfoImage";
 		
 		/*
 		  파일 업로드시 파일명이 동일한 파일이 이미 존재할 수도 있고 사용자가 

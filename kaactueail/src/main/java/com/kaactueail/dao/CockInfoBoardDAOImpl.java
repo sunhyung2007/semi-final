@@ -50,10 +50,6 @@ public class CockInfoBoardDAOImpl implements CockInfoBoardDAO {
 		
 	}
 
-//	@Override
-//	public CockInfoBoardDTO getByinfoboardNum(int infoboardNum) {
-//		return mapper.getByinfoboardNum(infoboardNum);
-//	}
 
 	@Override
 	public boolean modify(CockInfoBoardDTO dto) {		
@@ -77,7 +73,11 @@ public class CockInfoBoardDAOImpl implements CockInfoBoardDAO {
 	}
 	
 	
-	
+	@Override
+	public List<CockInfoBoardDTO> mainSelect() {
+	    return mapper.mainSelect();
+	}
+
 	
 	
 	

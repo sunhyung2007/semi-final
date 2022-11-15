@@ -35,4 +35,8 @@ public interface CockInfoBoardDAO {
 	
 	// 게시글 삭제
 	public boolean remove(int infoboardNum);
+	
+	// 메인페이지에 리스트 조회 출력
+	public List<CockInfoBoardDTO> mainSelect();
+
 }

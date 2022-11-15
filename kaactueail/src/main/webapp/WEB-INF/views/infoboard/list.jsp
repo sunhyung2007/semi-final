@@ -33,7 +33,7 @@
 				<c:forEach var="cocklist" items="${list}">
 					<div class="card" style="width: 18rem">
 						<a class="move" href='/infoboard/get?infoboardNum=<c:out value="${cocklist.infoboardNum }"/>'>
-							<img src="${path}/resources/images/infoboard/${cocklist.infoboardTitle}.png"
+							<img src="${path}/resources/images/cocktailInfoImage/${cocklist.infoboardTitle}.png"
 							class="card-img-top" alt="NO IMAGE" width=350px, height=230px
 							style="cursor: pointer;">
 							<div class="card-body">

@@ -73,4 +73,10 @@ public class MyCocktailBoardDAOImpl implements MyCocktailBoardDAO {
 	}
 	
 	
+	   @Override
+	 public List<MyCocktailBoardDTO> mainSelect() {
+	     return mapper.mainSelect();
+	 }
+
+	
 }

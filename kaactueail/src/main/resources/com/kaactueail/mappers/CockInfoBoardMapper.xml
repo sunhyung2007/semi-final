@@ -79,5 +79,11 @@
 		infoboardRecipe = #{infoboardRecipe} where infoboardNum = #{infoboardNum} 
 	</update>
  	
- 	 
+ 	
+ 	<select id="mainSelect" resultType="com.kaactueail.dto.CockInfoBoardDTO">
+      SELECT * FROM (SELECT * FROM InfoBoard ORDER BY DBMS_RANDOM.RANDOM) 
+      <![CDATA[where rownum <= 3]]>
+   </select>    
+ 	
+ 	
  </mapper>

@@ -27,5 +27,7 @@ public interface MyCocktailBoardMapper {
 	public void makeolike(LikeDTO like);
 
 	public void makeunlike(LikeDTO like);
+	
+	public List<MyCocktailBoardDTO> mainSelect();
 
 }

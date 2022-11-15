@@ -17,7 +17,7 @@
 <body>
 		<div class="header">
 			<div class="navbar_logo">
-				<a href="/main"><img class="logo" src="/resources/images/LOGO.png" /></a>
+				<a href="/"><img class="logo" src="/resources/images/LOGO.png" /></a>
 			</div>
 			<div class="navbar_left">
 				<ul class="left">
@@ -31,7 +31,7 @@
 			
 			<ul class="right">
 				<c:if test="${mRole == 'ROLE_USER'}">
-					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" onclick="location.href='bucketlist/list'">shopping_cart</span></li>
+					 <li><span id="cart" class="material-icons" id="cart" style="color: white; cursor: pointer;" onclick="location.href='/bucketlist/list'">shopping_cart</span></li>
 					 <!-- 회원일시 -->
 					 <li><span class="material-icons" style="color: white; cursor: pointer;" onclick="location.href='/checkpwd'">person</span></li>
 				</c:if>

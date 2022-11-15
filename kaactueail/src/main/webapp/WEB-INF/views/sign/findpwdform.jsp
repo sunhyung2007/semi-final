@@ -68,13 +68,13 @@ function checkMessage() {
 			</div>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="전화번호" aria-label="전화번호"
-									aria-describedby="button-addon2" name="mTel" style="padding: 2%">
+									aria-describedby="button-addon2" name="mTel" style="padding: 2%" id = "mTel">
 					<button class="btn btn-primary" type="button" id="button-addon2" onclick="authnum()">인증번호받기</button>
 					<div style = "display:none;" class = "successMessage"><b >인증번호가 발송 되었습니다</b></div>
 				</div>
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="인증번호" aria-label="인증번호"
-									aria-describedby="button-addon2" name="authNum" style="padding: 2%">
+									aria-describedby="button-addon2" name="authNum" style="padding: 2%" id = "authNum">
 					<button class="btn btn-primary" type="button" id="button-addon2" onclick = "checkMessage()">인증번호확인</button>
 					<div style = "display:none;" class = "authsuccessMessage"><b >인증 성공!</b></div>
 				</div>

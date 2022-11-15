@@ -73,7 +73,7 @@
 								</div>
 									<div class="btn_buy" style="display: flex; justify-content: flex-end; padding-top:2%;">
 										<div style="margin-right: 5%;">
-											<button type="submit" class="btn btn-dark" id="list_btn" formaction="cart" >장바구니	담기</button>
+											<button type="submit" class="btn btn-dark" id="list_btn" formaction="cart" >장바구니 담기</button>
 										</div>
 										<div style="margin-right: 5%;">
 											<button type="submit" class="btn btn-dark" id="list_btn">결제하기</button>
